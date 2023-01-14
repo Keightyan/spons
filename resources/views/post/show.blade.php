@@ -37,7 +37,7 @@
                                 <form method="post" action="{{ route('bookmark', $post) }}">
                                     @csrf
                                     <button type="submit"
-                                        class="absolute right-0 border-solid border border-spons_blue p-2 mb-6 rounded text-spons_blue font-bold text-xl"><i
+                                        class="bookmark_btn absolute right-0 border-solid border border-spons_blue p-2 mb-6 rounded text-spons_blue font-bold text-xl"><i
                                             class="far fa-star"></i></button>
                                 </form>
                                 @else
@@ -45,7 +45,7 @@
                                     @csrf
                                     @method('delete')
                                     <button type="submit"
-                                        class="absolute right-0 border-solid border border-spons_blue p-2 mb-6 rounded text-spons_blue font-bold text-xl"><i class="fas fa-star"></i></button>
+                                        class="bookmark_btn absolute right-0 border-solid border border-spons_blue p-2 mb-6 rounded text-spons_blue font-bold text-xl"><i class="fas fa-star"></i></button>
                                 </form>
                             @endif
                         @endif

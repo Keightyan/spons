@@ -31,3 +31,7 @@
     width: 100%;
     opacity: 1;
 }
+
+.bookmark_btn {
+    top: -10px;
+}
