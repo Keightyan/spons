@@ -13,7 +13,7 @@ class BookmarkController extends Controller
         if(!$user->is_bookmark($postId)) {
             $user->bookmark_posts()->attach($postId);
         }
-        return back();
+        return 'added';
     }
 
     public function destroy($postId) {
@@ -21,6 +21,6 @@ class BookmarkController extends Controller
         if ($user->is_bookmark($postId)) {
             $user->bookmark_posts()->detach($postId);
         }
-        return back();
+        return 'deleted';
     }
 }

@@ -33,21 +33,12 @@
                                 </li>
                             </ul>
                         @else
-                            @if (!Auth::user()->is_bookmark($post->id))
-                                <form method="post" action="{{ route('bookmark', $post) }}">
-                                    @csrf
-                                    <button type="submit"
-                                        class="bookmark_btn absolute right-0 border-solid border border-spons_blue p-2 mb-6 rounded text-spons_blue font-bold text-xl"><i
-                                            class="far fa-star"></i></button>
-                                </form>
-                                @else
-                                <form method="post" action="{{ route('unbookmark', $post) }}">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit"
-                                        class="bookmark_btn absolute right-0 border-solid border border-spons_blue p-2 mb-6 rounded text-spons_blue font-bold text-xl"><i class="fas fa-star"></i></button>
-                                </form>
-                            @endif
+                            <button type="submit" id="post-{{ $post->id }}"
+                                onClick="toggleBookmark( {{ $post->id }} )"
+                                data-is-bookmark="{{ Auth::user()->is_bookmark($post->id) ? 'true' : 'false' }}"
+                                class="bookmark_btn absolute right-0 border border-solid border-spons_blue p-2 mb-6 rounded text-spons_blue font-bold text-xl">
+                                <i
+                                    class="{{ Auth::user()->is_bookmark($post->id) ? 'fas fa-star' : 'far fa-star' }}"></i></button>
                         @endif
                     @endif
                 </div>
@@ -117,4 +108,49 @@
         </div>
         <x-footer></x-footer>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script>
+        // ★ボタンがクリックされたら
+        function toggleBookmark(post_id) {
+            // 押されたボタンを特定
+            let post = $("#post-" + post_id)
+
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+            });
+
+            let path;
+            let data;
+            if ($(post).data('is-bookmark') === true) {
+                // お気に入り解除
+                path = "/unbookmark"
+                data = {
+                    _method: "delete"
+                }
+            } else {
+                // お気に入り登録
+                path = "/bookmark"
+            }
+            $.ajax({
+                url: "/post/" + post_id + path,
+                type: "POST",
+                data: data,
+                dataType: 'json',
+                complete: function(res) {
+                    console.log(res)
+                    if (res.status === 200) {
+                        // 星の色を入れ替える
+                        $(post).find('i').attr('class', res.responseText === "added" ? "fas fa-star" :
+                            "far fa-star")
+                        // data-is_bookmarkを入れ替える
+                        $(post).data('is-bookmark', res.responseText === "added" ? true : false)
+                    }
+                }
+            })
+        }
+    </script>
 </x-app-layout>
