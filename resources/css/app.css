@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.ico_follow-er {
+    height: 24px;
+    padding: 0 20px;
+}
+
+#categories .look_more {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    line-height: 1 !important;
+}
+
+#categories .look_more::after {
+    position: static !important;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    content: '';
+    background: transparent;
+    opacity: 1;
+    transition: all ease 0.3s;
+}
+
+#categories .look_more:hover::after {
+    left: 0;
+    width: 100%;
+    opacity: 1;
+}
