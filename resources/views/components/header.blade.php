@@ -3,7 +3,7 @@
 <h1><a href="{{ route('post.index') }}"><img src="{{ asset('/img/logo_spons.png') }}" alt="SpoNS（スポンズ）"></a></h1>
 
 <ul class="flex">
-    <li><a href="{{ route('post.index') }}">募集を見る</a></li>
+    <li><a href="{{ route('post.search') }}">募集を見る</a></li>
     @if(Auth::check())
     <li><a href="{{ route('post.create') }}">募集を投稿</a></li>
     @endif

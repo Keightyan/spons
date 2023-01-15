@@ -168,8 +168,16 @@ class PostController extends Controller
 
     public function search()
     {
-        $posts = Post::orderBy('created_at', 'desc')->paginate(10);
+        $user = auth()->user();
+        $categories = Category::all();
+        $post_types = PostType::all();
+        $prefectures = Prefecture::all();
 
-        return view('post.search', compact('posts'));
+        $posts = Post::orderBy('created_at', 'desc')
+        ->Where('category_id', $category_id)
+        ->get()->paginate(10);
+        
+
+        return view('post.search', compact('posts', 'user', 'categories', 'post_types', 'prefectures'));
     }
 }
