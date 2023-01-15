@@ -28,8 +28,8 @@ class AppServiceProvider extends ServiceProvider
     {
         // トップページの新着の募集
         if(Schema::hasTable('posts')) {
-            $posts = Post::limit(5)->orderBy('created_at', 'desc')->get();
-            view()->share('posts', $posts);
+            $posts5 = Post::limit(5)->orderBy('created_at', 'desc')->get();
+            view()->share('posts5', $posts5);
         }
 
         if(Schema::hasTable('posts')) {

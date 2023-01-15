@@ -4,7 +4,7 @@
     <div id="new_recruits">
         <p class="head">新着の募集<span>最新の募集から 5 件までが表示されます。</span></p>
 
-        @foreach ($posts as $post)
+        @foreach ($posts5 as $post)
 
             @php
                 $week = ['日', '月', '火', '水', '木', '金', '土'];
