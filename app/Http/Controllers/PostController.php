@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
+use Illuminate\Pagination\Paginator;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Category;
@@ -52,7 +53,7 @@ class PostController extends Controller
 
         $post->fill($request->all());
 
-        if(request('image')) {
+        if (request('image')) {
             $original = $request->file('image')->getClientOriginalName();
             $name = date('Ymd_His') . '_' . $original;
             $request->file('image')->move('storage/images', $name);
@@ -60,7 +61,7 @@ class PostController extends Controller
         }
 
         $post->save();
-        
+
         return redirect()->route('post.create')->with('message', '募集を投稿しました！');
     }
 
@@ -132,7 +133,7 @@ class PostController extends Controller
     {
         $post->fill($request->all());
 
-        if(request('image')) {
+        if (request('image')) {
             $original = $request->file('image')->getClientOriginalName();
             $name = date('Ymd_His') . '_' . $original;
             $request->file('image')->move('storage/images', $name);
@@ -156,18 +157,19 @@ class PostController extends Controller
         return redirect()->route('post.index')->with('message', '投稿を削除しました');
     }
 
-    // public function bookmark_posts()
-    // {
-    //     $posts = auth()->user()->bookmark_posts()->orderBy('created_at', 'desc')->paginate(10);
-    //     // $data = [
-    //     //     'posts' => $posts,
-    //     // ];
-    //     return view('post.bookmarks', compact('posts'));
-    // }
+    public function bookmark_posts()
+    {
+        $posts = auth()->user()->bookmark_posts()->orderBy('created_at', 'desc')->paginate(10);
+        // $data = [
+        //     'posts' => $posts,
+        // ];
+        return view('post.bookmarks', compact('posts'));
+    }
 
-    public function search() {
+    public function search()
+    {
+        $posts = Post::orderBy('created_at', 'desc')->paginate(10);
 
-        view('post.search');
-
+        return view('post.search', compact('posts'));
     }
 }

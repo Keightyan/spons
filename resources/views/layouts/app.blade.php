@@ -42,7 +42,7 @@
         integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 
     {{-- ブックマーク用ajax --}}
-    <script src="{{ asset('js/bookmark_ajax.js') }}"></script>
+    <script src="{{ asset('/js/bookmark_ajax.js') }}"></script>
 
 </body>
 
