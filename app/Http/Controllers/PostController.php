@@ -173,9 +173,7 @@ class PostController extends Controller
         $post_types = PostType::all();
         $prefectures = Prefecture::all();
 
-        $posts = Post::orderBy('created_at', 'desc')
-        ->Where('category_id', $category_id)
-        ->get()->paginate(10);
+        $posts = Post::orderBy('created_at', 'desc')->paginate(10);
         
 
         return view('post.search', compact('posts', 'user', 'categories', 'post_types', 'prefectures'));

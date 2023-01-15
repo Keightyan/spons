@@ -72,10 +72,10 @@
                                         @endif
                                     </p>
                                     <p class="info">
-                                        <span class="text-spons_blue">{{ $post->user->name }}</span>
-                                        カテゴリ：<span class="font-bold">{{ $post->category->name }}</span>
-                                        募集タイプ：<span class="font-bold">{{ $post->post_type->name }}</span>
-                                        都道府県：<span class="font-bold">{{ $post->prefecture->name }}</span>
+                                        <span class="text-spons_blue">{{ $post->user->name }}</span>　
+                                        カテゴリ：<span class="font-bold">{{ $post->category->name }}</span>　
+                                        募集タイプ：<span class="font-bold">{{ $post->post_type->name }}</span>　
+                                        都道府県：<span class="font-bold">{{ $post->prefecture->name }}</span>　
                                         <br>
                                         <span
                                             class="text-sm">投稿日時：{{ $post->created_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}</span>
