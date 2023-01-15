@@ -41,5 +41,6 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/posts', [PostController::class, 'index'])->name('post.index');
 Route::get('/post/{post}', [PostController::class, 'show'])->name('post.show');
+Route::get('/posts/search', [PostController::class, 'search'])->name('post.search');
 
 require __DIR__.'/auth.php';

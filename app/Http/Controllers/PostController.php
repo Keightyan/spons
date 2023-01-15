@@ -156,12 +156,18 @@ class PostController extends Controller
         return redirect()->route('post.index')->with('message', '投稿を削除しました');
     }
 
-    public function bookmark_posts()
-    {
-        $posts = auth()->user()->bookmark_posts()->orderBy('created_at', 'desc')->paginate(10);
-        $data = [
-            'posts' => $posts,
-        ];
-        return view('post.bookmarks', $data);
+    // public function bookmark_posts()
+    // {
+    //     $posts = auth()->user()->bookmark_posts()->orderBy('created_at', 'desc')->paginate(10);
+    //     // $data = [
+    //     //     'posts' => $posts,
+    //     // ];
+    //     return view('post.bookmarks', compact('posts'));
+    // }
+
+    public function search() {
+
+        view('post.search');
+
     }
 }
