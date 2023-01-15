@@ -9,8 +9,8 @@
             @php
                 $week = ['日', '月', '火', '水', '木', '金', '土'];
                 $date = $post->created_at;
-                $now = new DateTime($date);
-                $day = $now->format('w');
+                $day = new DateTime($date);
+                $dow = $day->format('w');
             @endphp
 
             <div class="recruit">
@@ -27,7 +27,7 @@
                         募集タイプ：<span class="font-bold">{{ $post->post_type->name }}</span>　
                         都道府県：<span class="font-bold">{{ $post->prefecture->name }}</span>
                         <br>
-                        <span class="text-sm">投稿日時：{{ $post->created_at->format("Y年n月d日({$week[$day]}) H:i:s") }}</span>
+                        <span class="text-sm">投稿日時：{{ $post->created_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}</span>
                     </p>
 
                 </a>

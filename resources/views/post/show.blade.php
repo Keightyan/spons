@@ -1,8 +1,8 @@
 @php
     $week = ['日', '月', '火', '水', '木', '金', '土'];
     $date = $post->created_at;
-    $now = new DateTime($date);
-    $day = $now->format('w');
+    $day = new DateTime($date);
+    $dow = $day->format('w');
 @endphp
 
 <x-app-layout>
@@ -46,7 +46,7 @@
                 <div class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
                     <p class="mr-8 font-bold text-gray-500" style="width: 100px;">投稿日時</p>
                     <span
-                        class="text-black text-xl font-bold">{{ $post->created_at->format("Y年n月d日({$week[$day]}) H:i:s") }}</span>
+                        class="text-black text-xl font-bold">{{ $post->created_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}</span>
                 </div>
 
                 <div class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
