@@ -32,6 +32,25 @@
                                     </form>
                                 </li>
                             </ul>
+                        @elseif(Auth::user()->role === 2)
+                            <div class="flex">
+                                <button type="submit" id="post-{{ $post->id }}"
+                                    onClick="toggleBookmark( {{ $post->id }} )"
+                                    data-is-bookmark="{{ Auth::user()->is_bookmark($post->id) ? 'true' : 'false' }}"
+                                    class="bookmark_btn absolute right-14 border border-solid border-spons_blue p-2 mb-6 mr-2 rounded text-spons_blue font-bold text-xl">
+                                    <i
+                                        class="{{ Auth::user()->is_bookmark($post->id) ? 'fas fa-star' : 'far fa-star' }}"></i></button>
+                                <ul class="delete_btn absolute right-0">
+                                    <li
+                                        class="bg-red-500 border-solid border border-red-500 p-2 mb-6 rounded text-white font-bold mx-1 destroy">
+                                        <form method="post" action="{{ route('post.destroy', $post) }}">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" onClick="return confirm('本当に削除しますか？');">削除</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
                         @else
                             <button type="submit" id="post-{{ $post->id }}"
                                 onClick="toggleBookmark( {{ $post->id }} )"

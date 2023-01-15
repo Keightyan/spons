@@ -33,5 +33,9 @@
 }
 
 .bookmark_btn {
-    top: -10px;
+    top: -6px;
+}
+
+.delete_btn {
+    top: -6px;
 }
