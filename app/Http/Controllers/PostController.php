@@ -166,16 +166,51 @@ class PostController extends Controller
         return view('post.bookmarks', compact('posts'));
     }
 
-    public function search()
+    public function search(Request $request)
     {
         $user = auth()->user();
+
         $categories = Category::all();
         $post_types = PostType::all();
         $prefectures = Prefecture::all();
 
-        $posts = Post::orderBy('created_at', 'desc')->paginate(10);
-        
+        // 検索一覧ページの初期表示
+        $posts10 = Post::orderBy('created_at', 'desc')->paginate(10);
 
-        return view('post.search', compact('posts', 'user', 'categories', 'post_types', 'prefectures'));
+        // 検索結果用
+        $query = Post::orderBy('created_at', 'desc');
+
+        $category_id = $request->category_id;
+        $post_type_id = $request->post_type_id;
+        $prefecture_id = $request->prefecture_id;
+
+        // 検索された場合
+        if ($request) {
+            if ($category_id !== 'all_categories') {
+                $query->where('category_id', $category_id);
+            } elseif ($category_id === 'all_categories') {
+                $query->pluck('category_id');
+            }
+            if ($post_type_id !== 'all_post_types') {
+                $query->where('post_type_id', $post_type_id);
+            } elseif ($post_type_id === 'all_post_types') {
+                $query->pluck('post_type_id');
+            }
+            if ($prefecture_id !== 'all_prefectures') {
+                $query->where('prefecture_id', $prefecture_id);
+            } elseif ($prefecture_id === 'all_prefectures') {
+                $query->pluck('prefecture_id');
+            }
+            $data = $query->paginate(10);
+            
+        } else {    // 検索されなかった場合（初期表示）
+            return $posts10;
+        }
+
+        return view('post.search', compact('user', 'categories', 'post_types', 'prefectures', 'posts10', 'data', 'request'));
+    }
+
+    public function baseball() {
+        
     }
 }

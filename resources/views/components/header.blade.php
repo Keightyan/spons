@@ -9,7 +9,7 @@
     @endif
 </ul>
 
-<a href=""><i class="fas fa-search"></i></a>
+<a href="{{ route('post.search') }}"><i class="fas fa-search"></i></a>
 
 <!-- ユーザー登録／ログイン後 -->
 @if(Auth::check())
