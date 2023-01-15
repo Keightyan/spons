@@ -35,7 +35,7 @@
         @endforeach
 
         <div class="look_more_link">
-            <a href="">
+            <a href="{{ route('post.search') }}">
                 <p class="look_more"></p>
             </a>
         </div>

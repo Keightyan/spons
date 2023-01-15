@@ -154,7 +154,7 @@
         <li><a href=""><img src="{{ asset('/img/ico_badminton.png') }}" class="pictogram">バドミントン</a></li>
         <li><a href=""><img src="{{ asset('/img/ico_basketball.png') }}" class="pictogram">バスケットボール</a></li>
         <li><a href=""><img src="{{ asset('/img/ico_golf.png') }}" class="pictogram">ゴルフ</a></li> --}}
-        <li><a href="" class="look_more">もっと見る ></a></li>
+        <li><a href="{{ route('post.search') }}" class="look_more">もっと見る ></a></li>
     </ul>
 </div>
 </header>
