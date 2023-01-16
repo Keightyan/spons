@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\RelationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,8 +33,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/post/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
     Route::patch('/post/{post}', [PostController::class, 'update'])->name('post.update');
     Route::delete('/post/{post}', [PostController::class, 'destroy'])->name('post.destroy');
+
     Route::post('/post/{post}/bookmark', [BookmarkController::class, 'store'])->name('bookmark');
     Route::delete('/post/{post}/unbookmark', [BookmarkController::class, 'destroy'])->name('unbookmark');
+
+    Route::post('/user/{user}/follow', [RelationController::class, 'store'])->name('follow');
+    Route::delete('/user/{user}/unfollow', [RelationController::class, 'destroy'])->name('unfollow');
+    Route::get('followings', [UserController::class, 'followings'])->name('user.followings');
+    Route::get('followers', [UserController::class, 'followers'])->name('user.followers');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -43,4 +51,7 @@ Route::get('/posts', [PostController::class, 'index'])->name('post.index');
 Route::get('/post/{post}', [PostController::class, 'show'])->name('post.show');
 Route::get('/posts/search', [PostController::class, 'search'])->name('post.search');
 
-require __DIR__.'/auth.php';
+Route::get('/users', [UserController::class, 'index'])->name('user.index');
+Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
+
+require __DIR__ . '/auth.php';

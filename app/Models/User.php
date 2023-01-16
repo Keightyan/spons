@@ -46,35 +46,73 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function posts() {
+    public function posts()
+    {
         return $this->hasMany(Post::class);
     }
 
-    public function bookmarks() {
+    public function bookmarks()
+    {
         return $this->hasMany(Bookmark::class);
     }
 
-    public function bookmark_posts() {
+    public function bookmark_posts()
+    {
         return $this->belongsToMany(Post::class, 'bookmarks', 'user_id', 'post_id')->withTimestamps();
     }
 
-    public function is_bookmark($postId) {
+    public function is_bookmark($postId)
+    {
         return $this->bookmarks()->where('post_id', $postId)->exists();
     }
 
-    public function followings() {
+    public function followings()
+    {
         return $this->belongsToMany(User::class, 'relations', 'follow_id', 'followed_id')->withTimestamps();
     }
-       
-    public function followers() {
-    return $this->belongsToMany(User::class, 'relations', 'followed_id', 'follow_id')->withTimestamps();
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'relations', 'followed_id', 'follow_id')->withTimestamps();
     }
 
-    public function send() {
+    public function follow($userId) {
+        $exist = $this->is_following($userId);
+        $its_me = $this->id === $userId;
+
+        if ($exist || $its_me) {
+            return false;
+        } else {
+            $this->followings()->attach($userId);
+            return true;
+        }
+    }
+
+    public function unfollow($userId) {
+        $exist = $this->is_following($userId);
+        $its_me = $this->id === $userId;
+
+        if ($exist && !$its_me) {
+            $this->followings()->detach($userId);
+            return true;
+        } else {
+            
+            return false;
+        }
+    }
+
+    public function is_following($userId)
+    {
+        return $this->followings()->where('followed_id', $userId)->exists();
+    }
+
+    public function send()
+    {
         return $this->hasMany(Message::class);
     }
 
-    public function receive() {
+    public function receive()
+    {
         return $this->hasMany(Message::class);
     }
 }

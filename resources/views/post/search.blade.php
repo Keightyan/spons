@@ -52,9 +52,6 @@
                         </form>
                     </div>
                     <div id="recruits">
-                        {{-- @php
-                        dd();
-                        @endphp --}}
                         @if (!$request->has('search'))
                             {{-- 初期表示10件 --}}
                             @foreach ($posts10 as $post)
@@ -75,11 +72,15 @@
                                             @endif
                                         </p>
                                         <p class="info">
-                                            <span class="text-spons_blue">{{ $post->user->name }}</span>
-                                            カテゴリ：<span class="font-bold">{{ $post->category->name }}</span>
-                                            募集タイプ：<span class="font-bold">{{ $post->post_type->name }}</span>
-                                            都道府県：<span class="font-bold">{{ $post->prefecture->name }}</span>
+                                            <span class="text-spons_blue mr-6">{{ $post->user->name }}</span>
+                                            カテゴリ：<span class="font-bold mr-6">{{ $post->category->name }}</span>
+                                            募集タイプ：<span class="font-bold mr-6">{{ $post->post_type->name }}</span>
+                                            都道府県：<span class="font-bold mr-6">{{ $post->prefecture->name }}</span>
                                             <br>
+                                            @if ($post->updated_at > $post->created_at)
+                                                <span
+                                                    class="text-sm mr-6">更新日時：{{ $post->updated_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}</span>
+                                            @endif
                                             <span
                                                 class="text-sm">投稿日時：{{ $post->created_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}</span>
                                         </p>
@@ -91,18 +92,16 @@
                         @else
                             {{-- 検索結果 --}}
                             @foreach ($data as $post)
-                                @if ($loop->index == 0)
-                                <div class="text-center border border-1 border-spons_blue py-2">
-                                    カテゴリ：<span
-                                        class="font-bold">{{ $request->category_id === 'all_categories' ? 'すべてのカテゴリ' : $post->category->name }}</span>　
-                                    募集タイプ：<span
-                                        class="font-bold">{{ $request->post_type_id === 'all_post_types' ? 'すべての募集タイプ' : $post->post_type->name }}</span>　
-                                    都道府県：<span
-                                        class="font-bold">{{ $request->prefecture_id === 'all_prefectures' ? 'すべての都道府県' : $post->prefecture->name }}</span>　での検索結果
+                                @if ($loop->index === 0)
+                                    <div class="text-center border border-1 border-spons_blue py-2">
+                                        カテゴリ：<span
+                                            class="font-bold mr-6">{{ $request->category_id === 'all_categories' ? 'すべてのカテゴリ' : $post->category->name }}</span>
+                                        募集タイプ：<span
+                                            class="font-bold mr-6">{{ $request->post_type_id === 'all_post_types' ? 'すべての募集タイプ' : $post->post_type->name }}</span>
+                                        都道府県：<span
+                                            class="font-bold mr-6">{{ $request->prefecture_id === 'all_prefectures' ? 'すべての都道府県' : $post->prefecture->name }}</span>での検索結果
                                     </div>
                                 @endif
-                            @endforeach
-                            @foreach ($data as $post)
                                 @php
                                     $week = ['日', '月', '火', '水', '木', '金', '土'];
                                     $date = $post->created_at;
@@ -119,11 +118,15 @@
                                             @endif
                                         </p>
                                         <p class="info">
-                                            <span class="text-spons_blue">{{ $post->user->name }}</span>
-                                            カテゴリ：<span class="font-bold">{{ $post->category->name }}</span>
-                                            募集タイプ：<span class="font-bold">{{ $post->post_type->name }}</span>
-                                            都道府県：<span class="font-bold">{{ $post->prefecture->name }}</span>
+                                            <span class="text-spons_blue mr-6">{{ $post->user->name }}</span>
+                                            カテゴリ：<span class="font-bold mr-6">{{ $post->category->name }}</span>
+                                            募集タイプ：<span class="font-bold mr-6">{{ $post->post_type->name }}</span>
+                                            都道府県：<span class="font-bold mr-6">{{ $post->prefecture->name }}</span>
                                             <br>
+                                            @if ($post->updated_at > $post->created_at)
+                                                <span
+                                                    class="text-sm mr-6">更新日時：{{ $post->updated_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}</span>
+                                            @endif
                                             <span
                                                 class="text-sm">投稿日時：{{ $post->created_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}</span>
                                         </p>

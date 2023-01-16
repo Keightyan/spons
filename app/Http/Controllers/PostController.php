@@ -175,10 +175,10 @@ class PostController extends Controller
         $prefectures = Prefecture::all();
 
         // 検索一覧ページの初期表示
-        $posts10 = Post::orderBy('created_at', 'desc')->paginate(10);
+        $posts10 = Post::orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->paginate(10);
 
         // 検索結果用
-        $query = Post::orderBy('created_at', 'desc');
+        $query = Post::orderBy('updated_at', 'desc')->orderBy('created_at', 'desc');
 
         $category_id = $request->category_id;
         $post_type_id = $request->post_type_id;

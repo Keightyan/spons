@@ -481,6 +481,10 @@ header {
 
 // 募集詳細ページ
 
+.bookmark_btn {
+    top: -12px;
+}
+
 .edit {
     position: relative;
     width: 3rem;
@@ -497,10 +501,27 @@ header {
         display: flex;
         align-items: center;
         justify-content: center;
+        transition: .2s;
+
+        &:hover {
+            background-color: rgb(78, 83, 94);
+        }
     }
 }
 
-.destroy {
+.destroy_ul {
+    top: -6px;
+
+    button {
+        transition: .2s;
+
+        &:hover {
+            background-color: rgb(240, 12, 12);
+        }
+    }
+}
+
+.destroy_btn {
     position: relative;
     width: 3rem;
     height: 40px;
@@ -516,6 +537,19 @@ header {
         display: flex;
         align-items: center;
         justify-content: center;
+        transition: .2s;
+
+        &:hover {
+            background-color: rgb(240, 12, 12);
+        }
+    }
+}
+
+.msg_btn {
+    transition: .2s;
+
+    &:hover {
+        background-color: rgb(29, 168, 80);
     }
 }
 
@@ -614,6 +648,7 @@ header {
                 outline: none;
                 cursor: pointer;
                 height: 70px;
+                transition: .2s;
 
                 &:hover {
                     background: #156faf;

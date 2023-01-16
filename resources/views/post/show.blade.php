@@ -3,6 +3,7 @@
     $date = $post->created_at;
     $day = new DateTime($date);
     $dow = $day->format('w');
+
 @endphp
 
 <x-app-layout>
@@ -24,7 +25,7 @@
                                     <a href="{{ route('post.edit', $post) }}">編集</a>
                                 </li>
                                 <li
-                                    class="bg-red-500 border-solid border border-red-500 p-2 mb-6 rounded text-white font-bold mx-1 destroy">
+                                    class="bg-red-500 border-solid border border-red-500 p-2 mb-6 rounded text-white font-bold mx-1 destroy_btn">
                                     <form method="post" action="{{ route('post.destroy', $post) }}">
                                         @csrf
                                         @method('delete')
@@ -36,13 +37,13 @@
                             <div class="flex">
                                 <button type="submit" id="post-{{ $post->id }}"
                                     onClick="toggleBookmark( {{ $post->id }} )"
-                                    data-is-bookmark="{{ Auth::user()->is_bookmark($post->id) ? 'true' : 'false' }}"
+                                    data-is-bookmark="{{ Auth::user()->is_bookmark($post->id) ? true : false }}"
                                     class="bookmark_btn absolute right-14 border border-solid border-spons_blue p-2 mb-6 mr-2 rounded text-spons_blue font-bold text-xl">
                                     <i
                                         class="{{ Auth::user()->is_bookmark($post->id) ? 'fas fa-star' : 'far fa-star' }}"></i></button>
-                                <ul class="delete_btn absolute right-0">
+                                <ul class="destroy_ul absolute right-0">
                                     <li
-                                        class="bg-red-500 border-solid border border-red-500 p-2 mb-6 rounded text-white font-bold mx-1 destroy">
+                                        class="bg-red-500 border-solid border border-red-500 p-2 mb-6 rounded text-white font-bold mx-1 destroy_btn">
                                         <form method="post" action="{{ route('post.destroy', $post) }}">
                                             @csrf
                                             @method('delete')
@@ -54,7 +55,7 @@
                         @else
                             <button type="submit" id="post-{{ $post->id }}"
                                 onClick="toggleBookmark( {{ $post->id }} )"
-                                data-is-bookmark="{{ Auth::user()->is_bookmark($post->id) ? 'true' : 'false' }}"
+                                data-is-bookmark="{{ Auth::user()->is_bookmark($post->id) ? true : false }}"
                                 class="bookmark_btn absolute right-0 border border-solid border-spons_blue p-2 mb-6 rounded text-spons_blue font-bold text-xl">
                                 <i
                                     class="{{ Auth::user()->is_bookmark($post->id) ? 'fas fa-star' : 'far fa-star' }}"></i></button>
@@ -70,7 +71,7 @@
 
                 <div class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
                     <p class="mr-8 font-bold text-gray-500" style="width: 100px;">募集者</p>
-                    <span class="text-black text-xl font-bold">{{ $post->user->name }}</span>
+                    <span class="text-black text-xl font-bold"><a href="{{ route('user.show', $post->user->id) }}" class="text-spons_blue hover:underline decoration-solid">{{ $post->user->name }}</a></span>
                 </div>
 
                 <div class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
@@ -116,7 +117,7 @@
                 @if (Auth::check())
                     @if ($post->user_id !== Auth::id())
                         <div class="mt-6 flex">
-                            <button class="mt-4 mb-10 w-1/4 h-20 rounded bg-green-500" style="margin-inline: auto;">
+                            <button class="msg_btn mt-4 mb-10 w-1/4 h-20 rounded bg-green-500" style="margin-inline: auto;">
                                 <span class="text-xl text-white font-bold w-full">メッセージを送る
                             </button>
                         </div>

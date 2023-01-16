@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\PostController;
-use App\Models\User;
 
 class BookmarkController extends Controller
 {

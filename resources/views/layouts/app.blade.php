@@ -44,6 +44,9 @@
     {{-- ブックマーク用ajax --}}
     <script src="{{ asset('/js/bookmark_ajax.js') }}"></script>
 
+    {{-- フォロー用ajax --}}
+    <script src="{{ asset('/js/relation_ajax.js') }}"></script>
+
 </body>
 
 </html>
