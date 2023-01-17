@@ -209,8 +209,4 @@ class PostController extends Controller
 
         return view('post.search', compact('user', 'categories', 'post_types', 'prefectures', 'posts10', 'data', 'request'));
     }
-
-    public function baseball() {
-        
-    }
 }

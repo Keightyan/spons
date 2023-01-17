@@ -6,10 +6,9 @@
                 <x-message :message="session('message')" />
 
                 <div class="items-center mt-6 relative">
-                    <p class="text-spons_blue text-3xl font-bold"><i class="fas fa-search"></i> 募集投稿を探す</p>
+                    <p class="search_head text-spons_blue text-3xl font-bold"><i class="fas fa-search"></i> 募集投稿を探す<span>24時間以内の更新 or 投稿には<span class="new">NEW</span>が付きます。</span></p>
                     <div class="search_box my-5">
                         <form action="" id="form-new-search-box-basic" class="basic_search" method="get">
-                            @csrf
                             <ul class="tables">
                                 <li class="selector">
                                     <div class="in_table">
@@ -18,7 +17,7 @@
                                             <div class="selects"><select name="category_id">
                                                     <option value="all_categories">すべてのカテゴリ</option>
                                                     @foreach ($categories as $category)
-                                                        <option value="{{ $category->id }}">{{ $category->name }}
+                                                        <option value="{{ $category->id }}"{{ Request::get('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}
                                                         </option>
                                                     @endforeach
                                                 </select></div>
@@ -28,7 +27,7 @@
                                             <div class="selects"><select name="post_type_id">
                                                     <option value="all_post_types">すべての募集タイプ</option>
                                                     @foreach ($post_types as $post_type)
-                                                        <option value="{{ $post_type->id }}">{{ $post_type->name }}
+                                                        <option value="{{ $post_type->id }}"{{ Request::get('post_type_id') == $post_type->id ? 'selected' : '' }}>{{ $post_type->name }}
                                                         </option>
                                                     @endforeach
                                                 </select></div>
@@ -38,7 +37,7 @@
                                             <div class="selects"><select name="prefecture_id">
                                                     <option value="all_prefectures">すべての都道府県</option>
                                                     @foreach ($prefectures as $prefecture)
-                                                        <option value="{{ $prefecture->id }}">{{ $prefecture->name }}
+                                                        <option value="{{ $prefecture->id }}"{{ Request::get('prefecture_id') == $prefecture->id ? 'selected' : '' }}>{{ $prefecture->name }}
                                                         </option>
                                                     @endforeach
                                                 </select></div>
@@ -60,11 +59,15 @@
                                     $date = $post->created_at;
                                     $day = new DateTime($date);
                                     $dow = $day->format('w');
+
+                                    $carbon_updated_at = new \Carbon\Carbon($post->updated_at);
+                                    $carbon_created_at = new \Carbon\Carbon($post->created_at);
                                 @endphp
 
                                 <div class="recruit">
                                     <a href="{{ route('post.show', $post) }}">
-                                        <p class="{{ $posts10->currentPage() === 1 ? 'title_currentp1' : 'title' }}">
+                                        {{-- 24時間以内の更新 or 投稿には「NEW」を付ける --}}
+                                        <p class="{{ $carbon_updated_at->subHour(24) || $carbon_created_at->subHour(24) ? 'title_currentp1' : 'title' }}">
                                             {{ $post->title }}
                                             @if ($post->image)
                                                 <img src="{{ asset('/img/ico_isImage.png') }}" alt="画像有り"
@@ -107,16 +110,19 @@
                                     $date = $post->created_at;
                                     $day = new DateTime($date);
                                     $dow = $day->format('w');
+                                    
+                                    $carbon_updated_at = new \Carbon\Carbon($post->updated_at);
+                                    $carbon_created_at = new \Carbon\Carbon($post->created_at);
                                 @endphp
                                 <div class="recruit">
                                     <a href="{{ route('post.show', $post) }}">
-                                        <p class="title">
+                                        {{-- 24時間以内の更新 or 投稿には「NEW」を付ける --}}
+                                        <p class="{{ $carbon_updated_at->subHour(24) || $carbon_created_at->subHour(24) ? 'title_currentp1' : 'title' }}">
                                             {{ $post->title }}
                                             @if ($post->image)
                                                 <img src="{{ asset('/img/ico_isImage.png') }}" alt="画像有り"
                                                     style="display: inline; max-width: 30px; margin-left: 5px;">
                                             @endif
-                                        </p>
                                         <p class="info">
                                             <span class="text-spons_blue mr-6">{{ $post->user->name }}</span>
                                             カテゴリ：<span class="font-bold mr-6">{{ $post->category->name }}</span>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Prefecture;
 
 class UserController extends Controller
 {
@@ -22,8 +23,9 @@ class UserController extends Controller
 
     public function edit($id) {
         $user = auth()->user();
+        $prefectures = Prefecture::all();
 
-        return view('user.edit', compact('user'));
+        return view('user.edit', compact('user', 'prefectures'));
     }
 
     public function followings($id)

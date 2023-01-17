@@ -76,10 +76,10 @@
                         </div>
 
                         <ul class="tabs-menu">
-                            <li><a href="#tabs-1">フォロー中</a></li>
-                            <li><a href="#tabs-2">フォロワー</a></li>
-                            <li><a href="#tabs-3">募集投稿</a></li>
-                            <li><a href="#tabs-4">ブックマーク</a></li>
+                            <li><a href="#tabs-1">フォロー中　{{ Auth::user()->followings()->count() }}</a></li>
+                            <li><a href="#tabs-2">フォロワー　{{ Auth::user()->followers()->count() }}</a></li>
+                            <li><a href="#tabs-3">募集投稿　{{ Auth::user()->posts()->count() }}</a></li>
+                            <li><a href="#tabs-4">ブックマーク　{{ Auth::user()->bookmarks()->count() }}</a></li>
                         </ul>
                         <section class="tabs-content">
                             <section id="tabs-1">

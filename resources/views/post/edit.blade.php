@@ -20,7 +20,7 @@
                         <p class="mr-8 font-bold" style="width: 100px;">募集者</p>
                         <p>{{ $user->name }}</p>
                     </div>
-                    <input type="hidden" name="user_id" value="{{ $user->id }}">
+                    {{-- <input type="hidden" name="user_id" value="{{ $user->id }}"> --}}
 
                     <div class="mb-10 flex">
                         <p class="mr-8 font-bold" style="width: 100px;">所属チーム</p>
