@@ -47,6 +47,9 @@
     {{-- フォロー用ajax --}}
     <script src="{{ asset('/js/relation_ajax.js') }}"></script>
 
+    {{-- ユーザー詳細ページのタブ用 --}}
+    <script src="{{ asset('/js/user_show_tabs.js') }}"></script>
+
 </body>
 
 </html>

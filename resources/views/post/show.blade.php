@@ -63,6 +63,14 @@
                     @endif
                 </div>
 
+                @if ($post->updated_at > $post->created_at)
+                <div class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
+                    <p class="mr-8 font-bold text-gray-500" style="width: 100px;">更新日時</p>
+                    <span
+                        class="text-black text-xl font-bold">{{ $post->updated_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}</span>
+                </div>
+                @endif
+
                 <div class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
                     <p class="mr-8 font-bold text-gray-500" style="width: 100px;">投稿日時</p>
                     <span

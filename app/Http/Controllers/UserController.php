@@ -20,6 +20,12 @@ class UserController extends Controller
         return view('user.show', compact('user'));
     }
 
+    public function edit($id) {
+        $user = auth()->user();
+
+        return view('user.edit', compact('user'));
+    }
+
     public function followings($id)
     {
         $user = User::find($id);

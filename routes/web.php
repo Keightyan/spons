@@ -53,5 +53,6 @@ Route::get('/posts/search', [PostController::class, 'search'])->name('post.searc
 
 Route::get('/users', [UserController::class, 'index'])->name('user.index');
 Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
+Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
 
 require __DIR__ . '/auth.php';
