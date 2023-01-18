@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Models\Prefecture;
 
@@ -21,11 +22,29 @@ class UserController extends Controller
         return view('user.show', compact('user'));
     }
 
-    public function edit($id) {
+    public function edit(User $user) {
         $user = auth()->user();
         $prefectures = Prefecture::all();
 
         return view('user.edit', compact('user', 'prefectures'));
+    }
+
+    public function update(UserRequest $request, User $user) {
+
+        // dd($user);
+
+        $user->fill($request->all());
+
+        if (request('profile_image')) {
+            $original = $request->file('profile_image')->getClientOriginalName();
+            $name = date('Ymd_His') . '_' . $original;
+            $request->file('profile_image')->move('storage/profile_image', $name);
+            $user->profile_image = $name;
+        }
+
+        $user->save();
+
+        return redirect()->route('user.show', $user)->with('message', 'プロフィールを更新しました。');
     }
 
     public function followings($id)

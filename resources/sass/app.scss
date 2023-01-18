@@ -127,6 +127,42 @@ header {
             color: #1A89DA;
         }
 
+        .followings {
+
+            a {
+
+                &::before {
+                    content: '';
+                    background-image: url(/img/ico_follow.png);
+                    background-repeat: no-repeat;
+                    width: 54px;
+                    height: 24px;
+                    background-position: center center;
+                    background-size: contain;
+                    display: inline-block;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .followers {
+
+            a {
+
+                &::before {
+                    content: '';
+                    background-image: url(/img/ico_follower.png);
+                    background-repeat: no-repeat;
+                    width: 54px;
+                    height: 24px;
+                    background-position: center center;
+                    background-size: contain;
+                    display: inline-block;
+                    cursor: pointer;
+                }
+            }
+        }
+
         // nav {}
 
         .before_auth {
@@ -718,7 +754,7 @@ header {
     clear: both;
     padding: 10px;
 
-    section:not(#tabs-1) {
+    section:not(#followings) {
         display: none;
     }
 }

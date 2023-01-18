@@ -18,7 +18,7 @@
 
                     <div class="mt-8 my-10 flex">
                         <p class="mr-8 font-bold" style="width: 100px;">募集者</p>
-                        <p>{{ $user->name }}</p>
+                        <p class="text-spons_blue font-bold hover:underline decoration-solid"><a href="{{ route('user.show', $user) }}">{{ $user->name }}</a></p>
                     </div>
                     <input type="hidden" name="user_id" value="{{ $user->id }}">
 

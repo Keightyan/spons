@@ -26,8 +26,7 @@
                                 class="w-auto py-2 placeholder-gray-500 border border-gray-300 rounded-md bg-gray-200"
                                 placeholder="ニックネームを入力してください" value="{{ old('name', $user->name) }}"></p>
                     </div>
-                    {{-- <input type="hidden" name="user_id" value="{{ $user->id }}"> --}}
-
+                    
                     <div class="mb-10 flex">
                         <p class="mr-8 font-bold" style="width: 100px;">都道府県</p>
                         <select class="bg-gray-200 rounded" name="prefecture_id">

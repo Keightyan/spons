@@ -26,11 +26,18 @@
                             </div>
                             <div class="profile-right ml-5" style="width: 70%;">
                                 @if (Auth::check())
-                                    @if ($user->id !== Auth::id())
+                                    @if ($user->id === Auth::id())
+                                        <div class="text-right">
+                                            <a href="{{ route('user.edit', $user) }}"><button
+                                                    class="absolute right-0 border border-solid border-spons_blue p-2 mb-6 mr-2 rounded text-spons_blue font-bold text-xl">
+                                                    <i class="fas fa-cog"></i>
+                                                </button></a>
+                                        </div>
+                                    @else
                                         <div class="flex relative" id="user-{{ $user->id }}">
                                             <button type="submit" onClick="toggleRelation( {{ $user->id }} )"
                                                 data-is-follow="{{ Auth::user()->is_following($user->id) ? true : false }}"
-                                                class="{{ Auth::user()->is_following($user->id) ? 'absolute right-0 border border-solid border-spons_blue p-2 mb-10 rounded font-bold text-xl bg-spons_blue text-white' : 'absolute right-0 border border-solid border-spons_blue p-2 mb-10 rounded font-bold text-xl bg-white text-spons_blue' }}">
+                                                class="{{ Auth::user()->is_following($user->id) ? 'absolute right-0 border border-solid border-spons_blue p-2 rounded font-bold text-xl bg-spons_blue text-white' : 'absolute right-0 border border-solid border-spons_blue p-2 mb-10 rounded font-bold text-xl bg-white text-spons_blue' }}">
                                                 <span>{{ Auth::user()->is_following($user->id) ? 'フォロー中' : 'フォロー' }}</span></button>
                                         </div>
                                     @endif
@@ -76,24 +83,29 @@
                         </div>
 
                         <ul class="tabs-menu">
-                            <li><a href="#tabs-1">フォロー中　{{ Auth::user()->followings()->count() }}</a></li>
-                            <li><a href="#tabs-2">フォロワー　{{ Auth::user()->followers()->count() }}</a></li>
-                            <li><a href="#tabs-3">募集投稿　{{ Auth::user()->posts()->count() }}</a></li>
-                            <li><a href="#tabs-4">ブックマーク　{{ Auth::user()->bookmarks()->count() }}</a></li>
+                            <p class="mb-4"><span class=" text-spons_blue font-bold text-xl">{{ $user->name }}</span> さんの</p>
+                            <li><a href="#followings">フォロー中　{{ $user->followings()->count() }}</a></li>
+                            <li><a href="#followers">フォロワー　{{ $user->followers()->count() }}</a></li>
+                            <li><a href="#posts">募集投稿　{{ $user->posts()->count() }}</a></li>
+                            @if ($user->id === Auth::id())
+                            <li><a href="#bookmarks">ブックマーク　{{ $user->bookmarks()->count() }}</a></li>
+                            @endif
                         </ul>
                         <section class="tabs-content">
-                            <section id="tabs-1">
+                            <section id="followings">
                                 <p>フォロー中</p>
                             </section>
-                            <section id="tabs-2">
+                            <section id="followers">
                                 <p>フォロワー</p>
                             </section>
-                            <section id="tabs-3">
+                            <section id="posts">
                                 <p>募集投稿</p>
                             </section>
-                            <section id="tabs-4">
+                            @if ($user->id === Auth::id())
+                            <section id="bookmarks">
                                 <p>ブックマーク</p>
                             </section>
+                            @endif
                         </section>
                     </div>
                 </div>

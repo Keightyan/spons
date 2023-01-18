@@ -17,11 +17,12 @@
 
             <a href=""><i class="fas fa-envelope" alt="メッセージ"></i></a>
 
-            <p class="flex"><a href=""><img class="ico_follow-er" src="{{ asset('/img/ico_follow.png') }}" alt="フォロー中"><p>{{ Auth::user()->followings()->count() }}</p></a></p>
+            <div class="followings_followers flex">
+            <p class="followings"><a href="{{ route('user.show', Auth::user()->id) }}#followings">{{ Auth::user()->followings()->count() }}</a></p>
+            <p class="followers"><a href="{{ route('user.show', Auth::user()->id) }}#followers">{{ Auth::user()->followers()->count() }}</a></p>
+            </div>
 
-            <p class="flex"><a href=""><img class="ico_follow-er" src="{{ asset('/img/ico_follower.png') }}" alt="フォロワー"><p>{{ Auth::user()->followers()->count() }}</p></a></p>
-
-            <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 ml-16">
+            <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 ml-20">
         @endif
 
         <!-- ユーザー登録／ログイン前 -->
@@ -56,7 +57,7 @@
                             <x-slot name="trigger">
                                 <button
                                     class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-black-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                    <div class="text-right">
+                                    <div class="text-right" style="width: 80px;">
                                         @if (Auth::check())
                                             {{ Auth::user()->name }}
                                         @endif
