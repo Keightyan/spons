@@ -54,6 +54,6 @@ Route::get('/posts/search', [PostController::class, 'search'])->name('post.searc
 Route::get('/users', [UserController::class, 'index'])->name('user.index');
 Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
 Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
-Route::patch('/user/{id}', [UserController::class, 'update'])->name('user.update');
+Route::patch('/user', [UserController::class, 'update'])->name('user.update');   // {}を末尾に付けない理由は、他ユーザーのidを叩かれると、そのユーザーのプロフィールを更新されてしまう可能性があるため
 
 require __DIR__ . '/auth.php';

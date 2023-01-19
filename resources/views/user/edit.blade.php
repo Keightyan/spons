@@ -15,7 +15,7 @@
                                 （画像ファイル：{{ $user->profile_image }}）
                             </div>
                             <img src="{{ asset('storage/profile_image/' . $user->profile_image) }}" class="mx-auto mb-4"
-                                style="height:300px;">
+                                style="height:200px;">
                         @endif
                         <input type="file" name="profile_image">
                     </div>
@@ -69,7 +69,6 @@
                                 class="py-2 placeholder-gray-500 border border-gray-300 rounded-md bg-gray-200"
                                 value="{{ old('favorites', $user->favorites) }}" style="width: 100%;"></p>
                     </div>
-                    <input type="hidden" name="favorites" value="{{ $user->favorites }}">
 
                     <div class="mb-10 flex">
                         <p class="mr-12 font-bold" style="width: 100px;">自己紹介</p>

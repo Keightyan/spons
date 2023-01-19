@@ -702,11 +702,10 @@ header {
         }
 
         .info {
-            padding: 5px;
+            padding: 5px 5px 10px 5px;
             font-size: 1.1rem;
             color: #555;
             border-bottom: 1px dotted #1A89DA;
-            padding-bottom: 10px;
         }
     }
 }
@@ -757,6 +756,133 @@ header {
     section:not(#followings) {
         display: none;
     }
+
+    #followings {
+
+        .following {
+            padding: 5px 5px 10px 5px;
+            font-size: 1.1rem;
+            color: #555;
+            border-bottom: 1px dotted #1A89DA;
+            padding-bottom: 20px;
+        }
+    }
+
+    #followers {
+
+        .follower {
+            padding: 5px 5px 10px 5px;
+            font-size: 1.1rem;
+            color: #555;
+            border-bottom: 1px dotted #1A89DA;
+            padding-bottom: 20px;
+        }
+    }
+
+    #posts {
+
+        .post {
+            font-size: 1.1rem;
+            color: #555;
+            margin: 2rem 30px 20px 30px;
+            position: relative;
+
+            a {
+                transition: .2s;
+
+                &:hover {
+                    background-color: rgba(26, 137, 218, .2);
+                    display: inline-block;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            .title {
+                font-weight: 600;
+                font-size: 1.5rem;
+                padding: 5px;
+            }
+
+            .title_currentp1 {
+                font-weight: 600;
+                font-size: 1.5rem;
+                padding: 5px;
+
+                &::before {
+                    content: 'NEW';
+                    font-size: .9rem;
+                    color: #fff;
+                    background-color: #FF7171;
+                    width: 50px;
+                    height: 50px;
+                    padding: 5px;
+                    margin-right: 15px;
+                    border-radius: 5px;
+                }
+            }
+
+            .info {
+                padding: 5px 5px 10px 5px;
+                font-size: 1.1rem;
+                color: #555;
+                border-bottom: 1px dotted #1A89DA;
+            }
+        }
+    }
+
+    #bookmarks {
+
+        .bookmark {
+            font-size: 1.1rem;
+            color: #555;
+            margin: 2rem 30px 20px 30px;
+            position: relative;
+
+            a {
+                transition: .2s;
+
+                &:hover {
+                    background-color: rgba(26, 137, 218, .2);
+                    display: inline-block;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            .title {
+                font-weight: 600;
+                font-size: 1.5rem;
+                padding: 5px;
+            }
+
+            .title_currentp1 {
+                font-weight: 600;
+                font-size: 1.5rem;
+                padding: 5px;
+
+                &::before {
+                    content: 'NEW';
+                    font-size: .9rem;
+                    color: #fff;
+                    background-color: #FF7171;
+                    width: 50px;
+                    height: 50px;
+                    padding: 5px;
+                    margin-right: 15px;
+                    border-radius: 5px;
+                }
+            }
+
+            .info {
+                padding: 5px 5px 10px 5px;
+                font-size: 1.1rem;
+                color: #555;
+                border-bottom: 1px dotted #1A89DA;
+            }
+        }
+    }
+
 }
 
 footer {

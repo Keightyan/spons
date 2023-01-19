@@ -75,6 +75,7 @@
                                             @endif
                                         </p>
                                         <p class="info">
+                                            <img src="{{ asset('storage/profile_image/' . $post->user->profile_image) }}" class="inline mr-2" style="height: 35px;">
                                             <span class="text-spons_blue mr-6">{{ $post->user->name }}</span>
                                             カテゴリ：<span class="font-bold mr-6">{{ $post->category->name }}</span>
                                             募集タイプ：<span class="font-bold mr-6">{{ $post->post_type->name }}</span>

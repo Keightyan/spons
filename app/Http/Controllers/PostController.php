@@ -132,8 +132,6 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
 
-        // dd($post);
-        
         $post->fill($request->all());
 
         if (request('image')) {

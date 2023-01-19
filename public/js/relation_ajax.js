@@ -1,7 +1,7 @@
 // フォローボタンがクリックされたら
 function toggleRelation(followed_id) {
     // 押されたボタンを特定
-    let user = $("#user-" + followed_id)
+    let user = $(".user-" + followed_id)
 
     $.ajaxSetup({
         headers: {

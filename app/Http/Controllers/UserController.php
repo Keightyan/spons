@@ -29,9 +29,9 @@ class UserController extends Controller
         return view('user.edit', compact('user', 'prefectures'));
     }
 
-    public function update(UserRequest $request, User $user) {
+    public function update(UserRequest $request) {
 
-        // dd($user);
+        $user = auth()->user();     //　引数に渡すと他ユーザーのidを叩かれてしまう可能性があるので、ここで自身を指定している  
 
         $user->fill($request->all());
 

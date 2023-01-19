@@ -79,6 +79,7 @@
 
                 <div class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
                     <p class="mr-8 font-bold text-gray-500" style="width: 100px;">募集者</p>
+                    <a href="{{ route('user.show', $post->user->id) }}"><img src="{{ asset('storage/profile_image/' . $post->user->profile_image) }}" class="mr-4" style="width: 40px;"></a>
                     <span class="text-black text-xl font-bold"><a href="{{ route('user.show', $post->user->id) }}" class="text-spons_blue hover:underline decoration-solid">{{ $post->user->name }}</a></span>
                 </div>
 

@@ -24,7 +24,7 @@ class PostSeeder extends Seeder
         Post::create(['user_id' => 2, 'category_id' => 2, 'post_type_id' => 2, 'prefecture_id' => 1, 'title' => 'テスト', 'body' => "テスト"]);
         Post::create(['user_id' => 3, 'category_id' => 3, 'post_type_id' => 3, 'prefecture_id' => 2, 'title' => 'テスト', 'body' => "テスト"]);
         Post::create(['user_id' => 4, 'category_id' => 4, 'post_type_id' => 1, 'prefecture_id' => 3, 'title' => 'テスト', 'body' => "テスト"]);
-        Post::create(['user_id' => 1, 'category_id' => 5, 'post_type_id' => 2, 'prefecture_id' => 4, 'title' => 'テスト', 'body' => "テスト"]);
+        Post::create(['user_id' => 1, 'category_id' => 5, 'post_type_id' => 2, 'prefecture_id' => 30, 'title' => 'テスト', 'body' => "テスト"]);
         Post::create(['user_id' => 5, 'category_id' => 5, 'post_type_id' => 2, 'prefecture_id' => 4, 'title' => 'テスト', 'body' => "テスト"]);
     }
 }

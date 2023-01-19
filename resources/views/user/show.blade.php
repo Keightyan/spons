@@ -8,9 +8,11 @@
                 <div class="md:flex items-center mt-6 relative">
                     <div class="w-full flex flex-col pb-5">
                         <div class="profile_container flex justify-center">
-                            {{-- <img src="{{ asset('storage/images/' . $user->profile_image) }}" style="max-width: 600px;"> --}}
+
                             <div class="profile-left mr-5" style="width: 30%;">
-                                <div class="rounded-full bg-gray-500 mx-auto" style="width: 200px; height: 200px;">
+                                <div class="rounded-full mx-auto flex justify-center">
+                                    <img
+                                        src="{{ asset('storage/profile_image/' . $user->profile_image) }}"style="width: 200px;">
                                 </div>
                                 <p class="text-lg font-bold text-center mt-4">{{ $user->name }}</p>
                                 @if (Auth::check())
@@ -34,11 +36,11 @@
                                                 </button></a>
                                         </div>
                                     @else
-                                        <div class="flex relative" id="user-{{ $user->id }}">
+                                        <div class="flex relative user-{{ $user->id }}">
                                             <button type="submit" onClick="toggleRelation( {{ $user->id }} )"
                                                 data-is-follow="{{ Auth::user()->is_following($user->id) ? true : false }}"
                                                 class="{{ Auth::user()->is_following($user->id) ? 'absolute right-0 border border-solid border-spons_blue p-2 rounded font-bold text-xl bg-spons_blue text-white' : 'absolute right-0 border border-solid border-spons_blue p-2 mb-10 rounded font-bold text-xl bg-white text-spons_blue' }}">
-                                                <span>{{ Auth::user()->is_following($user->id) ? 'フォロー中' : 'フォロー' }}</span></button>
+                                                <span>{{ Auth::user()->is_following($user->id) ? 'フォロー中' : 'フォローする' }}</span></button>
                                         </div>
                                     @endif
                                 @endif
@@ -83,28 +85,159 @@
                         </div>
 
                         <ul class="tabs-menu">
-                            <p class="mb-4"><span class=" text-spons_blue font-bold text-xl">{{ $user->name }}</span> さんの</p>
+                            <p class="mb-4"><span
+                                    class=" text-spons_blue font-bold text-xl">{{ $user->name }}</span> さんの</p>
                             <li><a href="#followings">フォロー中　{{ $user->followings()->count() }}</a></li>
                             <li><a href="#followers">フォロワー　{{ $user->followers()->count() }}</a></li>
                             <li><a href="#posts">募集投稿　{{ $user->posts()->count() }}</a></li>
                             @if ($user->id === Auth::id())
-                            <li><a href="#bookmarks">ブックマーク　{{ $user->bookmarks()->count() }}</a></li>
+                                <li><a href="#bookmarks">ブックマーク　{{ $user->bookmarks()->count() }}</a></li>
                             @endif
                         </ul>
                         <section class="tabs-content">
                             <section id="followings">
-                                <p>フォロー中</p>
+                                <div>
+                                    @foreach ($user->followings as $following)
+                                        <div class="flex my-10 relative following">
+                                            <a href="{{ route('user.show', $following) }}"><img
+                                                    src="{{ asset('storage/profile_image/' . $following->profile_image) }}"
+                                                    style="width: 100px;"></a>
+                                            <p class="ml-4 mr-auto mt-2 font-bold"><a
+                                                    href="{{ route('user.show', $following) }}"
+                                                    class="text-spons_blue hover:underline decoration-solid">{{ $following->name }}</a><br>
+                                                <span
+                                                    class="block mt-4 font-medium">{{ $following->introduction }}</span>
+                                                @if ($user->id === Auth::id())
+                                                    <div class="user-{{ $following->id }}">
+                                                        <button type="submit"
+                                                            onClick="toggleRelation( {{ $following->id }} )"
+                                                            data-is-follow="{{ Auth::user()->is_following($following->id) ? true : false }}"
+                                                            class="{{ Auth::user()->is_following($following->id) ? 'absolute top-0 right-0 border border-solid border-spons_blue p-2 rounded font-bold text-xl bg-spons_blue text-white' : 'absolute top-0 right-0 border border-solid border-spons_blue p-2 mb-10 rounded font-bold text-xl bg-white text-spons_blue' }}">
+                                                            <span>{{ Auth::user()->is_following($following->id) ? 'フォロー中' : 'フォローする' }}</span></button>
+                                                    </div>
+                                                @endif
+                                        </div>
+                                    @endforeach
+                                </div>
                             </section>
                             <section id="followers">
-                                <p>フォロワー</p>
+                                <div>
+                                    @foreach ($user->followers as $follower)
+                                        <div class="flex my-10 relative follower">
+                                            <a href="{{ route('user.show', $follower) }}"><img
+                                                    src="{{ asset('storage/profile_image/' . $follower->profile_image) }}"
+                                                    style="width: 100px;"></a>
+                                            <p class="ml-4 mr-auto mt-2 font-bold"><a
+                                                    href="{{ route('user.show', $follower) }}"
+                                                    class="text-spons_blue hover:underline decoration-solid">{{ $follower->name }}</a><br>
+                                                <span
+                                                    class="block mt-4 font-medium">{{ $follower->introduction }}</span>
+                                                @if ($user->id === Auth::id())
+                                                    <div class="user-{{ $follower->id }}">
+                                                        <button type="submit"
+                                                            onClick="toggleRelation( {{ $follower->id }} )"
+                                                            data-is-follow="{{ Auth::user()->is_following($follower->id) ? true : false }}"
+                                                            class="{{ Auth::user()->is_following($follower->id) ? 'absolute top-0 right-0 border border-solid border-spons_blue p-2 rounded font-bold text-xl bg-spons_blue text-white' : 'absolute top-0 right-0 border border-solid border-spons_blue p-2 mb-10 rounded font-bold text-xl bg-white text-spons_blue' }}">
+                                                            <span>{{ Auth::user()->is_following($follower->id) ? 'フォロー中' : 'フォローする' }}</span></button>
+                                                    </div>
+                                                @endif
+                                        </div>
+                                    @endforeach
+                                </div>
                             </section>
                             <section id="posts">
-                                <p>募集投稿</p>
+                                <div>
+                                    @foreach ($user->posts as $post)
+                                        @php
+                                            $week = ['日', '月', '火', '水', '木', '金', '土'];
+                                            $date = $post->created_at;
+                                            $day = new DateTime($date);
+                                            $dow = $day->format('w');
+                                            
+                                            $carbon_updated_at = new \Carbon\Carbon($post->updated_at);
+                                            $carbon_created_at = new \Carbon\Carbon($post->created_at);
+                                        @endphp
+                                        <div class="post">
+                                            <a href="{{ route('post.show', $post) }}">
+                                                {{-- 24時間以内の更新 or 投稿には「NEW」を付ける --}}
+                                                <p
+                                                    class="{{ $carbon_updated_at->subHour(24) || $carbon_created_at->subHour(24) ? 'title_currentp1' : 'title' }}">
+                                                    {{ $post->title }}
+                                                    @if ($post->image)
+                                                        <img src="{{ asset('/img/ico_isImage.png') }}" alt="画像有り"
+                                                            style="display: inline; max-width: 30px; margin-left: 5px;">
+                                                    @endif
+                                                    <p class="info">
+                                                        {{-- <img src="{{ asset('storage/profile_image/' . $post->user->profile_image) }}" class="inline mr-2" style="height: 35px;">
+                                                        <span
+                                                            class="text-spons_blue mr-6">{{ $post->user->name }}</span> --}}
+                                                        カテゴリ：<span
+                                                            class="font-bold mr-6">{{ $post->category->name }}</span>
+                                                        募集タイプ：<span
+                                                            class="font-bold mr-6">{{ $post->post_type->name }}</span>
+                                                        都道府県：<span
+                                                            class="font-bold mr-6">{{ $post->prefecture->name }}</span>
+                                                        <br>
+                                                        @if ($post->updated_at > $post->created_at)
+                                                            <span
+                                                                class="text-sm mr-6">更新日時：{{ $post->updated_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}</span>
+                                                        @endif
+                                                        <span
+                                                            class="text-sm">投稿日時：{{ $post->created_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}</span>
+                                                    </p>
+                                            </a>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </section>
                             @if ($user->id === Auth::id())
-                            <section id="bookmarks">
-                                <p>ブックマーク</p>
-                            </section>
+                                <section id="bookmarks">
+                                    <div>
+                                        @foreach ($user->bookmark_posts as $bookmark_post)
+                                            @php
+                                                $week = ['日', '月', '火', '水', '木', '金', '土'];
+                                                $date = $bookmark_post->created_at;
+                                                $day = new DateTime($date);
+                                                $dow = $day->format('w');
+                                                
+                                                $carbon_updated_at = new \Carbon\Carbon($bookmark_post->updated_at);
+                                                $carbon_created_at = new \Carbon\Carbon($bookmark_post->created_at);
+                                            @endphp
+                                            <div class="bookmark">
+                                                <a href="{{ route('post.show', $bookmark_post) }}">
+                                                    {{-- 24時間以内の更新 or 投稿には「NEW」を付ける --}}
+                                                    <p
+                                                        class="{{ $carbon_updated_at->subHour(24) || $carbon_created_at->subHour(24) ? 'title_currentp1' : 'title' }}">
+                                                        {{ $bookmark_post->title }}
+                                                        @if ($bookmark_post->image)
+                                                            <img src="{{ asset('/img/ico_isImage.png') }}"
+                                                                alt="画像有り"
+                                                                style="display: inline; max-width: 30px; margin-left: 5px;">
+                                                        @endif
+                                                        <p class="info">
+                                                            <img src="{{ asset('storage/profile_image/' . $bookmark_post->user->profile_image) }}"
+                                                                class="inline mr-2" style="height: 35px;">
+                                                            <span
+                                                                class="text-spons_blue mr-6">{{ $bookmark_post->user->name }}</span>
+                                                            カテゴリ：<span
+                                                                class="font-bold mr-6">{{ $bookmark_post->category->name }}</span>
+                                                            募集タイプ：<span
+                                                                class="font-bold mr-6">{{ $bookmark_post->post_type->name }}</span>
+                                                            都道府県：<span
+                                                                class="font-bold mr-6">{{ $bookmark_post->prefecture->name }}</span>
+                                                            <br>
+                                                            @if ($bookmark_post->updated_at > $bookmark_post->created_at)
+                                                                <span
+                                                                    class="text-sm mr-6">更新日時：{{ $bookmark_post->updated_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}</span>
+                                                            @endif
+                                                            <span
+                                                                class="text-sm">投稿日時：{{ $bookmark_post->created_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}</span>
+                                                        </p>
+                                                </a>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </section>
                             @endif
                         </section>
                     </div>
