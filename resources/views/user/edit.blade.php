@@ -20,11 +20,14 @@
                         <input type="file" name="profile_image">
                     </div>
 
-                    <div class="mt-8 my-10 flex">
-                        <p class="mr-8 font-bold" style="width: 100px;">ニックネーム</p>
-                        <p><input type="text" name="name"
-                                class="w-auto py-2 placeholder-gray-500 border border-gray-300 rounded-md bg-gray-200"
-                                placeholder="ニックネームを入力してください" value="{{ old('name', $user->name) }}"></p>
+                    <div class="mt-8 my-10">
+                        <div class="flex">
+                            <p class="mr-8 font-bold" style="width: 100px;">ニックネーム</p>
+                            <p><input type="text" name="name"
+                                    class="w-auto py-2 placeholder-gray-500 border border-gray-300 rounded-md bg-gray-200"
+                                    placeholder="ニックネームを入力してください" value="{{ old('name', $user->name) }}"><br><span
+                                    class="inline-block mt-2">※10文字以下</span></p>
+                        </div>
                     </div>
 
                     <div class="mb-10 flex">
@@ -43,7 +46,8 @@
                             <input type="text" name="team"
                                 class="w-auto py-2 placeholder-gray-500 border border-gray-300 rounded-md bg-gray-200"
                                 placeholder="所属チームを入力してください"
-                                value="{{ old('team', $user->team === null ? '－' : $user->team) }}">
+                                value="{{ old('team', $user->team === null ? '－' : $user->team) }}"><br><span
+                                class="inline-block mt-2">※20文字以下</span>
                         </p>
                     </div>
 
@@ -61,20 +65,25 @@
                         <p class="mr-8 font-bold" style="width: 100px;">生年月日</p>
                         <p><input type="text" name="birthday"
                                 class="w-auto py-2 placeholder-gray-500 border border-gray-300 rounded-md bg-gray-200"
-                                placeholder="生年月日を入力してください" value="{{ old('birthday', $user->birthday) }}"></p>
+                                placeholder="生年月日を入力してください" value="{{ old('birthday', $user->birthday) }}"><br><span
+                                class="inline-block mt-2">※yymmdd、yy-mm-dd、yy/mm/dd のいずれかの形式で入力してください。</span></p>
                     </div>
 
                     <div class="mt-8 my-10 flex">
                         <p class="mr-12 font-bold" style="width: 100px;">興味のある<br>スポーツ</p>
                         <p class="w-full"><input type="text" name="favorites"
                                 class="py-2 placeholder-gray-500 border border-gray-300 rounded-md bg-gray-200"
-                                value="{{ old('favorites', $user->favorites) }}" style="width: 100%;"></p>
+                                value="{{ old('favorites', $user->favorites) }}" style="width: 100%;"><br><span
+                                class="inline-block mt-2">※50文字以下</span></p>
                     </div>
 
-                    <div class="mb-10 flex">
-                        <p class="mr-12 font-bold" style="width: 100px;">自己紹介</p>
-                        <textarea name="introduction" class="w-full placeholder-gray-500 border border-gray-300 rounded-md bg-gray-200"
-                            cols="30" rows="10" placeholder="自己紹介を入力してください">{{ old('introduction', $user->introduction) }}</textarea>
+                    <div class="mb-14 relative">
+                        <div class="flex">
+                            <p class="mr-12 font-bold" style="width: 100px;">自己紹介</p>
+                            <textarea name="introduction" class="w-full placeholder-gray-500 border border-gray-300 rounded-md bg-gray-200"
+                                cols="30" rows="10" placeholder="自己紹介を入力してください">{{ old('introduction', $user->introduction) }}</textarea>
+                        </div>
+                        <span class="inline-block mt-2 absolute" style="left: 8.3rem;">※200文字以下</span>
                     </div>
 
                     <div class="mb-10 flex">
