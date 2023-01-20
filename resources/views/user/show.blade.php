@@ -48,12 +48,6 @@
                                                     <i class="fas fa-cog"></i>
                                                 </button></a>
                                         </div>
-                                        <div class="relative user-{{ $user->id }}">
-                                            <button type="submit" onClick="toggleRelation( {{ $user->id }} )"
-                                                data-is-follow="{{ Auth::user()->is_following($user->id) ? true : false }}"
-                                                class="{{ Auth::user()->is_following($user->id) ? 'absolute right-0 border border-solid border-spons_blue p-2 rounded font-bold text-xl bg-spons_blue text-white' : 'absolute right-0 border border-solid border-spons_blue p-2 mb-10 rounded font-bold text-xl bg-white text-spons_blue' }}">
-                                                <span>{{ Auth::user()->is_following($user->id) ? 'フォロー中' : 'フォローする' }}</span></button>
-                                        </div>
                                     @else
                                         <div class="flex relative user-{{ $user->id }}">
                                             <button type="submit" onClick="toggleRelation( {{ $user->id }} )"
