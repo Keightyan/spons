@@ -15,6 +15,19 @@
                                         src="{{ asset('storage/profile_image/' . $user->profile_image) }}"style="width: 200px;">
                                 </div>
                                 <p class="text-lg font-bold text-center mt-4">{{ $user->name }}</p>
+                                @if (Auth::user()->role === 2)
+                                    <ul class="destroy_ul flex justify-center mt-2">
+                                        <li
+                                            class="bg-red-500 border-solid border border-red-500 p-2 mb-6 rounded text-white font-bold mx-1 destroy_btn">
+                                            <form method="post" action="{{ route('user.destroy', $user) }}">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit"
+                                                    onClick="return confirm('本当に削除しますか？');">削除</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                @endif
                                 @if (Auth::check())
                                     @if ($user->id !== Auth::id())
                                         <div class="mt-6 flex">
@@ -34,6 +47,12 @@
                                                     class="absolute right-0 border border-solid border-spons_blue p-2 mb-6 mr-2 rounded text-spons_blue font-bold text-xl">
                                                     <i class="fas fa-cog"></i>
                                                 </button></a>
+                                        </div>
+                                        <div class="relative user-{{ $user->id }}">
+                                            <button type="submit" onClick="toggleRelation( {{ $user->id }} )"
+                                                data-is-follow="{{ Auth::user()->is_following($user->id) ? true : false }}"
+                                                class="{{ Auth::user()->is_following($user->id) ? 'absolute right-0 border border-solid border-spons_blue p-2 rounded font-bold text-xl bg-spons_blue text-white' : 'absolute right-0 border border-solid border-spons_blue p-2 mb-10 rounded font-bold text-xl bg-white text-spons_blue' }}">
+                                                <span>{{ Auth::user()->is_following($user->id) ? 'フォロー中' : 'フォローする' }}</span></button>
                                         </div>
                                     @else
                                         <div class="flex relative user-{{ $user->id }}">
@@ -75,7 +94,7 @@
                                         <p class="mr-8 font-bold text-gray-500" style="width: 100px;">年齢</p>
                                         <span class="text-black text-xl font-bold">
                                             @php
-                                            $birthday = new \Carbon\Carbon($user->birthday);
+                                                $birthday = new \Carbon\Carbon($user->birthday);
                                             @endphp
                                             {{ $birthday->age }} <span class="text-sm">歳</span></span>
                                     </div>

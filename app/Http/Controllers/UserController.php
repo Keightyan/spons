@@ -11,25 +11,28 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('id','desc')->paginate(10);
+        $users = User::orderBy('id', 'desc')->paginate(10);
         return view('user.index', compact('users'));
     }
 
-    public function show($id) {
+    public function show($id)
+    {
 
         $user = User::find($id);
 
         return view('user.show', compact('user'));
     }
 
-    public function edit(User $user) {
+    public function edit(User $user)
+    {
         $user = auth()->user();
         $prefectures = Prefecture::all();
 
         return view('user.edit', compact('user', 'prefectures'));
     }
 
-    public function update(UserRequest $request) {
+    public function update(UserRequest $request)
+    {
 
         $user = auth()->user();     //　引数に渡すと他ユーザーのidを叩かれてしまう可能性があるので、ここで自身を指定している  
 
@@ -45,6 +48,19 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->route('user.show', $user)->with('message', 'プロフィールを更新しました。');
+    }
+
+    public function destroy(User $user)
+    {
+
+        $admin = auth()->user();
+
+        // dd($admin->role);
+
+        if ($admin->role === 2) {
+            $user->delete();
+            return redirect()->route('post.index')->with('message', 'ユーザーを削除しました');
+        }
     }
 
     public function followings($id)

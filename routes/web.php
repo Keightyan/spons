@@ -55,5 +55,6 @@ Route::get('/users', [UserController::class, 'index'])->name('user.index');
 Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
 Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
 Route::patch('/user', [UserController::class, 'update'])->name('user.update');   // {}を末尾に付けない理由は、他ユーザーのidを叩かれると、そのユーザーのプロフィールを更新されてしまう可能性があるため
+Route::delete('/user{user}', [UserController::class, 'destroy'])->name('user.destroy');
 
 require __DIR__ . '/auth.php';
