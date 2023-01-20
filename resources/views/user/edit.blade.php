@@ -26,7 +26,7 @@
                                 class="w-auto py-2 placeholder-gray-500 border border-gray-300 rounded-md bg-gray-200"
                                 placeholder="ニックネームを入力してください" value="{{ old('name', $user->name) }}"></p>
                     </div>
-                    
+
                     <div class="mb-10 flex">
                         <p class="mr-8 font-bold" style="width: 100px;">都道府県</p>
                         <select class="bg-gray-200 rounded" name="prefecture_id">
@@ -50,9 +50,10 @@
                     <div class="mb-10 flex">
                         <p class="mr-8 font-bold" style="width: 100px;">性別</p>
                         <select class="bg-gray-200 rounded" name="gender">
-                            <option
-                                value="{{ $user->gender }}"{{ Request::get('gender') == $user->gender ? 'selected' : '' }}>
-                                {{ $user->gender === 1 ? '男' : '女' }}</option>
+
+                            <option value="1" {{ $user->gender == 1 ? 'selected' : '' }}>男</option>
+                            <option value="2" {{ $user->gender == 2 ? 'selected' : '' }}>女</option>
+
                         </select>
                     </div>
 

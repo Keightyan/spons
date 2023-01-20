@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'profile_image',
         'team',
+        'gender',
         'birthday',
         'favorites',
         'introduction',
@@ -103,6 +104,10 @@ class User extends Authenticatable
     public function is_following($userId)
     {
         return $this->followings()->where('followed_id', $userId)->exists();
+    }
+
+    public function prefecture() {
+        return $this->belongsTo(Prefecture::class);
     }
 
     public function send()

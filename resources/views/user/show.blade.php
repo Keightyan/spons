@@ -48,13 +48,7 @@
                                     <div
                                         class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
                                         <p class="mr-8 font-bold text-gray-500" style="width: 100px;">都道府県</p>
-                                        <span class="text-black text-xl font-bold">{{ $user->prefecture }}</span>
-                                    </div>
-
-                                    <div
-                                        class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
-                                        <p class="mr-8 font-bold text-gray-500" style="width: 100px;">性別</p>
-                                        <span class="text-black text-xl font-bold">{{ $user->gender }}</span>
+                                        <span class="text-black text-xl font-bold">{{ $user->prefecture->name }}</span>
                                     </div>
 
                                     <div
@@ -67,6 +61,23 @@
                                                 <span class="text-black text-xl font-bold">{{ $user->team }}</span>
                                             @endif
                                         </span>
+                                    </div>
+
+                                    <div
+                                        class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
+                                        <p class="mr-8 font-bold text-gray-500" style="width: 100px;">性別</p>
+                                        <span
+                                            class="text-black text-xl font-bold">{{ $user->gender == 1 ? '男' : '女' }}</span>
+                                    </div>
+
+                                    <div
+                                        class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
+                                        <p class="mr-8 font-bold text-gray-500" style="width: 100px;">年齢</p>
+                                        <span class="text-black text-xl font-bold">
+                                            @php
+                                            $birthday = new \Carbon\Carbon($user->birthday);
+                                            @endphp
+                                            {{ $birthday->age }} <span class="text-sm">歳</span></span>
                                     </div>
 
                                     <div
