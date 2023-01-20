@@ -15,7 +15,7 @@
                                         src="{{ asset('storage/profile_image/' . $user->profile_image) }}"style="width: 200px;">
                                 </div>
                                 <p class="text-lg font-bold text-center mt-4">{{ $user->name }}</p>
-                                @if (Auth::user()->role === 2)
+                                @if (Auth::user()->role === 2 && $user->id !== 1)
                                     <ul class="destroy_ul flex justify-center mt-2">
                                         <li
                                             class="bg-red-500 border-solid border border-red-500 p-2 mb-6 rounded text-white font-bold mx-1 destroy_btn">
