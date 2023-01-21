@@ -110,13 +110,13 @@ class User extends Authenticatable
         return $this->belongsTo(Prefecture::class);
     }
 
-    public function send()
+    public function senders()
     {
-        return $this->hasMany(Message::class);
+        return $this->belongsToMany(User::class, 'messages', 'sender_user_id', 'receiver_user_id');
     }
 
-    public function receive()
+    public function receivers()
     {
-        return $this->hasMany(Message::class);
+        return $this->belongsToMany(User::class, 'messages', 'receiver_user_id', 'sender_user_id');
     }
 }

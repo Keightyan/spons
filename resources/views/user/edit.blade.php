@@ -89,7 +89,7 @@
                     <div class="mb-10 flex">
                         <div class="mr-20"></div>
                         <button class="mt-4 mb-10 w-full h-20 rounded bg-spons_blue" style="margin-left: 3.3rem;">
-                            <span class="text-xl text-white font-bold w-full">更新完了
+                            <span class="text-xl text-white font-bold w-full">更新する
                         </button>
                     </div>
             </div>
