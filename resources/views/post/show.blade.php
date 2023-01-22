@@ -3,7 +3,6 @@
     $date = $post->created_at;
     $day = new DateTime($date);
     $dow = $day->format('w');
-
 @endphp
 
 <x-app-layout>
@@ -64,11 +63,11 @@
                 </div>
 
                 @if ($post->updated_at > $post->created_at)
-                <div class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
-                    <p class="mr-8 font-bold text-gray-500" style="width: 100px;">更新日時</p>
-                    <span
-                        class="text-black text-xl font-bold">{{ $post->updated_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}</span>
-                </div>
+                    <div class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
+                        <p class="mr-8 font-bold text-gray-500" style="width: 100px;">更新日時</p>
+                        <span
+                            class="text-black text-xl font-bold">{{ $post->updated_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}</span>
+                    </div>
                 @endif
 
                 <div class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
@@ -79,8 +78,11 @@
 
                 <div class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
                     <p class="mr-8 font-bold text-gray-500" style="width: 100px;">募集者</p>
-                    <a href="{{ route('user.show', $post->user->id) }}"><img src="{{ asset('storage/profile_image/' . $post->user->profile_image) }}" class="mr-4" style="width: 40px;"></a>
-                    <span class="text-black text-xl font-bold"><a href="{{ route('user.show', $post->user->id) }}" class="text-spons_blue hover:underline decoration-solid">{{ $post->user->name }}</a></span>
+                    <a href="{{ route('user.show', $post->user->id) }}"><img
+                            src="{{ asset('storage/profile_image/' . $post->user->profile_image) }}" class="mr-4"
+                            style="width: 40px;"></a>
+                    <span class="text-black text-xl font-bold"><a href="{{ route('user.show', $post->user->id) }}"
+                            class="text-spons_blue hover:underline decoration-solid">{{ $post->user->name }}</a></span>
                 </div>
 
                 <div class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
@@ -125,15 +127,33 @@
 
                 @if (Auth::check())
                     @if ($post->user_id !== Auth::id())
-                        <div class="mt-6 flex">
-                            <button class="msg_btn mt-4 mb-10 w-1/4 h-20 rounded bg-green-500" style="margin-inline: auto;">
-                                <span class="text-xl text-white font-bold w-full">メッセージを送る
-                            </button>
-                        </div>
+                        @foreach ($msgs as $msg)
+                            @if ($loop->index === 0)
+                                @if ($from_id === $msg->sender_user_id)
+                                    <div class="mt-6 flex justify-center">
+                                        <form method="get" action="{{ route('message.message', $post) }}">
+                                            <button class="msg_btn mt-4 mb-10 w-100 h-20 p-4 rounded bg-green-500"
+                                                style="margin-inline: auto;">
+                                                <span class="text-xl text-white font-bold w-full">メッセージ画面へ
+                                            </button>
+                                        </form>
+                                    </div>
+                                @endif
+                            @endif
+                        @endforeach
+                        @if ($post->messages->count() === 0)
+                            <div class="mt-6 flex justify-center">
+                                <form method="get" action="{{ route('message.inquiry', $post) }}">
+                                    <button class="msg_btn mt-4 mb-10 w-100 h-20 p-4 rounded bg-green-500"
+                                        style="margin-inline: auto;">
+                                        <span class="text-xl text-white font-bold w-full">メッセージを送る
+                                    </button>
+                                </form>
+                            </div>
+                        @endif
                     @endif
                 @endif
             </div>
-            </form>
         </div>
         <x-footer></x-footer>
     </div>

@@ -10,6 +10,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\PostType;
 use App\Models\Prefecture;
+use App\Models\Message;
 
 class PostController extends Controller
 {
@@ -103,7 +104,10 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('post.show', compact('post'));
+        $msgs = $post->messages;
+        $from_id = auth()->user()->id;
+        $to_id = $post->user->id;
+        return view('post.show', compact('msgs', 'post', 'from_id', 'to_id'));
     }
 
     /**
@@ -203,7 +207,6 @@ class PostController extends Controller
                 $query->pluck('prefecture_id');
             }
             $data = $query->paginate(10);
-            
         } else {    // 検索されなかった場合（初期表示）
             return $posts10;
         }

@@ -28,6 +28,10 @@ class MessageController extends Controller
 
         $msg->save();
 
-        return redirect()->route('message.inquiry')->with('message', 'メッセージを送信しました！', compact('post'));
+        return redirect()->route('post.show', $post)->with('message', 'メッセージを送信しました！');
+    }
+
+    public function message() {
+        
     }
 }

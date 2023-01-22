@@ -29,7 +29,6 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
-    // Route::post('/post/confirm', [PostController::class, 'confirm'])->name('post.confirm');
     Route::post('/post/complete', [PostController::class, 'store'])->name('post.store');
     Route::get('/post/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
     Route::patch('/post/{post}', [PostController::class, 'update'])->name('post.update');
@@ -46,8 +45,9 @@ Route::middleware('auth')->group(function () {
     Route::get('followings', [UserController::class, 'followings'])->name('user.followings');
     Route::get('followers', [UserController::class, 'followers'])->name('user.followers');
 
-    Route::get('/post/{post}/inquiry', [MessageController::class, 'create'])->name('message.create');
+    Route::get('/post/{post}/inquiry', [MessageController::class, 'create'])->name('message.inquiry');
     Route::post('/post/{post}/inquiry/complete', [MessageController::class, 'store'])->name('message.store');
+    Route::get('/post/{post}/message', [MessageController::class, 'message'])->name('message.message');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
