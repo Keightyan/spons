@@ -885,6 +885,39 @@ header {
 
 }
 
+// メッセージ画面
+.messages {
+
+
+    #messages {
+
+
+        .message {
+            font-size: 1.1rem;
+            color: #555;
+            margin: 2rem 30px 20px 30px;
+            position: relative;
+
+            &>div {
+                border-bottom: 1px dotted #1A89DA;
+            }
+
+            .time {
+                padding: 0 5px;
+            }
+
+            img {
+                min-width: 100px;
+                max-width: 100px;
+                display: inline-block;
+                margin-top: -10px;
+            }
+        }
+    }
+}
+
+
+
 footer {
     position: absolute;
     bottom: 0;

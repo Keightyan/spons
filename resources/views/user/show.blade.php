@@ -191,24 +191,25 @@
                                                         <img src="{{ asset('/img/ico_isImage.png') }}" alt="画像有り"
                                                             style="display: inline; max-width: 30px; margin-left: 5px;">
                                                     @endif
-                                                    <p class="info">
-                                                        {{-- <img src="{{ asset('storage/profile_image/' . $post->user->profile_image) }}" class="inline mr-2" style="height: 35px;">
+                                                </p>
+                                                <p class="info">
+                                                    {{-- <img src="{{ asset('storage/profile_image/' . $post->user->profile_image) }}" class="inline mr-2" style="height: 35px;">
                                                         <span
                                                             class="text-spons_blue mr-6">{{ $post->user->name }}</span> --}}
-                                                        カテゴリ：<span
-                                                            class="font-bold mr-6">{{ $post->category->name }}</span>
-                                                        募集タイプ：<span
-                                                            class="font-bold mr-6">{{ $post->post_type->name }}</span>
-                                                        都道府県：<span
-                                                            class="font-bold mr-6">{{ $post->prefecture->name }}</span>
-                                                        <br>
-                                                        @if ($post->updated_at > $post->created_at)
-                                                            <span
-                                                                class="text-sm mr-6">更新日時：{{ $post->updated_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}</span>
-                                                        @endif
+                                                    カテゴリ：<span
+                                                        class="font-bold mr-6">{{ $post->category->name }}</span>
+                                                    募集タイプ：<span
+                                                        class="font-bold mr-6">{{ $post->post_type->name }}</span>
+                                                    都道府県：<span
+                                                        class="font-bold mr-6">{{ $post->prefecture->name }}</span>
+                                                    <br>
+                                                    @if ($post->updated_at > $post->created_at)
                                                         <span
-                                                            class="text-sm">投稿日時：{{ $post->created_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}</span>
-                                                    </p>
+                                                            class="text-sm mr-6">更新日時：{{ $post->updated_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}</span>
+                                                    @endif
+                                                    <span
+                                                        class="text-sm">投稿日時：{{ $post->created_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}</span>
+                                                </p>
                                             </a>
                                         </div>
                                     @endforeach
