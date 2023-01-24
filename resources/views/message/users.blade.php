@@ -31,23 +31,23 @@
                                     $day = new DateTime($date);
                                     $dow = $day->format('w');
                                 @endphp
-                                <div class="message">
-                                    <div class="flex my-10 py-10 relative">
-                                        <a href="{{ route('user.show', $message->sender_user_id) }}"><img
-                                                src="{{ asset('/storage/profile_image/' . $message->sender_user->profile_image) }}"></a>
-                                        <p class="ml-8 mr-auto mt-2 font-bold inline-block">
-                                            <a href="{{ route('user.show', $message->sender_user_id) }}"
-                                                class="text-spons_blue hover:underline decoration-solid">{{ $message->sender_user->name }}</a><br>
-                                            <span class="block mt-4 font-medium">{{ $message->body }}</span>
-                                        </p>
-                                        <p class="time absolute top-0 right-0">
-                                            {{-- <img src="{{ asset('storage/profile_image/' . $post->user->profile_image) }}" class="inline mr-2" style="height: 35px;">
-                                            <span
-                                                class="text-spons_blue mr-6">{{ $post->user->name }}</span> --}}
-                                            <span
-                                                class="text-sm">送信日時：{{ $message->created_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}</span>
-                                        </p>
-                                    </div>
+
+                                <div class="user relative">
+                                    <a href="{{ route('message.message', $to_id, $message->sender_user->id) }}">
+                                        <div>
+                                            <div class="flex">
+                                                <div class="msg_img"><img
+                                                        src="{{ asset('/storage/profile_image/' . $message->sender_user->profile_image) }}">
+                                                </div>
+                                                <div>
+                                                    <p class="mt-2 ml-8 mr-auto">{{ $message->sender_user->name }}</p>
+                                                    <p class="bmt-4 mt-4 ml-8 font-medium msg_body">{{ $message->body }}</p>
+                                                </div>
+                                                <p class="text-sm mt-2 absolute right-0">
+                                                    送信日時：{{ $message->created_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
                             @endforeach
                         </div>

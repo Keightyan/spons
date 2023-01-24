@@ -47,7 +47,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/post/{post}/inquiry', [MessageController::class, 'create'])->name('message.inquiry');
     Route::post('/post/{post}/inquiry/complete', [MessageController::class, 'store'])->name('message.store');
-    Route::get('/post/{post}/message', [MessageController::class, 'message'])->name('message.message');
+    Route::get('/messages', [MessageController::class, 'index'])->name('message.index');
+    Route::get('/post/{post}/message/users', [MessageController::class, 'users'])->name('message.users');
+    Route::get('/post/{post}/message/{user}', [MessageController::class, 'message'])->name('message.message');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

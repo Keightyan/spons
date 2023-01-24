@@ -108,7 +108,7 @@ class User extends Authenticatable
     }
 
     public function prefecture() {
-        return $this->belongsTo(Prefecture::class);
+        return $this->belongsTo(Prefecture::class, 'prefecture_id');
     }
 
     public function senders()

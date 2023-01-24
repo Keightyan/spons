@@ -35,12 +35,58 @@ class MessageController extends Controller
         return redirect()->route('post.show', $post)->with('message', 'メッセージを送信しました！');
     }
 
-    public function message(Post $post) {
+    public function index() {
+
+        $msg = Message::all();
+        $posts = Post::all();
+
+        foreach($posts as $post) {
+            $to_id = $post->user_id;
+        }
+
+        $from_id = auth()->user()->id;
+
+        $query = Message::query()->with('sender_user')->where('post_id', $post->id);
+        $query->where(function($q) use ($from_id) {
+            $q->where('sender_user_id', $from_id);
+            $q->orWhere('receiver_user_id', $from_id);
+        });
+        $query->where(function($q) use ($to_id) {
+            $q->where('sender_user_id', $to_id);
+            $q->orWhere('receiver_user_id', $to_id);
+        });
+
+        $messages = $query->paginate(20);
+
+        return view('message.index', compact('msg', 'messages', 'from_id', 'to_id'));
+    }
+
+    public function users(Post $post) {
+
+        $from_id = auth()->user()->id;
+        $to_id = $post->user_id;
+
+        $query = Message::query()->with('sender_user')->where('post_id', $post->id);
+        $query->where(function($q) use ($from_id) {
+            $q->where('sender_user_id', $from_id);
+            $q->orWhere('receiver_user_id', $from_id);
+        });
+        $query->where(function($q) use ($to_id) {
+            $q->where('sender_user_id', $to_id);
+            $q->orWhere('receiver_user_id', $to_id);
+        });
+
+        $messages = $query->paginate(20);
+
+        return view('message.users', compact('messages', 'post', 'from_id', 'to_id'));
+    }
+
+    public function message(Post $post, User $user) {
 
         $from_id = auth()->user()->id;
         $to_id = $post->user->id;
 
-        $query = Message::query()->with('user');
+        $query = Message::query()->with('sender_user')->where('post_id', $post->id);
         $query->where(function($q) use ($from_id) {
             $q->where('sender_user_id', $from_id);
             $q->orWhere('receiver_user_id', $from_id);

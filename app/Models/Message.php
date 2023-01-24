@@ -9,7 +9,7 @@ class Message extends Model
 {
     use HasFactory;
 
-    public function user() {
+    public function sender_user() {
         return $this->belongsTo(User::class, 'sender_user_id');
     }
 
