@@ -25,7 +25,10 @@ class MessageController extends Controller
     {
         $msg = new Message();
 
-        $msg->fill($request->all());
+        $msg->sender_user_id = $request->sender_user_id;
+        $msg->receiver_user_id = $request->receiver_user_id;
+        $msg->post_id = $request->post_id;
+        $msg->body = $request->body;
 
         $msg->save();
 
@@ -37,7 +40,7 @@ class MessageController extends Controller
         $from_id = auth()->user()->id;
         $to_id = $post->user->id;
 
-        $query = Message::query();
+        $query = Message::query()->with('user');
         $query->where(function($q) use ($from_id) {
             $q->where('sender_user_id', $from_id);
             $q->orWhere('receiver_user_id', $from_id);

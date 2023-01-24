@@ -22,7 +22,6 @@
                         <span class="mr-2">都道府県：<span class="font-bold">{{ $post->prefecture->name }}</span></span>
                     </p>
 
-
                     <section id="messages">
                         <div>
                             @foreach ($post->messages as $message)
@@ -34,37 +33,12 @@
                                 @endphp
                                 <div class="message">
                                     <div class="flex my-10 py-10 relative">
-                                        @if ($message->sender_user_id === $from_id)
-                                            <a href="{{ route('user.show', $from_id) }}"><img
-                                                    src="{{ asset('/storage/profile_image/' . Auth::user()->profile_image) }}"></a>
-                                        @elseif($message->receiver_user_id === $from_id)
-                                            <a href="{{ route('user.show', $from_id) }}"><img
-                                                    src="{{ asset('/storage/profile_image/' . Auth::user()->profile_image) }}"></a>
-                                        @elseif($message->sender_user_id === $to_id)
-                                            <a href="{{ route('user.show', $to_id) }}"><img
-                                                    src="{{ asset('/storage/profile_image/' . $post->user->profile_image) }}"></a>
-                                        @elseif($message->receiver_user_id === $to_id)
-                                            <a href="{{ route('user.show', $to_id) }}"><img
-                                                    src="{{ asset('/storage/profile_image/' . $post->user->profile_image) }}"></a>
-                                        @endif
+                                        <a href="{{ route('user.show', $message->sender_user_id) }}"><img
+                                                src="{{ asset('/storage/profile_image/' . $message->user->profile_image) }}"></a>
                                         <p class="ml-8 mr-auto mt-2 font-bold inline-block">
-                                            @if ($message->sender_user_id === $from_id)
-                                                <a href="{{ route('user.show', $from_id) }}"
-                                                    class="no-underline hover:underline text-spons_blue font-bold hover:text-spons_blue">{{ Auth::user()->name }}</a><br>
-                                                <span class="block mt-4 font-medium">{{ $message->body }}</span>
-                                            @elseif($message->receiver_user_id === $from_id)
-                                                <a href="{{ route('user.show', $from_id) }}"
-                                                    class="no-underline hover:underline text-spons_blue font-bold hover:text-spons_blue">{{ Auth::user()->name }}</a><br>
-                                                <span class="block mt-4 font-medium">{{ $message->body }}</span>
-                                            @elseif($message->sender_user_id === $to_id)
-                                                <a href="{{ route('user.show', $to_id) }}"
-                                                    class="no-underline hover:underline text-spons_blue font-bold hover:text-spons_blue">{{ $post->user->name }}</a><br>
-                                                <span class="block mt-4 font-medium">{{ $message->body }}</span>
-                                            @elseif($message->receiver_user_id === $to_id)
-                                                <a href="{{ route('user.show', $to_id) }}"
-                                                    class="no-underline hover:underline text-spons_blue font-bold hover:text-spons_blue">{{ $post->user->name }}</a><br>
-                                                <span class="block mt-4 font-medium">{{ $message->body }}</span>
-                                            @endif
+                                            <a href="{{ route('user.show', $message->sender_user_id) }}"
+                                                class="text-spons_blue hover:underline decoration-solid">{{ $message->user->name }}</a><br>
+                                            <span class="block mt-4 font-medium">{{ $message->body }}</span>
                                         </p>
                                         <p class="time absolute top-0 right-0">
                                             {{-- <img src="{{ asset('storage/profile_image/' . $post->user->profile_image) }}" class="inline mr-2" style="height: 35px;">

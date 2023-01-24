@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('sender_user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('receiver_user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('post_id')->constrained()->onDelete('cascade');
+            $table->foreignId('post_id')->nullable();
             $table->text('body');
             $table->timestamps();
             $table->softDeletes();

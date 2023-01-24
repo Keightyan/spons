@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('team', 20)->nullable()->after('profile_image');
             $table->foreignId('prefecture_id')->nullable()->after('team');
             $table->integer('gender')->length(1)->nullable()->after('prefecture_id');
-            $table->date('birthday')->after('gender');
+            $table->date('birthday')->nullable()->after('gender');
             $table->string('favorites', 50)->nullable()->after('birthday');
             $table->text('introduction')->nullable()->after('team');
             $table->integer('role')->length(1)->default(1)->after('remember_token');
