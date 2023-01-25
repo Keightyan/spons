@@ -33,7 +33,7 @@
                                 @endphp
 
                                 <div class="user relative">
-                                    <a href="{{ route('message.message', $to_id, $message->sender_user->id) }}">
+                                    {{-- <a href="{{ route('message.message', $to_id, $message->sender_user->id) }}"> --}}
                                         <div>
                                             <div class="flex">
                                                 <div class="msg_img"><img
@@ -47,7 +47,7 @@
                                                     送信日時：{{ $message->created_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}
                                             </div>
                                         </div>
-                                    </a>
+                                    {{-- </a> --}}
                                 </div>
                             @endforeach
                         </div>

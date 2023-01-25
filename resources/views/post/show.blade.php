@@ -3,8 +3,8 @@
     $date = $post->created_at;
     $day = new DateTime($date);
     $dow = $day->format('w');
+    // dd($msgs->isEmpty());
 @endphp
-
 <x-app-layout>
     <div class="footer_wrap">
         <div class="mx-auto px-4 sm:px-6 lg:px-8" style="max-width: 1100px;">
@@ -128,20 +128,21 @@
                 @if (Auth::check())
                     @if ($post->user_id !== Auth::id())
                         @foreach ($msgs as $msg)
-                            @if ($loop->index === 0)
-                                @if ($from_id === $msg->sender_user_id)
-                                    <div class="mt-6 flex justify-center">
-                                        <form method="get" action="{{ route('message.message', $post) }}">
-                                            <button class="msg_btn mt-4 mb-10 w-100 h-20 p-4 rounded bg-green-500"
-                                                style="margin-inline: auto;">
-                                                <span class="text-xl text-white font-bold w-full">メッセージ画面へ
-                                            </button>
-                                        </form>
-                                    </div>
-                                @endif
+                            {{-- <?php dd($msg->sender_user_id === $from_id); ?> --}}
+                            @if ($msg->where('sender_user_id', $from_id) || $post->messages->isNotEmpty())
+                                <div class="mt-6 flex justify-center">
+                                    <form method="get"
+                                        action="{{ route('message.message', ['post' => $msg->post_id, 'user' => $msg->sender_user_id]) }}">
+                                        <button class="msg_btn mt-4 mb-10 w-100 h-20 p-4 rounded bg-green-500"
+                                            style="margin-inline: auto;">
+                                            <span class="text-xl text-white font-bold w-full">メッセージ画面へ
+                                        </button>
+                                    </form>
+                                </div>
                             @endif
                         @endforeach
-                        @if ($post->messages->count() === 0)
+                        @if ($msgs->isEmpty() || $post->messages()->where('sender_user_id', !$from_id))
+                            {{-- <?php dd($post); ?> --}}
                             <div class="mt-6 flex justify-center">
                                 <form method="get" action="{{ route('message.inquiry', $post) }}">
                                     <button class="msg_btn mt-4 mb-10 w-100 h-20 p-4 rounded bg-green-500"
