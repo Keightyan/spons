@@ -60,14 +60,20 @@
                                     $day = new DateTime($date);
                                     $dow = $day->format('w');
 
-                                    $carbon_updated_at = new \Carbon\Carbon($post->updated_at);
-                                    $carbon_created_at = new \Carbon\Carbon($post->created_at);
+                                    $now_carbon_updated_at = new \Carbon\Carbon($post->updated_at);
+                                    $now_carbon_created_at = new \Carbon\Carbon($post->created_at);
+
+                                    $h24_carbon_updated_at = new \Carbon\Carbon($post->updated_at);
+                                    $h24_carbon_updated_at->subHours(24);
+
+                                    $h24_carbon_created_at = new \Carbon\Carbon($post->created_at);
+                                    $h24_carbon_created_at->subHours(24);
                                 @endphp
 
                                 <div class="recruit">
                                     <a href="{{ route('post.show', $post) }}">
                                         {{-- 24時間以内の更新 or 投稿には「NEW」を付ける --}}
-                                        <p class="{{ $carbon_updated_at->subHour(24) || $carbon_created_at->subHour(24) ? 'title_currentp1' : 'title' }}">
+                                        <p class="{{ $now_carbon_updated_at >= $h24_carbon_updated_at || $now_carbon_created_at >= $h24_carbon_created_at ? 'title' : 'title_currentp1' }}">
                                             {{ $post->title }}
                                             @if ($post->image)
                                                 <img src="{{ asset('/img/ico_isImage.png') }}" alt="画像有り"
@@ -112,13 +118,19 @@
                                     $day = new DateTime($date);
                                     $dow = $day->format('w');
                                     
-                                    $carbon_updated_at = new \Carbon\Carbon($post->updated_at);
-                                    $carbon_created_at = new \Carbon\Carbon($post->created_at);
+                                    $now_carbon_updated_at = new \Carbon\Carbon($post->updated_at);
+                                    $now_carbon_created_at = new \Carbon\Carbon($post->created_at);
+
+                                    $h24_carbon_updated_at = new \Carbon\Carbon($post->updated_at);
+                                    $h24_carbon_updated_at->subHours(24);
+
+                                    $h24_carbon_created_at = new \Carbon\Carbon($post->created_at);
+                                    $h24_carbon_created_at->subHours(24);
                                 @endphp
                                 <div class="recruit">
                                     <a href="{{ route('post.show', $post) }}">
                                         {{-- 24時間以内の更新 or 投稿には「NEW」を付ける --}}
-                                        <p class="{{ $carbon_updated_at->subHour(24) || $carbon_created_at->subHour(24) ? 'title_currentp1' : 'title' }}">
+                                        <p class="{{ $now_carbon_updated_at >= $h24_carbon_updated_at || $now_carbon_created_at >= $h24_carbon_created_at ? 'title' : 'title_currentp1' }}">
                                             {{ $post->title }}
                                             @if ($post->image)
                                                 <img src="{{ asset('/img/ico_isImage.png') }}" alt="画像有り"
