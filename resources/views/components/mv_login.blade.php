@@ -53,7 +53,7 @@
                 @endif
             </div>
             <x-primary-button
-                class="block mt-1 w-4/5 mx-auto py-2 border-spons_blue rounded-md bg-spons_blue text-white h-16">
+                class="block mt-2 w-4/5 mx-auto py-2 border-spons_blue rounded-md bg-spons_blue text-white h-16">
                 {{ __('Log in') }}
             </x-primary-button>
 

@@ -13,25 +13,25 @@
 
                     <section id="messages">
                         <div>
-                            @foreach ($message as $msg)
+                            @foreach ($messages2 as $msg2)
                                 <div class="user relative">
-                                    {{-- <a href="{{ route('message.message', $msg->post_id, $msg->sender_user_id) }}"> --}}
+                                    <a href="{{ route('message.message', ['post' => $msg2->post_id, 'user' => $msg2->sender_user_id]) }}">
                                         <div
                                             style="border-bottom: 1px dotted #1A89DA;
                                         padding-bottom: 10px;
                                         padding-top: 5px;">
                                             <div class="mb-4 flex">
-                                                <p class="mr-4 font-bold">{{ $msg->post->title }}</p>
+                                                <p class="mr-4 font-bold">{{ $msg2->post->title }}</p>
                                             </div>
                                             <p class="text-sm"><span class="mr-2">カテゴリ：<span
-                                                        class="font-bold">{{ $msg->post->category->name }}</span></span>
+                                                        class="font-bold">{{ $msg2->post->category->name }}</span></span>
                                                 <span class="mr-2">募集タイプ：<span
-                                                        class="font-bold">{{ $msg->post->post_type->name }}</span></span>
+                                                        class="font-bold">{{ $msg2->post->post_type->name }}</span></span>
                                                 <span class="mr-2">都道府県：<span
-                                                        class="font-bold">{{ $msg->post->prefecture->name }}</span></span>
+                                                        class="font-bold">{{ $msg2->post->prefecture->name }}</span></span>
                                             </p>
                                         </div>
-                                    {{-- </a> --}}
+                                    </a>
                                 </div>
                             @endforeach
                         </div>

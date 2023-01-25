@@ -37,9 +37,15 @@ class MessageController extends Controller
 
     public function index() {
 
-        $message = Message::where('sender_user_id', !null)->get();
+        $messages1 = Message::all();
 
-        return view('message.index', compact('message'));
+        foreach($messages1 as $msg1) {
+
+        }
+
+        $messages2 = Message::where('post_id', $msg1->post->id)->where('sender_user_id', !null)->get();
+
+        return view('message.index', compact('messages2'));
     }
 
     public function users(Post $post) {
