@@ -73,7 +73,7 @@
                                 <div class="recruit">
                                     <a href="{{ route('post.show', $post) }}">
                                         {{-- 24時間以内の更新 or 投稿には「NEW」を付ける --}}
-                                        <p class="{{ $now_carbon_updated_at >= $h24_carbon_updated_at || $now_carbon_created_at >= $h24_carbon_created_at ? 'title' : 'title_currentp1' }}">
+                                        <p class="{{ $now_carbon_updated_at >= $h24_carbon_updated_at || $now_carbon_created_at >= $h24_carbon_created_at ? 'title_currentp1' : 'title' }}">
                                             {{ $post->title }}
                                             @if ($post->image)
                                                 <img src="{{ asset('/img/ico_isImage.png') }}" alt="画像有り"
@@ -130,7 +130,7 @@
                                 <div class="recruit">
                                     <a href="{{ route('post.show', $post) }}">
                                         {{-- 24時間以内の更新 or 投稿には「NEW」を付ける --}}
-                                        <p class="{{ $now_carbon_updated_at >= $h24_carbon_updated_at || $now_carbon_created_at >= $h24_carbon_created_at ? 'title' : 'title_currentp1' }}">
+                                        <p class="{{ $now_carbon_updated_at >= $h24_carbon_updated_at || $now_carbon_created_at >= $h24_carbon_created_at ? 'title_currentp1' : 'title' }}">
                                             {{ $post->title }}
                                             @if ($post->image)
                                                 <img src="{{ asset('/img/ico_isImage.png') }}" alt="画像有り"

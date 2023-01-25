@@ -39,13 +39,13 @@ class MessageController extends Controller
 
         $messages1 = Message::all();
 
-        foreach($messages1 as $msg1) {
+        // foreach($messages1 as $msg1) {
 
-        }
+        // }
 
-        $messages2 = Message::where('post_id', $msg1->post->id)->where('sender_user_id', !null)->get();
+        // $messages2 = Message::where('post_id', $msg1->post->id)->where('sender_user_id', !null)->get();
 
-        return view('message.index', compact('messages2'));
+        return view('message.index', compact('messages1'));
     }
 
     public function users(Post $post) {

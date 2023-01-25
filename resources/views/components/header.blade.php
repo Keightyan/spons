@@ -15,7 +15,7 @@
         @if (Auth::check())
             <a href=""><i class="fas fa-bell" alt="通知"></i></a>
 
-            <a href=""><i class="fas fa-envelope" alt="メッセージ"></i></a>
+            <a href="{{ route('message.index') }}"><i class="fas fa-envelope" alt="メッセージ"></i></a>
 
             <div class="followings_followers flex">
             <p class="followings"><a href="{{ route('user.show', Auth::user()->id) }}#followings">{{ Auth::user()->followings()->count() }}</a></p>
