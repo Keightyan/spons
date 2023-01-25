@@ -13,32 +13,25 @@
 
                     <section id="messages">
                         <div>
-                            @foreach ($msg as $m)
-                                @php
-                                    $week = ['日', '月', '火', '水', '木', '金', '土'];
-                                    $date = $m->created_at;
-                                    $day = new DateTime($date);
-                                    $dow = $day->format('w');
-                                @endphp
-
+                            @foreach ($message as $msg)
                                 <div class="user relative">
-                                    <a href="{{ route('message.users', $to_id, $m->sender_user->id) }}">
+                                    {{-- <a href="{{ route('message.message', $msg->post_id, $msg->sender_user_id) }}"> --}}
                                         <div
                                             style="border-bottom: 1px dotted #1A89DA;
                                         padding-bottom: 10px;
                                         padding-top: 5px;">
                                             <div class="mb-4 flex">
-                                                <p class="mr-4 font-bold">{{ $m->post->title }}</p>
+                                                <p class="mr-4 font-bold">{{ $msg->post->title }}</p>
                                             </div>
                                             <p class="text-sm"><span class="mr-2">カテゴリ：<span
-                                                        class="font-bold">{{ $m->post->category->name }}</span></span>
+                                                        class="font-bold">{{ $msg->post->category->name }}</span></span>
                                                 <span class="mr-2">募集タイプ：<span
-                                                        class="font-bold">{{ $m->post->post_type->name }}</span></span>
+                                                        class="font-bold">{{ $msg->post->post_type->name }}</span></span>
                                                 <span class="mr-2">都道府県：<span
-                                                        class="font-bold">{{ $m->post->prefecture->name }}</span></span>
+                                                        class="font-bold">{{ $msg->post->prefecture->name }}</span></span>
                                             </p>
                                         </div>
-                                    </a>
+                                    {{-- </a> --}}
                                 </div>
                             @endforeach
                         </div>
