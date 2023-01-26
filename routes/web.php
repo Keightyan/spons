@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/messages', [MessageController::class, 'index'])->name('message.index');
     Route::get('/post/{post}/message/users', [MessageController::class, 'users'])->name('message.users');
     Route::get('/post/{post}/message/{user}', [MessageController::class, 'message'])->name('message.message');
+    Route::post('/post/{post}/message/{user}/complete', [MessageController::class, 'store2'])->name('message.store2');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

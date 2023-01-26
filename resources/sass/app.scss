@@ -928,6 +928,10 @@ header {
             margin: 2rem 30px 20px 30px;
             position: relative;
 
+            .user_msg_container {
+                border-bottom: 1px dotted #1A89DA;
+            }
+
             a {
                 transition: .2s;
 

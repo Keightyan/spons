@@ -24,7 +24,7 @@
 
                     <section id="messages">
                         <div>
-                            @foreach ($post->messages as $message)
+                            @foreach ($messages as $message)
                                 @php
                                     $week = ['日', '月', '火', '水', '木', '金', '土'];
                                     $date = $message->created_at;
@@ -33,21 +33,18 @@
                                 @endphp
 
                                 <div class="user relative">
-                                    {{-- <a href="{{ route('message.message', $to_id, $message->sender_user->id) }}"> --}}
-                                        <div>
-                                            <div class="flex">
-                                                <div class="msg_img"><img
-                                                        src="{{ asset('/storage/profile_image/' . $message->sender_user->profile_image) }}">
-                                                </div>
-                                                <div>
-                                                    <p class="mt-2 ml-8 mr-auto">{{ $message->sender_user->name }}</p>
-                                                    <p class="bmt-4 mt-4 ml-8 font-medium msg_body">{{ $message->body }}</p>
-                                                </div>
-                                                <p class="text-sm mt-2 absolute right-0">
-                                                    送信日時：{{ $message->created_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}
-                                            </div>
-                                        </div>
-                                    {{-- </a> --}}
+                                    <div class="user_msg_container">
+                                        <a
+                                            href="{{ route('message.message', ['post' => $post->id, 'user' => $message->sender_user->id]) }}">
+                                            <p class="mt-2 ml-8 pt-2 text-lg mr-auto">{{ $message->sender_user->name }}</p>
+                                            <p class="mt-4 ml-8 pb-2 font-medium text-2xl msg_body">
+                                                {{ $from_id->body }}</p>
+                                        </a>
+                                    </div>
+                                    {{-- <p class="text-sm mt-2 absolute right-0">
+                                                送信日時：{{ $message->created_at->format("Y年n月d日({$week[$dow]}) H:i:s") }}
+                                            </p> --}}
+
                                 </div>
                             @endforeach
                         </div>

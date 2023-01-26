@@ -13,18 +13,18 @@
 
                     <section id="messages">
                         <div>
-                            @foreach ($messages1 as $msg1)
+                            @foreach ($messages as $message)
                                 @php
-                                    $posts = \App\models\Message::where('sender_user_id', $msg1->sender_user_id)
-                                        ->where('post_id', $msg1->post_id)
+                                    $posts = \App\models\Message::where('sender_user_id', $message->sender_user_id)
+                                        ->where('post_id', $message->post_id)
                                         ->get();
                                 @endphp
                                 @foreach ($posts as $post)
-                                    {{-- <?php dd($msg1->receiver_user_id); ?> --}}
+                                    {{-- <?php dd($message->receiver_user_id); ?> --}}
                                     <?php $titles = \App\Models\Post::where('title', $post->post->title)->get(); ?>
                                     <div class="user relative">
-                                        @if ($msg1->receiver_user_id === Auth::user()->id)
-                                            <a href="{{ route('message.users', ['post' => $msg1->post_id]) }}">
+                                        @if ($message->receiver_user_id === Auth::user()->id)
+                                            <a href="{{ route('message.users', ['post' => $message->post_id]) }}">
                                                 <div
                                                     style="border-bottom: 1px dotted #1A89DA;
                                         padding-bottom: 10px;
@@ -35,17 +35,17 @@
                                                         </p>
                                                     </div>
                                                     <p class="text-sm"><span class="mr-2">カテゴリ：<span
-                                                                class="font-bold">{{ $msg1->post->category->name }}</span></span>
+                                                                class="font-bold">{{ $message->post->category->name }}</span></span>
                                                         <span class="mr-2">募集タイプ：<span
-                                                                class="font-bold">{{ $msg1->post->post_type->name }}</span></span>
+                                                                class="font-bold">{{ $message->post->post_type->name }}</span></span>
                                                         <span class="mr-2">都道府県：<span
-                                                                class="font-bold">{{ $msg1->post->prefecture->name }}</span></span>
+                                                                class="font-bold">{{ $message->post->prefecture->name }}</span></span>
                                                     </p>
                                                 </div>
                                             </a>
-                                        @elseif($msg1->sender_user_id === Auth::user()->id)
+                                        @elseif($message->sender_user_id === Auth::user()->id)
                                             <a
-                                                href="{{ route('message.message', ['post' => $msg1->post_id, 'user' => $msg1->sender_user_id]) }}">
+                                                href="{{ route('message.message', ['post' => $message->post_id, 'user' => $message->sender_user_id]) }}">
                                                 <div
                                                     style="border-bottom: 1px dotted #1A89DA;
                                         padding-bottom: 10px;
@@ -56,11 +56,11 @@
                                                         </p>
                                                     </div>
                                                     <p class="text-sm"><span class="mr-2">カテゴリ：<span
-                                                                class="font-bold">{{ $msg1->post->category->name }}</span></span>
+                                                                class="font-bold">{{ $message->post->category->name }}</span></span>
                                                         <span class="mr-2">募集タイプ：<span
-                                                                class="font-bold">{{ $msg1->post->post_type->name }}</span></span>
+                                                                class="font-bold">{{ $message->post->post_type->name }}</span></span>
                                                         <span class="mr-2">都道府県：<span
-                                                                class="font-bold">{{ $msg1->post->prefecture->name }}</span></span>
+                                                                class="font-bold">{{ $message->post->prefecture->name }}</span></span>
                                                     </p>
                                                 </div>
                                             </a>

@@ -50,7 +50,25 @@
                                     </div>
                                 </div>
                             @endforeach
-                        </div>
+
+                            <form method="post" action="{{ route('message.store2', ['post' => $message->post_id, 'user' => $message->sender_user_id]) }}">
+                                @csrf
+
+                                <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                <input type="hidden" name="sender_user_id" value="{{ $from_id }}">
+                                <input type="hidden" name="receiver_user_id" value="{{ $to_id }}">
+
+                                <div class="mb-10">
+                                    <textarea name="body" class="w-full placeholder-gray-500 border border-gray-300 rounded-md bg-gray-200"
+                                        cols="30" rows="3" placeholder="メッセージを入力してください"></textarea>
+                                </div>
+
+                                <div class="mb-10 flex">
+                                    <button class="mt-4 mb-10 w-full h-20 rounded bg-spons_blue">
+                                        <span class="text-xl text-white font-bold w-full">送信する
+                                    </button>
+                                </div>
+                            </form>
                     </section>
                 </div>
             </div>
