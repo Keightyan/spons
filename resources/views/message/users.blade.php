@@ -24,10 +24,11 @@
 
                     <section id="messages">
                         <div>
-                            @foreach ($messages as $message)
+                            @foreach ($posts as $post)
+                            @foreach($post->messages as $pm)
                                 @php
                                     $week = ['日', '月', '火', '水', '木', '金', '土'];
-                                    $date = $message->created_at;
+                                    $date = $post->created_at;
                                     $day = new DateTime($date);
                                     $dow = $day->format('w');
                                 @endphp
@@ -35,10 +36,10 @@
                                 <div class="user relative">
                                     <div class="user_msg_container">
                                         <a
-                                            href="{{ route('message.message', ['post' => $post->id, 'user' => $message->sender_user->id]) }}">
-                                            <p class="mt-2 ml-8 pt-2 text-lg mr-auto">{{ $message->sender_user->name }}</p>
+                                            href="{{ route('message.message', ['post' => $post->id, 'user' => $pm->sender_user->id]) }}">
+                                            <p class="mt-2 ml-8 pt-2 text-lg mr-auto">{{ $pm->sender_user->name }}</p>
                                             <p class="mt-4 ml-8 pb-2 font-medium text-2xl msg_body">
-                                                {{ $from_id->body }}</p>
+                                                {{ $pm->body }}</p>
                                         </a>
                                     </div>
                                     {{-- <p class="text-sm mt-2 absolute right-0">
@@ -46,6 +47,7 @@
                                             </p> --}}
 
                                 </div>
+                                @endforeach
                             @endforeach
                         </div>
                     </section>

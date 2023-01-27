@@ -7,14 +7,14 @@
                 <x-message :message="session('message')" />
 
 
-                <form method="post" action="{{ route('message.store', $post) }}">
+                <form method="post" action="{{ route('message.store', $user) }}">
                     @csrf
 
-                    <input type="hidden" name="post_id" value="{{ $post->id }}">
+                    {{-- <input type="hidden" name="post_id" value="{{ $post->id }}"> --}}
                     <input type="hidden" name="sender_user_id" value="{{ $from_id }}">
                     <input type="hidden" name="receiver_user_id" value="{{ $to_id }}">
                     
-                    <div class="mt-8 mb-4 flex">
+                    {{-- <div class="mt-8 mb-4 flex">
                         <p class="mr-8 font-bold" style="width: 100px;">募集タイトル</p>
                         <p class="text-spons_blue font-bold hover:underline decoration-solid mr-4"><a
                                 href="{{ route('post.show', $post) }}">{{ $post->title }}</a></p>
@@ -22,7 +22,7 @@
                     </div>
                     <p class="text-sm"><span class="mr-2">カテゴリ：<span class="font-bold">{{ $post->category->name }}</span></span>
                         <span class="mr-2">募集タイプ：<span class="font-bold">{{ $post->post_type->name }}</span></span>
-                        <span class="mr-2">都道府県：<span class="font-bold">{{ $post->prefecture->name }}</span></span></p>
+                        <span class="mr-2">都道府県：<span class="font-bold">{{ $post->prefecture->name }}</span></span></p> --}}
 
                     <div class="my-10 flex">
                         <p class="mr-12 font-bold" style="width: 100px;">メッセージ<br>内容</p>

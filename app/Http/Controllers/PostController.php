@@ -63,7 +63,7 @@ class PostController extends Controller
 
         $post->save();
 
-        return redirect()->route('post.create')->with('message', '募集を投稿しました！');
+        return redirect()->route('post.search')->with('message', '募集を投稿しました！');
     }
 
     // public function confirm(PostRequest $request)
@@ -105,9 +105,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $msgs = $post->messages;
-        $from_id = auth()->user()->id;
-        $to_id = $post->user->id;
-        return view('post.show', compact('msgs', 'post', 'from_id', 'to_id'));
+        return view('post.show', compact('msgs', 'post'));
     }
 
     /**

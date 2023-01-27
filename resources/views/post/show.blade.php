@@ -78,9 +78,13 @@
 
                 <div class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
                     <p class="mr-8 font-bold text-gray-500" style="width: 100px;">募集者</p>
-                    <a href="{{ route('user.show', $post->user->id) }}"><img
-                            src="{{ asset('storage/profile_image/' . $post->user->profile_image) }}" class="mr-4"
-                            style="width: 40px;"></a>
+                    <a href="{{ route('user.show', $post->user->id) }}">
+                        @if ($post->user->profile_image !== 'user_default.jpg')
+                        <img src="{{ asset('/storage/profile_image/' . $post->user->profile_image) }}" class="mr-4" style="width: 40px;">
+                        @else
+                        <img src="{{ asset('/profile_image/' . $post->user->profile_image) }}" class="mr-4" style="width: 40px;">
+                        @endif
+                    </a>
                     <span class="text-black text-xl font-bold"><a href="{{ route('user.show', $post->user->id) }}"
                             class="text-spons_blue hover:underline decoration-solid">{{ $post->user->name }}</a></span>
                 </div>
@@ -120,39 +124,9 @@
                     <div class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
                         <p class="mr-8 font-bold text-gray-500" style="width: 100px;">画像</p>
                         <div>
-                            <img src="{{ asset('storage/images/' . $post->image) }}" style="max-width: 600px;">
+                            <img src="{{ asset('/images/' . $post->image) }}" style="max-width: 600px;">
                         </div>
                     </div>
-                @endif
-
-                @if (Auth::check())
-                    @if ($post->user_id !== Auth::id())
-                        @foreach ($msgs as $msg)
-                            {{-- <?php dd($msg->sender_user_id === $from_id); ?> --}}
-                            @if ($msg->where('sender_user_id', $from_id) || $post->messages->isNotEmpty())
-                                <div class="mt-6 flex justify-center">
-                                    <form method="get"
-                                        action="{{ route('message.message', ['post' => $msg->post_id, 'user' => $msg->sender_user_id]) }}">
-                                        <button class="msg_btn mt-4 mb-10 w-100 h-20 p-4 rounded bg-green-500"
-                                            style="margin-inline: auto;">
-                                            <span class="text-xl text-white font-bold w-full">メッセージ画面へ
-                                        </button>
-                                    </form>
-                                </div>
-                            @endif
-                        @endforeach
-                        @if ($msgs->isEmpty() || $post->messages()->where('sender_user_id', !$from_id))
-                            {{-- <?php dd($post); ?> --}}
-                            <div class="mt-6 flex justify-center">
-                                <form method="get" action="{{ route('message.inquiry', $post) }}">
-                                    <button class="msg_btn mt-4 mb-10 w-100 h-20 p-4 rounded bg-green-500"
-                                        style="margin-inline: auto;">
-                                        <span class="text-xl text-white font-bold w-full">メッセージを送る
-                                    </button>
-                                </form>
-                            </div>
-                        @endif
-                    @endif
                 @endif
             </div>
         </div>

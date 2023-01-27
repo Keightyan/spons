@@ -14,7 +14,7 @@
                             <div class="mb-2">
                                 （画像ファイル：{{ $user->profile_image }}）
                             </div>
-                            <img src="{{ asset('storage/profile_image/' . $user->profile_image) }}" class="mx-auto mb-4"
+                            <img src="{{ asset('/profile_image/' . $user->profile_image) }}" class="mx-auto mb-4"
                                 style="height:200px;">
                         @endif
                         <input type="file" name="profile_image">

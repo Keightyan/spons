@@ -10,7 +10,7 @@
                         <p class="search_head text-spons_blue text-3xl font-bold"><i class="fas fa-envelope"></i> メッセージ
                         </p>
                     </div>
-                    <div class="mt-4 mb-4 flex">
+                    {{-- <div class="mt-4 mb-4 flex">
                         <p class="font-bold" style="width: 100px;">募集タイトル</p>
                         <p class="text-spons_blue font-bold hover:underline decoration-solid mr-4"><a
                                 href="{{ route('post.show', $post) }}">{{ $post->title }}</a></p>
@@ -20,11 +20,11 @@
                                 class="font-bold">{{ $post->category->name }}</span></span>
                         <span class="mr-2">募集タイプ：<span class="font-bold">{{ $post->post_type->name }}</span></span>
                         <span class="mr-2">都道府県：<span class="font-bold">{{ $post->prefecture->name }}</span></span>
-                    </p>
+                    </p> --}}
 
                     <section id="messages">
                         <div>
-                            @foreach ($post->messages as $message)
+                            @foreach ($user->messages as $message)
                                 @php
                                     $week = ['日', '月', '火', '水', '木', '金', '土'];
                                     $date = $message->created_at;
@@ -34,14 +34,14 @@
                                 <div class="message">
                                     <div class="flex my-10 py-10 relative">
                                         <a href="{{ route('user.show', $message->sender_user_id) }}"><img
-                                                src="{{ asset('/storage/profile_image/' . $message->sender_user->profile_image) }}"></a>
+                                                src="{{ asset('/public/profile_image/' . $message->sender_user->profile_image) }}"></a>
                                         <p class="ml-8 mr-auto mt-2 font-bold inline-block">
                                             <a href="{{ route('user.show', $message->sender_user_id) }}"
                                                 class="text-spons_blue hover:underline decoration-solid">{{ $message->sender_user->name }}</a><br>
                                             <span class="block mt-4 font-medium">{{ $message->body }}</span>
                                         </p>
                                         <p class="time absolute top-0 right-0">
-                                            {{-- <img src="{{ asset('storage/profile_image/' . $post->user->profile_image) }}" class="inline mr-2" style="height: 35px;">
+                                            {{-- <img src="{{ asset('public/profile_image/' . $post->user->profile_image) }}" class="inline mr-2" style="height: 35px;">
                                             <span
                                                 class="text-spons_blue mr-6">{{ $post->user->name }}</span> --}}
                                             <span
@@ -54,7 +54,7 @@
                             <form method="post" action="{{ route('message.store2', ['post' => $message->post_id, 'user' => $message->sender_user_id]) }}">
                                 @csrf
 
-                                <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                {{-- <input type="hidden" name="post_id" value="{{ $post->id }}"> --}}
                                 <input type="hidden" name="sender_user_id" value="{{ $from_id }}">
                                 <input type="hidden" name="receiver_user_id" value="{{ $to_id }}">
 

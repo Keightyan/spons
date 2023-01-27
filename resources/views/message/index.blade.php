@@ -1,3 +1,5 @@
+{{-- <?php dd($receivers->user); ?> --}}
+
 <x-app-layout>
     <div class="footer_wrap">
         <div class="mx-auto px-4 sm:px-6 lg:px-8" style="max-width: 1100px;">
@@ -13,60 +15,64 @@
 
                     <section id="messages">
                         <div>
-                            @foreach ($messages as $message)
+                            @foreach ($receivers as $receiver)
+                            {{-- <?php  dd($receiver->user); ?> --}}
                                 @php
-                                    $posts = \App\models\Message::where('sender_user_id', $message->sender_user_id)
-                                        ->where('post_id', $message->post_id)
-                                        ->get();
+                                
+                                    // $posts = \App\models\Message::where('sender_user_id', $post->sender_user_id)
+                                    //     ->where('post_id', $post->post_id)
+                                    //     ->get();
                                 @endphp
-                                @foreach ($posts as $post)
-                                    {{-- <?php dd($message->receiver_user_id); ?> --}}
-                                    <?php $titles = \App\Models\Post::where('title', $post->post->title)->get(); ?>
-                                    <div class="user relative">
-                                        @if ($message->receiver_user_id === Auth::user()->id)
-                                            <a href="{{ route('message.users', ['post' => $message->post_id]) }}">
-                                                <div
-                                                    style="border-bottom: 1px dotted #1A89DA;
+                                {{-- <?php dd($post->receiver_user_id); ?> --}}
+                                {{-- <?php $titles = \App\Models\Post::where('title', $post->title)->get(); ?> --}}
+                                <div class="user relative">
+                                    {{-- @if ($post->receiver_user_id === Auth::user()->id) --}}
+                                        <a href="{{ route('message.message', ['user' => $receiver->id]) }}">
+                                            <div
+                                                style="border-bottom: 1px dotted #1A89DA;
                                         padding-bottom: 10px;
                                         padding-top: 5px;">
-                                                    <div class="mb-4 flex">
-                                                        <p class="mr-4 font-bold">
-                                                            {{ $post->post->title }}
-                                                        </p>
-                                                    </div>
-                                                    <p class="text-sm"><span class="mr-2">カテゴリ：<span
-                                                                class="font-bold">{{ $message->post->category->name }}</span></span>
-                                                        <span class="mr-2">募集タイプ：<span
-                                                                class="font-bold">{{ $message->post->post_type->name }}</span></span>
-                                                        <span class="mr-2">都道府県：<span
-                                                                class="font-bold">{{ $message->post->prefecture->name }}</span></span>
+                                                <div class="mb-4 flex">
+                                                    <p class="mr-4 font-bold">
+                                                        {{ $receiver->name }}
+                                                    </p>
+                                                    {{-- <?php dd($body); ?> --}}
+                                                    <p class="mr-4 font-bold">
+                                                        {{ $receiver->body }}
                                                     </p>
                                                 </div>
-                                            </a>
-                                        @elseif($message->sender_user_id === Auth::user()->id)
-                                            <a
-                                                href="{{ route('message.message', ['post' => $message->post_id, 'user' => $message->sender_user_id]) }}">
-                                                <div
-                                                    style="border-bottom: 1px dotted #1A89DA;
+                                                {{-- <p class="text-sm"><span class="mr-2">カテゴリ：<span
+                                                            class="font-bold">{{ $post->category->name }}</span></span>
+                                                    <span class="mr-2">募集タイプ：<span
+                                                            class="font-bold">{{ $post->post_type->name }}</span></span>
+                                                    <span class="mr-2">都道府県：<span
+                                                            class="font-bold">{{ $post->prefecture->name }}</span></span>
+                                                </p> --}}
+                                            </div>
+                                        </a>
+                                    {{-- @elseif($post->sender_user_id === Auth::user()->id)
+                                        <a
+                                            href="{{ route('message.message', ['post' => $post->post_id, 'user' => $post->sender_user_id]) }}">
+                                            <div
+                                                style="border-bottom: 1px dotted #1A89DA;
                                         padding-bottom: 10px;
                                         padding-top: 5px;">
-                                                    <div class="mb-4 flex">
-                                                        <p class="mr-4 font-bold">
-                                                            {{ $post->post->title }}
-                                                        </p>
-                                                    </div>
-                                                    <p class="text-sm"><span class="mr-2">カテゴリ：<span
-                                                                class="font-bold">{{ $message->post->category->name }}</span></span>
-                                                        <span class="mr-2">募集タイプ：<span
-                                                                class="font-bold">{{ $message->post->post_type->name }}</span></span>
-                                                        <span class="mr-2">都道府県：<span
-                                                                class="font-bold">{{ $message->post->prefecture->name }}</span></span>
+                                                <div class="mb-4 flex">
+                                                    <p class="mr-4 font-bold">
+                                                        {{ $post->title }}
                                                     </p>
                                                 </div>
-                                            </a>
-                                        @endif
-                                    </div>
-                                @endforeach
+                                                <p class="text-sm"><span class="mr-2">カテゴリ：<span
+                                                            class="font-bold">{{ $post->category->name }}</span></span>
+                                                    <span class="mr-2">募集タイプ：<span
+                                                            class="font-bold">{{ $post->post_type->name }}</span></span>
+                                                    <span class="mr-2">都道府県：<span
+                                                            class="font-bold">{{ $post->prefecture->name }}</span></span>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    @endif --}}
+                                </div>
                             @endforeach
                         </div>
                     </section>

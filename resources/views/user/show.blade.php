@@ -11,24 +11,29 @@
 
                             <div class="profile-left mr-5" style="width: 30%;">
                                 <div class="rounded-full mx-auto flex justify-center">
-                                    <img
-                                        src="{{ asset('storage/profile_image/' . $user->profile_image) }}"style="width: 200px;">
+                                    @if ($user->profile_image !== 'user_default.jpg')
+                                        <img src="{{ asset('/storage/profile_image/' . $user->profile_image) }}"
+                                            style="width: 200px;">
+                                    @else
+                                        <img src="{{ asset('/profile_image/' . $user->profile_image) }}"
+                                            style="width: 200px;">
+                                    @endif
                                 </div>
                                 <p class="text-lg font-bold text-center mt-4">{{ $user->name }}</p>
-                                @if (Auth::user()->role === 2 && $user->id !== 1)
-                                    <ul class="destroy_ul flex justify-center mt-2">
-                                        <li
-                                            class="bg-red-500 border-solid border border-red-500 p-2 mb-6 rounded text-white font-bold mx-1 destroy_btn">
-                                            <form method="post" action="{{ route('user.destroy', $user) }}">
-                                                @csrf
-                                                @method('delete')
-                                                <button type="submit"
-                                                    onClick="return confirm('本当に削除しますか？');">削除</button>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                @endif
                                 @if (Auth::check())
+                                    @if (Auth::user()->role === 2 && $user->id !== 1)
+                                        <ul class="destroy_ul flex justify-center mt-2">
+                                            <li
+                                                class="bg-red-500 border-solid border border-red-500 p-2 mb-6 rounded text-white font-bold mx-1 destroy_btn">
+                                                <form method="post" action="{{ route('user.destroy', $user) }}">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit"
+                                                        onClick="return confirm('本当に削除しますか？');">削除</button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    @endif
                                     @if ($user->id !== Auth::id())
                                         <div class="mt-6 flex">
                                             <button class="msg_btn mt-4 mb-10 w-40 h-20 rounded bg-green-500"
@@ -123,9 +128,15 @@
                                 <div>
                                     @foreach ($user->followings as $following)
                                         <div class="flex my-10 relative following">
-                                            <a href="{{ route('user.show', $following) }}"><img
-                                                    src="{{ asset('storage/profile_image/' . $following->profile_image) }}"
-                                                    style="width: 100px;"></a>
+                                            <a href="{{ route('user.show', $following) }}">
+                                                @if ($following->profile_image !== 'user_default.jpg')
+                                                    <img src="{{ asset('/storage/profile_image/' . $following->profile_image) }}"
+                                                        style="width: 100px;">
+                                                @else
+                                                    <img src="{{ asset('/profile_image/' . $following->profile_image) }}"
+                                                        style="width: 100px;">
+                                                @endif
+                                            </a>
                                             <p class="ml-4 mr-auto mt-2 font-bold"><a
                                                     href="{{ route('user.show', $following) }}"
                                                     class="text-spons_blue hover:underline decoration-solid">{{ $following->name }}</a><br>
@@ -148,9 +159,15 @@
                                 <div>
                                     @foreach ($user->followers as $follower)
                                         <div class="flex my-10 relative follower">
-                                            <a href="{{ route('user.show', $follower) }}"><img
-                                                    src="{{ asset('storage/profile_image/' . $follower->profile_image) }}"
-                                                    style="width: 100px;"></a>
+                                            <a href="{{ route('user.show', $follower) }}">
+                                                @if ($follower->profile_image !== 'user_default.jpg')
+                                                    <img src="{{ asset('/storage/profile_image/' . $follower->profile_image) }}"
+                                                        style="width: 100px;">
+                                                @else
+                                                    <img src="{{ asset('/profile_image/' . $follower->profile_image) }}"
+                                                        style="width: 100px;">
+                                                @endif
+                                            </a>
                                             <p class="ml-4 mr-auto mt-2 font-bold"><a
                                                     href="{{ route('user.show', $follower) }}"
                                                     class="text-spons_blue hover:underline decoration-solid">{{ $follower->name }}</a><br>
@@ -193,7 +210,7 @@
                                                     @endif
                                                 </p>
                                                 <p class="info">
-                                                    {{-- <img src="{{ asset('storage/profile_image/' . $post->user->profile_image) }}" class="inline mr-2" style="height: 35px;">
+                                                    {{-- <img src="{{ asset('/profile_image/' . $post->user->profile_image) }}" class="inline mr-2" style="height: 35px;">
                                                         <span
                                                             class="text-spons_blue mr-6">{{ $post->user->name }}</span> --}}
                                                     カテゴリ：<span
@@ -240,7 +257,7 @@
                                                                 style="display: inline; max-width: 30px; margin-left: 5px;">
                                                         @endif
                                                         <p class="info">
-                                                            <img src="{{ asset('storage/profile_image/' . $bookmark_post->user->profile_image) }}"
+                                                            <img src="{{ asset('/profile_image/' . $bookmark_post->user->profile_image) }}"
                                                                 class="inline mr-2" style="height: 35px;">
                                                             <span
                                                                 class="text-spons_blue mr-6">{{ $bookmark_post->user->name }}</span>

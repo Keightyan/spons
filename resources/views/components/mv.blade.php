@@ -1,7 +1,7 @@
-<div class="mv">
+<div class="mv pc sp">
     <h2>スポーツでつながるSNS</h2>
 
-    <div id="new_recruits">
+    <div class="new_recruits pc sp">
         <p class="head">新着の募集<span>最新の募集から 5 件までが表示されます。</span></p>
 
         @foreach ($posts5 as $post)
@@ -21,7 +21,11 @@
                         @endif
                     </p>
                     <p class="info">
-                        <img src="{{ asset('storage/profile_image/' . $post->user->profile_image) }}" class="inline mr-2" style="height: 35px;">
+                        @if ($post->user->profile_image !== 'user_default.jpg')
+                        <img src="{{ asset('/storage/profile_image/' . $post->user->profile_image) }}" class="inline mr-2" style="height: 35px;">
+                        @else
+                        <img src="{{ asset('/profile_image/' . $post->user->profile_image) }}" class="inline mr-2" style="height: 35px;">
+                        @endif
                         <span class="text-spons_blue mr-6">{{ $post->user->name }}</span>
                         カテゴリ：<span class="font-bold mr-6">{{ $post->category->name }}</span>
                         募集タイプ：<span class="font-bold mr-6">{{ $post->post_type->name }}</span>

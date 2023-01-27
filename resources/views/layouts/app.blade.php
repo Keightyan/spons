@@ -19,7 +19,8 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen">
+    {{-- <div class="min-h-screen"> --}}
+    <div>
         @include('layouts.navigation')
 
         <!-- Page Heading -->
