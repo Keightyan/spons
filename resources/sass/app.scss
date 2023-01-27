@@ -1754,7 +1754,11 @@ footer {
 }
 
 @media(min-width:1272px) {
-    .br_895-1271 {
-        display: none;
+    .categories {
+        height: auto;
+
+        .br_895-1271 {
+            display: none;
+        }
     }
 }
