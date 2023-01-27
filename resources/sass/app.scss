@@ -1397,11 +1397,11 @@ footer {
 
             h2 {
                 font-weight: 600;
-                font-size: 3rem;
+                font-size: 2rem;
                 color: #fff;
                 width: 100%;
                 text-align: center;
-                margin-top: -15px;
+                margin-top: 0;
             }
 
 
@@ -1734,6 +1734,22 @@ footer {
                     }
                 }
             }
+        }
+    }
+}
+
+@media(min-width:895px) and (max-width:1029px) {
+    .mv {
+
+        h2 {
+            position: absolute;
+            top: 41.5%;
+            transform: translate(0);
+            font-weight: 600;
+            font-size: 3.5rem;
+            color: #fff;
+            width: 100%;
+            text-align: center;
         }
     }
 }
