@@ -59,7 +59,7 @@
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button
-                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-black-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                class="inline-flex items-center mx-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-black-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                                 <div class="text-right" style="width: 80px;">
                                     @if (Auth::check())
                                         {{ Auth::user()->name }}
@@ -177,8 +177,8 @@
             <ul class="flex">
                 @foreach ($categories as $category)
                     <li><a href="/posts/search?category_id={{ $category->id }}&post_type_id=all_post_types&prefecture_id=all_prefectures&search=検索"
-                            class="a_895-1219"><img src="{{ asset("/img/{$category->image}") }}" class="pictogram"><br
-                                class="br_895-1219"><span style="font-size: 1.5vw;">{{ $category->name }}</span></a>
+                            class="a_895-1271"><img src="{{ asset("/img/{$category->image}") }}" class="pictogram"><br
+                                class="br_895-1271"><span style="font-size: 1.5vw;">{{ $category->name }}</span></a>
                     </li>
                 @endforeach
                 {{-- <li><a href=""><img src="{{ asset('/img/ico_baseball.png') }}" class="pictogram">野球</a></li>

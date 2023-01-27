@@ -1738,14 +1738,14 @@ footer {
     }
 }
 
-@media(min-width:895px) and (max-width:1219px) {
+@media(min-width:895px) and (max-width:1271px) {
     .categories {
         height: 85px;
 
-        .a_895-1219 {
+        .a_895-1271 {
             text-align: center;
 
-            .br_895-1219 {
+            .br_895-1271 {
                 display: block;
             }
         }
@@ -1753,8 +1753,8 @@ footer {
 
 }
 
-@media(min-width:1220px) {
-    .br_895-1219 {
+@media(min-width:1272px) {
+    .br_895-1271 {
         display: none;
     }
 }
