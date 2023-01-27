@@ -178,7 +178,7 @@
                 @foreach ($categories as $category)
                     <li><a href="/posts/search?category_id={{ $category->id }}&post_type_id=all_post_types&prefecture_id=all_prefectures&search=検索"
                             class="a_895-1271"><img src="{{ asset("/img/{$category->image}") }}" class="pictogram"><br
-                                class="br_895-1271"><span style="font-size: 1.5vw;">{{ $category->name }}</span></a>
+                                class="br_895-1271"><span style="font-size: 1.3vw;">{{ $category->name }}</span></a>
                     </li>
                 @endforeach
                 {{-- <li><a href=""><img src="{{ asset('/img/ico_baseball.png') }}" class="pictogram">野球</a></li>
