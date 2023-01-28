@@ -14,6 +14,24 @@
     padding-top: 2rem;
 }
 
+.sp_area_form {
+    display: none;
+}
+
+.sp_area_show {
+    display: none;
+}
+
+.pc_area_form {
+    display: block;
+    position: relative;
+}
+
+.pc_area_show {
+    display: block;
+    position: relative;
+}
+
 .top_footer_wrap.pc {
     overflow-x: hidden;
     overflow-y: hidden;
@@ -66,9 +84,9 @@ header {
     width: 100%;
     // max-width: 1100px;
     // margin: 0 auto 5px auto;
-    z-index: 10;
-    position: sticky;
-    top: 0;
+    // z-index: 10;
+    // position: sticky;
+    // top: 0;
     background-color: #fff;
 
     .pc.flexer {
@@ -337,6 +355,10 @@ header {
 
 // トップページ
 
+.sp_area {
+    display: none;
+}
+
 .mv.pc {
     margin: 0 auto;
     background-image: url('/img/mv.jpg');
@@ -467,8 +489,9 @@ header {
 
     // 新規ユーザー登録ページ
 
-    #register_form {
-        width: 1100px;
+    .register_form.pc {
+        width: 90%;
+        max-width: 1100px;
         margin: 0 auto;
         position: absolute;
         top: 136.8%;
@@ -490,9 +513,9 @@ header {
 
     // ユーザー登録完了ページ
 
-    #register_comp {
-        width: 1100px;
-        height: 200px;
+    #register_comp.pc {
+        width: 90%;
+        max-width: 1100px;
         margin: 0 auto;
         position: absolute;
         top: 97.3%;
@@ -517,8 +540,9 @@ header {
 
     // ログインページ
 
-    #login_form {
-        width: 1100px;
+    .login_form.pc {
+        width: 90%;
+        max-width: 1100px;
         margin: 0 auto;
         position: absolute;
         top: 134.4%;
@@ -540,8 +564,9 @@ header {
 
     // パスワードリセットページ
 
-    #pass_reset_form {
-        width: 1100px;
+    #pass_reset_form.pc {
+        width: 90%;
+        max-width: 1100px;
         margin: 0 auto;
         position: absolute;
         top: 104.1%;
@@ -1000,7 +1025,7 @@ header {
 
 
 
-footer {
+footer.pc {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -1166,6 +1191,13 @@ footer {
 }
 
 
+@media(max-width: 639px) {
+    .mt-2_5rem {
+        margin-top: 2.5rem;
+    }
+}
+
+
 @media (max-width: 894px) {
 
     .br_sp {
@@ -1176,10 +1208,48 @@ footer {
         padding-top: 0;
     }
 
+    .sp_select {
+        width: 40%;
+    }
+
+    .pc_area_form {
+        display: none;
+    }
+
+    .pc_area_show {
+        display: none;
+    }
+
+    .sp_area_form {
+        display: block;
+    }
+
+    .sp_area_show {
+        display: block;
+    }
+
+    .footer_wrap.sp {
+        overflow-x: hidden;
+        overflow-y: hidden;
+        padding-bottom: 0;
+    }
+
     .top_footer_wrap.sp {
         overflow-x: hidden;
         overflow-y: hidden;
-        /* footerの高さ */
+        padding-bottom: 0;
+    }
+
+    .register_footer_wrap.sp {
+        overflow-x: hidden;
+        overflow-y: hidden;
+        padding-bottom: 0;
+    }
+
+    .login_footer_wrap.sp {
+        overflow-x: hidden;
+        overflow-y: hidden;
+        padding-bottom: 0;
     }
 
     header {
@@ -1383,19 +1453,30 @@ footer {
         }
     }
 
-    .mv-new_recruits-container.sp {
-        margin-bottom: 80%;
+    // トップページ
 
-        .mv.sp {
-            position: absolute;
-            margin: 0 auto;
-            background-image: url('/img/mv.jpg');
-            background-repeat: no-repeat;
-            width: 100%;
-            height: 300px;
-            background-size: cover;
+    .mv-new_recruits-container.sp {
+
+        .mv.pc {
+            display: none;
+        }
+
+        .sp_area {
+            display: block;
+
+            .mv.sp {
+                position: relative;
+                margin: 0 auto;
+                background-image: url('/img/mv.jpg');
+                background-repeat: no-repeat;
+                width: 100%;
+                height: 200px;
+                background-size: cover;
+            }
 
             h2 {
+                position: absolute;
+                top: 39%;
                 font-weight: 600;
                 font-size: 2rem;
                 color: #fff;
@@ -1404,16 +1485,12 @@ footer {
                 margin-top: 0;
             }
 
-
             .new_recruits.sp {
                 position: static;
-                margin-top: 230px;
-                margin-bottom: 230px;
-                width: 90%;
+                margin: 20px auto 0 auto;
+                width: 100%;
                 background-color: #fff;
                 padding: 20px;
-                border-radius: 15px;
-                border: 3px solid #1A89DA;
                 transform: translate(0);
 
                 .head {
@@ -1426,7 +1503,6 @@ footer {
                     span {
                         font-size: .8rem;
                         color: #555;
-                        margin-left: 10px;
                     }
                 }
 
@@ -1472,25 +1548,25 @@ footer {
                     }
                 }
 
-                .look_more {
-                    position: relative;
-                    height: 50px;
+                // .look_more {
+                //     position: relative;
+                //     height: 50px;
 
-                    &::before {
-                        content: 'もっと見る';
-                        position: absolute;
-                        width: 100%;
-                        left: 42.8%;
-                    }
+                //     &::before {
+                //         content: 'もっと見る';
+                //         position: absolute;
+                //         width: 100%;
+                //         left: 42.8%;
+                //     }
 
-                    &::after {
-                        content: '\02228';
-                        position: absolute;
-                        font-size: 1.5rem;
-                        top: 50%;
-                        left: 47%;
-                    }
-                }
+                //     &::after {
+                //         content: '\02228';
+                //         position: absolute;
+                //         font-size: 1.5rem;
+                //         top: 50%;
+                //         left: 47%;
+                //     }
+                // }
 
                 .look_more_link {
 
@@ -1561,29 +1637,6 @@ footer {
             }
         }
 
-        // ログインページ
-
-        #login_form {
-            width: 1100px;
-            margin: 0 auto;
-            position: absolute;
-            top: 134.4%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 15px;
-            border: 3px solid #1A89DA;
-
-            .head {
-                color: #1A89DA;
-                font-weight: 600;
-                font-size: 1.5rem;
-                padding-bottom: 5px;
-                border-bottom: 3px solid #1A89DA;
-            }
-        }
-
         // パスワードリセットページ
 
         #pass_reset_form {
@@ -1605,6 +1658,146 @@ footer {
                 padding-bottom: 5px;
                 border-bottom: 3px solid #1A89DA;
             }
+        }
+    }
+
+    // ユーザー登録ページ
+
+    .mv-register_form-container.sp {
+
+        .mv.pc {
+            display: none;
+        }
+
+        .sp_area {
+            display: block;
+
+            .mv.sp {
+                position: relative;
+                margin: 0 auto;
+                background-image: url('/img/mv.jpg');
+                background-repeat: no-repeat;
+                width: 100%;
+                height: 200px;
+                background-size: cover;
+            }
+
+            h2 {
+                position: absolute;
+                top: 39%;
+                font-weight: 600;
+                font-size: 2rem;
+                color: #fff;
+                width: 100%;
+                text-align: center;
+                margin-top: 0;
+            }
+
+            .register_form.sp {
+                position: static;
+                margin: 20px auto 0 auto;
+                width: 100%;
+                background-color: #fff;
+                padding: 20px;
+                transform: translate(0);
+
+                .head {
+                    color: #1A89DA;
+                    font-weight: 600;
+                    font-size: 1.5rem;
+                    padding-bottom: 5px;
+                    border-bottom: 3px solid #1A89DA;
+                }
+            }
+        }
+    }
+
+    // ログインページ
+
+    .mv-login_form-container.sp {
+
+        .mv.pc {
+            display: none;
+        }
+
+        .sp_area {
+            display: block;
+
+            .mv.sp {
+                position: relative;
+                margin: 0 auto;
+                background-image: url('/img/mv.jpg');
+                background-repeat: no-repeat;
+                width: 100%;
+                height: 200px;
+                background-size: cover;
+            }
+
+            h2 {
+                position: absolute;
+                top: 39%;
+                font-weight: 600;
+                font-size: 2rem;
+                color: #fff;
+                width: 100%;
+                text-align: center;
+                margin-top: 0;
+            }
+
+            .login_form.sp {
+                position: static;
+                margin: 20px auto 0 auto;
+                width: 100%;
+                background-color: #fff;
+                padding: 20px;
+                transform: translate(0);
+
+                .head {
+                    color: #1A89DA;
+                    font-weight: 600;
+                    font-size: 1.5rem;
+                    padding-bottom: 5px;
+                    border-bottom: 3px solid #1A89DA;
+                }
+            }
+        }
+    }
+
+    .footer.sp {
+        position: static;
+        height: 120px;
+
+        p {
+            padding-top: 1.5rem;
+        }
+    }
+
+    .top_footer.sp {
+        position: static;
+        height: 120px;
+
+        p {
+            padding-top: 1.5rem;
+        }
+    }
+
+    .register_footer.sp {
+        position: static;
+        height: 120px;
+        padding-top: 0;
+
+        p {
+            padding-top: 1.5rem;
+        }
+    }
+
+    .login_footer.sp {
+        position: static;
+        height: 120px;
+        padding-top: 0;
+
+        p {
+            padding-top: 1.5rem;
         }
     }
 
