@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="footer_wrap">
+    <div class="footer_wrap pc sp">
         <div class="mx-auto px-4 sm:px-6 lg:px-8" style="max-width: 1100px;">
             <div class="mx-4 sm:p-8">
 
@@ -7,9 +7,9 @@
 
                 <div class="md:flex items-center mt-6 relative">
                     <div class="w-full flex flex-col pb-5">
-                        <div class="profile_container flex justify-center">
+                        <div class="profile_container md:flex justify-center">
 
-                            <div class="profile-left mr-5" style="width: 30%;">
+                            <div class="profile-left mr-5">
                                 <div class="rounded-full mx-auto flex justify-center">
                                     @if ($user->profile_image !== 'user_default.jpg')
                                         <img src="{{ asset('/storage/profile_image/' . $user->profile_image) }}"
@@ -44,12 +44,12 @@
                                     @endif
                                 @endif
                             </div>
-                            <div class="profile-right ml-5" style="width: 70%;">
+                            <div class="profile-right ml-5 md:w-70per">
                                 @if (Auth::check())
                                     @if ($user->id === Auth::id())
                                         <div class="text-right">
                                             <a href="{{ route('user.edit', $user) }}"><button
-                                                    class="absolute right-0 border border-solid border-spons_blue p-2 mb-6 mr-2 rounded text-spons_blue font-bold text-xl">
+                                                    class="md:absolute md:right-0 border border-solid border-spons_blue p-2 mb-6 mr-2 rounded text-spons_blue font-bold text-xl">
                                                     <i class="fas fa-cog"></i>
                                                 </button></a>
                                         </div>
@@ -62,7 +62,7 @@
                                         </div>
                                     @endif
                                 @endif
-                                <div class="my-16">
+                                <div class="md:my-16 mt-0 mb-16">
                                     <div
                                         class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
                                         <p class="mr-8 font-bold text-gray-500" style="width: 100px;">都道府県</p>

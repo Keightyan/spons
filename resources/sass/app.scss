@@ -1763,44 +1763,6 @@ footer.pc {
         }
     }
 
-    .footer.sp {
-        position: static;
-        height: 120px;
-
-        p {
-            padding-top: 1.5rem;
-        }
-    }
-
-    .top_footer.sp {
-        position: static;
-        height: 120px;
-
-        p {
-            padding-top: 1.5rem;
-        }
-    }
-
-    .register_footer.sp {
-        position: static;
-        height: 120px;
-        padding-top: 0;
-
-        p {
-            padding-top: 1.5rem;
-        }
-    }
-
-    .login_footer.sp {
-        position: static;
-        height: 120px;
-        padding-top: 0;
-
-        p {
-            padding-top: 1.5rem;
-        }
-    }
-
     // 検索結果ページ
 
     .search_head.sp {
@@ -1929,6 +1891,45 @@ footer.pc {
             }
         }
     }
+
+    .footer.sp {
+        position: static;
+        height: 120px;
+
+        p {
+            padding-top: 1.5rem;
+        }
+    }
+
+    .top_footer.sp {
+        position: static;
+        height: 120px;
+
+        p {
+            padding-top: 1.5rem;
+        }
+    }
+
+    .register_footer.sp {
+        position: static;
+        height: 120px;
+        padding-top: 0;
+
+        p {
+            padding-top: 1.5rem;
+        }
+    }
+
+    .login_footer.sp {
+        position: static;
+        height: 120px;
+        padding-top: 0;
+
+        p {
+            padding-top: 1.5rem;
+        }
+    }
+
 }
 
 @media(min-width:895px) and (max-width:1029px) {

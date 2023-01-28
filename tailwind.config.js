@@ -17,6 +17,9 @@ module.exports = {
             colors: {
                 'spons_blue': '#1A89DA',
             },
+            width: {
+                '70per': '70%',
+            },
         },
     },
 
