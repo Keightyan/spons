@@ -1,17 +1,20 @@
 <x-app-layout>
     <div class="footer_wrap pc sp">
         <div class="mx-auto px-4 sm:px-6 lg:px-8" style="max-width: 1100px;">
-            <div class="mx-4 sm:p-8">
+            <div class="mx-4">
 
                 <x-message :message="session('message')" />
 
-                <div class="md:flex items-center mt-6 relative">
+                <div class="md:flex items-center relative">
                     <div class="w-full flex flex-col pb-5">
                         <div class="profile_container md:flex justify-center">
 
-                            <div class="profile-left mr-5">
+                            <div class="profile-left md:mr-5 mt-8">
                                 <div class="rounded-full mx-auto flex justify-center">
-                                    @if ($user->profile_image !== 'user_default.jpg')
+                                    @if ($user->profile_image === null)
+                                        <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}"
+                                            style="width: 200px;">
+                                    @elseif ($user->profile_image !== 'user_default.jpg')
                                         <img src="{{ asset('/storage/profile_image/' . $user->profile_image) }}"
                                             style="width: 200px;">
                                     @else
@@ -49,7 +52,7 @@
                                     @if ($user->id === Auth::id())
                                         <div class="text-right">
                                             <a href="{{ route('user.edit', $user) }}"><button
-                                                    class="md:absolute md:right-0 border border-solid border-spons_blue p-2 mb-6 mr-2 rounded text-spons_blue font-bold text-xl">
+                                                    class="md:absolute md:right-6 border border-solid border-spons_blue p-2 mt-8 mb-6 mr-2 rounded text-spons_blue font-bold text-xl">
                                                     <i class="fas fa-cog"></i>
                                                 </button></a>
                                         </div>
@@ -66,48 +69,68 @@
                                     <div
                                         class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
                                         <p class="mr-8 font-bold text-gray-500" style="width: 100px;">都道府県</p>
-                                        <span class="text-black text-xl font-bold">{{ $user->prefecture->name }}</span>
+                                        @if ($user->prefecture_id === null)
+                                            <span class="text-black text-xl font-bold">未設定</span>
+                                        @else
+                                            <span
+                                                class="text-black text-xl font-bold">{{ $user->prefecture->name }}</span>
+                                        @endif
                                     </div>
 
                                     <div
                                         class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
                                         <p class="mr-8 font-bold text-gray-500" style="width: 100px;">所属チーム</p>
-                                        <span class="text-black text-xl font-bold">
-                                            @if ($user->team === null)
-                                                <span class="text-black text-xl font-bold">－</span>
-                                            @else
-                                                <span class="text-black text-xl font-bold">{{ $user->team }}</span>
-                                            @endif
-                                        </span>
+                                        @if ($user->team === null)
+                                            <span class="text-black text-xl font-bold">－</span>
+                                        @else
+                                            <span class="text-black text-xl font-bold">{{ $user->team }}</span>
+                                        @endif
                                     </div>
 
                                     <div
                                         class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
                                         <p class="mr-8 font-bold text-gray-500" style="width: 100px;">性別</p>
-                                        <span
-                                            class="text-black text-xl font-bold">{{ $user->gender == 1 ? '男' : '女' }}</span>
+                                        @if ($user->gender === null)
+                                            <span class="text-black text-xl font-bold">未設定</span>
+                                        @else
+                                            <span
+                                                class="text-black text-xl font-bold">{{ $user->gender == 1 ? '男' : '女' }}</span>
+                                        @endif
                                     </div>
 
                                     <div
                                         class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
                                         <p class="mr-8 font-bold text-gray-500" style="width: 100px;">年齢</p>
-                                        <span class="text-black text-xl font-bold">
-                                            @php
-                                                $birthday = new \Carbon\Carbon($user->birthday);
-                                            @endphp
-                                            {{ $birthday->age }} <span class="text-sm">歳</span></span>
+                                        @if ($user->birthday === null)
+                                            <span class="text-black text-xl font-bold">未設定</span>
+                                        @else
+                                            <span class="text-black text-xl font-bold">
+                                                @php
+                                                    $birthday = new \Carbon\Carbon($user->birthday);
+                                                @endphp
+                                                {{ $birthday->age }} <span class="text-sm">歳</span>
+                                            </span>
+                                        @endif
                                     </div>
 
                                     <div
                                         class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
                                         <p class="mr-8 font-bold text-gray-500" style="width: 100px;">興味のあるスポーツ</p>
-                                        <span class="text-black text-xl font-bold">{{ $user->favorites }}</span>
+                                        @if ($user->favorites === null)
+                                            <span class="text-black text-xl font-bold">未入力</span>
+                                        @else
+                                            <span class="text-black text-xl font-bold">{{ $user->favorites }}</span>
+                                        @endif
                                     </div>
 
                                     <div
                                         class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
                                         <p class="mr-8 font-bold text-gray-500" style="width: 100px;">自己紹介</p>
-                                        <span class="text-black text-xl font-bold">{!! nl2br(e($user->introduction)) !!}</span>
+                                        @if ($user->introduction === null)
+                                            <span class="text-black text-xl font-bold">未入力</span>
+                                        @else
+                                            <span class="text-black text-xl font-bold">{!! nl2br(e($user->introduction)) !!}</span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +139,8 @@
                         <ul class="tabs-menu">
                             <p class="mb-4"><span
                                     class=" text-spons_blue font-bold text-xl">{{ $user->name }}</span> さんの</p>
-                            <li><a href="#followings">フォロー中　{{ $user->followings()->count() }}</a></li>
+                            <li class="followings_li"><a
+                                    href="#followings">フォロー中　{{ $user->followings()->count() }}</a></li>
                             <li><a href="#followers">フォロワー　{{ $user->followers()->count() }}</a></li>
                             <li><a href="#posts">募集投稿　{{ $user->posts()->count() }}</a></li>
                             @if ($user->id === Auth::id())

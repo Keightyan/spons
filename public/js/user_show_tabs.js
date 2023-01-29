@@ -1,9 +1,7 @@
 /**
- * selectorに該当するタブを表示する関数
+ * selector1に該当するタブを表示する関数
  */
 const showTab1 = (selector1) => {
-    // 引数selectorの中身をコンソールで確認する
-    console.log(selector1);
 
     /* 1. タブの選択状態のリセット */
 
@@ -40,11 +38,9 @@ showTab1('#followings');
 
 
 /**
- * selectorに該当するタブを表示する関数
+ * selector2に該当するタブを表示する関数
  */
- const showTab2 = (hashCut) => {
-    // 引数hashCutの中身をコンソールで確認する
-    console.log(hashCut);
+const showTab2 = (hashCut) => {
 
     /* 1. タブの選択状態のリセット */
 
@@ -56,8 +52,8 @@ showTab1('#followings');
 
     /* 2. 選択されたタブの表示 */
 
-        // .tabs-menu liのうち、hashCutに該当するものにだけactiveクラスを付ける
-$(`.tabs-menu a[href="${hashCut}"]`)
+    // .tabs-menu liのうち、hashCutに該当するものにだけactiveクラスを付ける
+    $(`.tabs-menu a[href="${hashCut}"]`)
         .parent('li')
         .addClass('active');
 
@@ -65,17 +61,22 @@ $(`.tabs-menu a[href="${hashCut}"]`)
     $(hashCut).show();
 };
 
-// タブがクリックされたらコンテンツを表示
+// アイコンがクリックされたらコンテンツを表示
 $('.followings_followers a').on('click', (e) => {
 
-    // hrefの値を受け取った後、showTab()関数に渡す。e.targetはクリックされたアイコン（.followings_followers a）を表す
-    const selector2 = $(e.target).attr('href');
-    // console.log(selector2);
-    let cut = selector2.substr(selector2.indexOf('#') + 1);
-    let hashCut = '#' + cut;
-    console.log(hashCut)
-    showTab2(hashCut);
+    const followings_li = document.getElementsByClassName('followings_li');
+
+    if ($('.tabs-menu > li').hasClass('followings_li')) {
+        $(followings_li).removeClass('active');
+
+        // hrefの値を受け取った後、showTab()関数に渡す。e.targetはクリックされたアイコン（.followings_followers a）を表す
+        const selector2 = $(e.target).attr('href');
+        console.log(selector2);
+        let cut = selector2.substr(selector2.indexOf('#') + 1);
+        let hashCut = '#' + cut;
+
+        showTab2(hashCut);
+    }
 });
 
 // 初期状態としてhashCutのタブを表示
-showTab2(hashCut);

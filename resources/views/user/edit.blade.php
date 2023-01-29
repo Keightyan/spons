@@ -12,17 +12,18 @@
 
                         <p class="mr-8 font-bold" style="width: 100px;">プロフィール<br>画像</p>
                         <div>
-                            @if ($user->profile_image)
-                                <div class="mb-2">
-                                    （画像ファイル：{{ $user->profile_image }}）
-                                </div>
-                                @if ($user->profile_image !== 'user_default.jpg')
-                                    <img src="{{ asset('/storage/profile_image/' . $user->profile_image) }}"
-                                        class="mx-auto mb-4" style="height:200px;">
-                                @else
-                                    <img src="{{ asset('/profile_image/' . $user->profile_image) }}"
-                                        class="mx-auto mb-4" style="height:200px;">
-                                @endif
+                            <div class="mb-2">
+                                （画像ファイル：{{ $user->profile_image }}）
+                            </div>
+                            @if ($user->profile_image === null)
+                                <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}" class="mx-auto mb-4"
+                                    style="width: 200px;">
+                            @elseif ($user->profile_image !== 'user_default.jpg')
+                                <img src="{{ asset('/storage/profile_image/' . $user->profile_image) }}"
+                                    class="mx-auto mb-4" style="width: 200px;">
+                            @else
+                                <img src="{{ asset('/profile_image/' . $user->profile_image) }}" class="mx-auto mb-4"
+                                    style="width: 200px;">
                             @endif
                             <input type="file" name="profile_image">
                         </div>
@@ -121,19 +122,20 @@
                         @csrf
                         @method('patch')
 
-                        <p class="mt-10 font-bold text-left mb-2">プロフィール画像</p>
+                        <p class="mt-8 font-bold text-left mb-2">プロフィール画像</p>
                         <div>
-                            @if ($user->profile_image)
-                                <div class="mb-2">
-                                    （画像ファイル：{{ $user->profile_image }}）
-                                </div>
-                                @if ($user->profile_image !== 'user_default.jpg')
-                                    <img src="{{ asset('/storage/profile_image/' . $user->profile_image) }}"
-                                        class="mx-auto mb-4" style="height:200px;">
-                                @else
-                                    <img src="{{ asset('/profile_image/' . $user->profile_image) }}"
-                                        class="mx-auto mb-4" style="height:200px;">
-                                @endif
+                            <div class="mb-2">
+                                （画像ファイル：{{ $user->profile_image }}）
+                            </div>
+                            @if ($user->profile_image === null)
+                                <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}" class="mx-auto mb-4"
+                                    style="width: 200px;">
+                            @elseif ($user->profile_image !== 'user_default.jpg')
+                                <img src="{{ asset('/storage/profile_image/' . $user->profile_image) }}"
+                                    class="mx-auto mb-4" style="width: 200px;">
+                            @else
+                                <img src="{{ asset('/profile_image/' . $user->profile_image) }}" class="mx-auto mb-4"
+                                    style="width: 200px;">
                             @endif
                             <input type="file" name="profile_image">
                         </div>
@@ -191,8 +193,8 @@
                         <div class="mt-8 my-12">
                             <p class="mr-12 font-bold mb-2">
                                 興味のあるスポーツ</p>
-                            <p class="w-full"><input type="text" name="favorites"
-                                    cl ass="py-2 placeholder-gray-500 border border-gray-300 rounded-md bg-gray-200"
+                            <p class="w-full"><input type="text" name="favorites" cl
+                                    ass="py-2 placeholder-gray-500 border border-gray-300 rounded-md bg-gray-200"
                                     value="{{ old('favorites', $user->favorites) }}" style="width: 100%;"><br><span
                                     class="inline-block mt-2">※50文字以下</span></p>
                         </div>

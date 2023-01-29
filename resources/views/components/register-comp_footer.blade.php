@@ -1,4 +1,4 @@
-<footer class="register-comp_footer">
+<footer class="register-comp_footer pc sp">
     <p class="text-center mt-6"><a href="{{ route('post.index') }}"><img src="{{ asset('/img/logo_spons.png') }}" alt="SpoNS（スポンズ）" class="inline"></a></p>
 
     <small>© 2023 Keiichiro Kariya</small>

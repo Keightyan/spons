@@ -192,7 +192,7 @@
                             @endif
                         @endif
 
-                    <div class="md:flex items-center relative">
+                    <div class="md:flex items-center relative md:mt-6">
                         <div class="w-full flex flex-col pb-5 border-b-spons_blue border-b-4">
                             <span class="text-xl font-bold text-spons_blue">{{ $post->title }}</span>
                         </div>

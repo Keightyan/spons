@@ -1,7 +1,7 @@
 <div class="mv pc">
     <h2>スポーツでつながるSNS</h2>
 
-    <div class="login_form pc sp">
+    <div class="login_form pc">
         <p class="head">ログイン</p>
 
         <!-- Session Status -->

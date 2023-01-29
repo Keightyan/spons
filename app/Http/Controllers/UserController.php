@@ -17,7 +17,6 @@ class UserController extends Controller
 
     public function show($id)
     {
-
         $user = User::find($id);
 
         return view('user.show', compact('user'));
@@ -27,6 +26,8 @@ class UserController extends Controller
     {
         $user = auth()->user();
         $prefectures = Prefecture::all();
+
+        // dd($user);
 
         return view('user.edit', compact('user', 'prefectures'));
     }

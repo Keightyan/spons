@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="footer_wrap">
+    <div class="footer_wrap pc sp">
         <div class="mx-auto px-4 sm:px-6 lg:px-8" style="max-width: 1100px;">
             <div class="mx-4 pt-2rem">
 

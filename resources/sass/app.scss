@@ -32,7 +32,7 @@
     position: relative;
 }
 
-.top_footer_wrap.pc {
+.top_footer_wrap {
     overflow-x: hidden;
     overflow-y: hidden;
     position: relative;
@@ -52,7 +52,7 @@
     overflow-x: hidden;
     overflow-y: hidden;
     position: relative;
-    padding-bottom: 316px;
+    padding-bottom: 266px;
     /* footerの高さ */
 }
 
@@ -68,7 +68,7 @@
     overflow-x: hidden;
     overflow-y: hidden;
     position: relative;
-    padding-bottom: 384px;
+    padding-bottom: 428px;
     /* footerの高さ */
 }
 
@@ -513,12 +513,13 @@ header {
 
     // ユーザー登録完了ページ
 
-    #register_comp.pc {
+    .register-comp.pc {
         width: 90%;
+        height: 150px;
         max-width: 1100px;
         margin: 0 auto;
         position: absolute;
-        top: 97.3%;
+        top: 92.3%;
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: #fff;
@@ -564,12 +565,12 @@ header {
 
     // パスワードリセットページ
 
-    #pass_reset_form.pc {
+    .pass_reset.pc {
         width: 90%;
         max-width: 1100px;
         margin: 0 auto;
         position: absolute;
-        top: 104.1%;
+        top: 108.5%;
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: #fff;
@@ -1246,7 +1247,19 @@ footer.pc {
         padding-bottom: 0;
     }
 
+    .register-comp_footer_wrap.sp {
+        overflow-x: hidden;
+        overflow-y: hidden;
+        padding-bottom: 0;
+    }
+
     .login_footer_wrap.sp {
+        overflow-x: hidden;
+        overflow-y: hidden;
+        padding-bottom: 0;
+    }
+
+    .pass_reset_footer_wrap.sp {
         overflow-x: hidden;
         overflow-y: hidden;
         padding-bottom: 0;
@@ -1587,78 +1600,78 @@ footer.pc {
             }
         }
 
-        // 新規ユーザー登録ページ
+        // // 新規ユーザー登録ページ
 
-        #register_form {
-            width: 1100px;
-            margin: 0 auto;
-            position: absolute;
-            top: 136.8%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 15px;
-            border: 3px solid #1A89DA;
+        // .register_form {
+        //     width: 1100px;
+        //     margin: 0 auto;
+        //     position: absolute;
+        //     top: 136.8%;
+        //     left: 50%;
+        //     transform: translate(-50%, -50%);
+        //     background-color: #fff;
+        //     padding: 20px;
+        //     border-radius: 15px;
+        //     border: 3px solid #1A89DA;
 
-            .head {
-                color: #1A89DA;
-                font-weight: 600;
-                font-size: 1.5rem;
-                padding-bottom: 5px;
-                border-bottom: 3px solid #1A89DA;
-            }
-        }
+        //     .head {
+        //         color: #1A89DA;
+        //         font-weight: 600;
+        //         font-size: 1.5rem;
+        //         padding-bottom: 5px;
+        //         border-bottom: 3px solid #1A89DA;
+        //     }
+        // }
 
-        // ユーザー登録完了ページ
+        // // ユーザー登録完了ページ
 
-        #register_comp {
-            width: 1100px;
-            height: 200px;
-            margin: 0 auto;
-            position: absolute;
-            top: 97.3%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 15px;
-            border: 3px solid #1A89DA;
+        // #register_comp {
+        //     width: 1100px;
+        //     height: 200px;
+        //     margin: 0 auto;
+        //     position: absolute;
+        //     top: 97.3%;
+        //     left: 50%;
+        //     transform: translate(-50%, -50%);
+        //     background-color: #fff;
+        //     padding: 20px;
+        //     border-radius: 15px;
+        //     border: 3px solid #1A89DA;
 
-            .head {
-                color: #1A89DA;
-                font-weight: 600;
-                font-size: 1.5rem;
-                padding-bottom: 5px;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-        }
+        //     .head {
+        //         color: #1A89DA;
+        //         font-weight: 600;
+        //         font-size: 1.5rem;
+        //         padding-bottom: 5px;
+        //         position: absolute;
+        //         top: 50%;
+        //         left: 50%;
+        //         transform: translate(-50%, -50%);
+        //     }
+        // }
 
-        // パスワードリセットページ
+        // // パスワードリセットページ
 
-        #pass_reset_form {
-            width: 1100px;
-            margin: 0 auto;
-            position: absolute;
-            top: 104.1%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 15px;
-            border: 3px solid #1A89DA;
+        // #pass_reset_form {
+        //     width: 1100px;
+        //     margin: 0 auto;
+        //     position: absolute;
+        //     top: 104.1%;
+        //     left: 50%;
+        //     transform: translate(-50%, -50%);
+        //     background-color: #fff;
+        //     padding: 20px;
+        //     border-radius: 15px;
+        //     border: 3px solid #1A89DA;
 
-            .head {
-                color: #1A89DA;
-                font-weight: 600;
-                font-size: 1.5rem;
-                padding-bottom: 5px;
-                border-bottom: 3px solid #1A89DA;
-            }
-        }
+        //     .head {
+        //         color: #1A89DA;
+        //         font-weight: 600;
+        //         font-size: 1.5rem;
+        //         padding-bottom: 5px;
+        //         border-bottom: 3px solid #1A89DA;
+        //     }
+        // }
     }
 
     // ユーザー登録ページ
@@ -1712,6 +1725,56 @@ footer.pc {
         }
     }
 
+    // ユーザー登録完了ページ
+
+    .mv-register-comp-container.sp {
+
+        .mv.pc {
+            display: none;
+        }
+
+        .sp_area {
+            display: block;
+
+            .mv.sp {
+                position: relative;
+                margin: 0 auto;
+                background-image: url('/img/mv.jpg');
+                background-repeat: no-repeat;
+                width: 100%;
+                height: 200px;
+                background-size: cover;
+            }
+
+            h2 {
+                position: absolute;
+                top: 39%;
+                font-weight: 600;
+                font-size: 2rem;
+                color: #fff;
+                width: 100%;
+                text-align: center;
+                margin-top: 0;
+            }
+
+            .register-comp.sp {
+                position: static;
+                margin: 20px auto 0 auto;
+                width: 100%;
+                background-color: #fff;
+                padding: 20px;
+                transform: translate(0);
+
+                .head {
+                    color: #1A89DA;
+                    font-weight: 600;
+                    font-size: 1.5rem;
+                    padding-bottom: 5px;
+                }
+            }
+        }
+    }
+
     // ログインページ
 
     .mv-login_form-container.sp {
@@ -1745,6 +1808,57 @@ footer.pc {
             }
 
             .login_form.sp {
+                position: static;
+                margin: 20px auto 0 auto;
+                width: 100%;
+                background-color: #fff;
+                padding: 20px;
+                transform: translate(0);
+
+                .head {
+                    color: #1A89DA;
+                    font-weight: 600;
+                    font-size: 1.5rem;
+                    padding-bottom: 5px;
+                    border-bottom: 3px solid #1A89DA;
+                }
+            }
+        }
+    }
+
+    // パスワードリセットページ
+
+    .mv-pass_reset-container.sp {
+
+        .mv.pc {
+            display: none;
+        }
+
+        .sp_area {
+            display: block;
+
+            .mv.sp {
+                position: relative;
+                margin: 0 auto;
+                background-image: url('/img/mv.jpg');
+                background-repeat: no-repeat;
+                width: 100%;
+                height: 200px;
+                background-size: cover;
+            }
+
+            h2 {
+                position: absolute;
+                top: 39%;
+                font-weight: 600;
+                font-size: 2rem;
+                color: #fff;
+                width: 100%;
+                text-align: center;
+                margin-top: 0;
+            }
+
+            .pass_reset.sp {
                 position: static;
                 margin: 20px auto 0 auto;
                 width: 100%;
@@ -1920,6 +2034,16 @@ footer.pc {
         }
     }
 
+    .register-comp_footer.sp {
+        position: static;
+        height: 120px;
+        padding-top: 0;
+
+        p {
+            padding-top: 1.5rem;
+        }
+    }
+
     .login_footer.sp {
         position: static;
         height: 120px;
@@ -1929,6 +2053,18 @@ footer.pc {
             padding-top: 1.5rem;
         }
     }
+
+    .pass_reset_footer.sp {
+        position: static;
+        height: 120px;
+        padding-top: 0;
+
+        p {
+            padding-top: 1.5rem;
+        }
+    }
+
+
 
 }
 
