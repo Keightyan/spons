@@ -2,7 +2,7 @@
  * selector1に該当するタブを表示する関数
  */
 const showTab1 = (selector1) => {
-
+    
     /* 1. タブの選択状態のリセット */
 
     // いったん、すべての.tabs-menu > liからactiveクラスを削除する
@@ -33,4 +33,5 @@ $('.tabs-menu a').on('click', (e) => {
 });
 
 // 初期状態
+
 showTab1(location.hash || '#followings_content');
