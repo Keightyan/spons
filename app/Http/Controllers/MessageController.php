@@ -64,7 +64,7 @@ class MessageController extends Controller
 
         $receiver_ids_all   = auth()->user()->all_messages()->groupBy('target_id')->pluck(0)->pluck('target_id');
         $receiver_ids_order = implode(',', $receiver_ids_all->toArray());
-        $receivers          = $receiver_ids_all ? User::whereIn('id', $receiver_ids_all)->orderByRaw("FIELD(id, $receiver_ids_order)")->get() : [];
+        $receivers          = $receiver_ids_all->isNotEmpty() ? User::whereIn('id', $receiver_ids_all)->orderByRaw("FIELD(id, $receiver_ids_order)")->get() : [];
 
         // dd($receivers);
         return view('message.index', compact('receivers'));
@@ -98,7 +98,7 @@ class MessageController extends Controller
             $q->where('receiver_user_id', $from_id);
         });
 
-        $query->orderByDesc('created_at');
+        $query->orderBy('created_at');
         $messages = $query->paginate(20);
 
         return view('message.message', compact('user', 'messages', 'from_id', 'to_id'));
