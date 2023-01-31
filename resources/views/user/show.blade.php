@@ -41,7 +41,7 @@
                                         <div class="mt-6 flex">
                                             <button class="msg_btn mt-4 mb-10 w-40 h-20 rounded bg-green-500"
                                                 style="margin-inline: auto;">
-                                                <span class="text-xl text-white font-bold w-full">メッセージを送る
+                                                <a class="text-xl text-white font-bold w-full" href="{{ route('message.inquiry', $user->id) }}">メッセージを送る</a>
                                             </button>
                                         </div>
                                     @endif
@@ -218,7 +218,7 @@
                                             $date = $post->created_at;
                                             $day = new DateTime($date);
                                             $dow = $day->format('w');
-                                            
+
                                             $carbon_updated_at = new \Carbon\Carbon($post->updated_at);
                                             $carbon_created_at = new \Carbon\Carbon($post->created_at);
                                         @endphp
@@ -265,7 +265,7 @@
                                                 $date = $bookmark_post->created_at;
                                                 $day = new DateTime($date);
                                                 $dow = $day->format('w');
-                                                
+
                                                 $carbon_updated_at = new \Carbon\Carbon($bookmark_post->updated_at);
                                                 $carbon_created_at = new \Carbon\Carbon($bookmark_post->created_at);
                                             @endphp
