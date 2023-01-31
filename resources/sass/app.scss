@@ -283,10 +283,10 @@ header {
         li {
             font-size: 1.2rem;
             position: relative;
-            padding-right: 1.5rem;
+            padding-right: 1rem;
 
             &:nth-of-type(n + 2) {
-                padding-left: 1.5rem;
+                padding-left: 1rem;
             }
 
             .pictogram {
@@ -831,7 +831,7 @@ header {
         display: none;
     }
 
-    #followings {
+    #followings_content {
 
         .following {
             padding: 5px 5px 10px 5px;
@@ -842,7 +842,7 @@ header {
         }
     }
 
-    #followers {
+    #followers_content {
 
         .follower {
             padding: 5px 5px 10px 5px;

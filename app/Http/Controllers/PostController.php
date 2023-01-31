@@ -116,6 +116,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        if ($post->user_id != auth()->id()) {
+            abort(403);
+        }
+
         $user = auth()->user();
         $categories = Category::all();
         $post_types = PostType::all();
@@ -133,6 +137,9 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
+        if ($post->user_id != auth()->id()) {
+            abort(403);
+        }
 
         $post->fill($request->all());
 
@@ -156,6 +163,10 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if ($post->user_id != auth()->id()) {
+            abort(403);
+        }
+
         $post->delete();
         return redirect()->route('post.index')->with('message', '投稿を削除しました');
     }

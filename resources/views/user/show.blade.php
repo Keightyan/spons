@@ -139,16 +139,16 @@
                         <ul class="tabs-menu">
                             <p class="mb-4"><span
                                     class=" text-spons_blue font-bold text-xl">{{ $user->name }}</span> さんの</p>
-                            <li class="followings_li"><a
-                                    href="#followings">フォロー中　{{ $user->followings()->count() }}</a></li>
-                            <li><a href="#followers">フォロワー　{{ $user->followers()->count() }}</a></li>
+                            <li id="followings" class="followings_li"><a
+                                    href="#followings_content">フォロー中　{{ $user->followings()->count() }}</a></li>
+                            <li id="followers"><a href="#followers_content">フォロワー　{{ $user->followers()->count() }}</a></li>
                             <li><a href="#posts">募集投稿　{{ $user->posts()->count() }}</a></li>
                             @if ($user->id === Auth::id())
                                 <li><a href="#bookmarks">ブックマーク　{{ $user->bookmarks()->count() }}</a></li>
                             @endif
                         </ul>
                         <section class="tabs-content">
-                            <section id="followings">
+                            <section id="followings_content">
                                 <div>
                                     @foreach ($user->followings as $following)
                                         <div class="flex my-10 relative following">
@@ -179,7 +179,7 @@
                                     @endforeach
                                 </div>
                             </section>
-                            <section id="followers">
+                            <section id="followers_content">
                                 <div>
                                     @foreach ($user->followers as $follower)
                                         <div class="flex my-10 relative follower">

@@ -19,10 +19,10 @@
 
             <div class="followings_followers flex">
                 <p class="followings"><a
-                        href="{{ route('user.show', Auth::user()->id) }}#followings">{{ Auth::user()->followings()->count() }}</a>
+                        href="{{ route('user.show', Auth::user()->id) }}#followings_content">{{ Auth::user()->followings()->count() }}</a>
                 </p>
                 <p class="followers"><a
-                        href="{{ route('user.show', Auth::user()->id) }}#followers">{{ Auth::user()->followers()->count() }}</a>
+                        href="{{ route('user.show', Auth::user()->id) }}#followers_content">{{ Auth::user()->followers()->count() }}</a>
                 </p>
             </div>
             <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 ml-20">
