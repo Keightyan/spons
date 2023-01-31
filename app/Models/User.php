@@ -97,7 +97,7 @@ class User extends Authenticatable
             $this->followings()->detach($userId);
             return true;
         } else {
-            
+
             return false;
         }
     }
@@ -123,5 +123,25 @@ class User extends Authenticatable
     public function receivers()
     {
         return $this->belongsToMany(User::class, 'messages', 'receiver_user_id', 'sender_user_id');
+    }
+
+    // ユーザが送信または受信した全メッセージ
+    public function all_messages() {
+        $receive_message = $this->hasMany(Message::class, 'receiver_user_id')->get();
+        $send_message    = $this->hasMany(Message::class, 'sender_user_id')->get();
+        $messages        = $receive_message->union($send_message)->sortByDesc('created_at');
+
+        // target_idキーを作成し、メッセージ相手のuser_idを格納する
+        $all_messages = collect([]);
+        foreach ($messages as $message) {
+            if ($message->receiver_user_id != $this->id) {
+                $message['target_id'] = $message->receiver_user_id;
+            } else {
+                $message['target_id'] = $message->sender_user_id;
+            }
+            $all_messages->add($message);
+        }
+
+        return $all_messages;
     }
 }

@@ -24,7 +24,7 @@
 
                     <section id="messages">
                         <div>
-                            @foreach ($user->messages as $message)
+                            @foreach ($messages as $message)
                                 @php
                                     $week = ['日', '月', '火', '水', '木', '金', '土'];
                                     $date = $message->created_at;
@@ -51,7 +51,7 @@
                                 </div>
                             @endforeach
 
-                            <form method="post" action="{{ route('message.store2', ['post' => $message->post_id, 'user' => $message->sender_user_id]) }}">
+                            <form method="post" action="{{ route('message.store2', ['user' => $to_id]) }}">
                                 @csrf
 
                                 {{-- <input type="hidden" name="post_id" value="{{ $post->id }}"> --}}

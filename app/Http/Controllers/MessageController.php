@@ -17,7 +17,7 @@ class MessageController extends Controller
     {
         $from_id = auth()->user()->id;
         // dd($user->id === $from_id);
-        $to_id = User::where('id', '!=', auth()->user()->id)->get();
+        $to_id = $user->id;
         // dd($to_id);
 
         if ($user->id !== $from_id) {
@@ -62,11 +62,10 @@ class MessageController extends Controller
         // $messages = auth()->user()->messages()->get();
         // // dd($messages);
 
-        $receiver_ids = Message::where('sender_user_id', auth()->id())->groupBy('receiver_user_id')->orderBy('created_at', 'desc')->pluck('receiver_user_id');
-        
-        $receiver_ids_all = $receiver_ids->all();
-        $receiver_ids_order = implode(',', $receiver_ids_all);
-        $receivers = User::whereIn('id', $receiver_ids)->orderByRaw("FIELD(id, $receiver_ids_order)")->get();
+        $receiver_ids_all   = auth()->user()->all_messages()->groupBy('target_id')->pluck(0)->pluck('target_id');
+        $receiver_ids_order = implode(',', $receiver_ids_all->toArray());
+        $receivers          = $receiver_ids_all->isNotEmpty() ? User::whereIn('id', $receiver_ids_all)->orderByRaw("FIELD(id, $receiver_ids_order)")->get() : [];
+
         // dd($receivers);
         return view('message.index', compact('receivers'));
     }
@@ -89,16 +88,17 @@ class MessageController extends Controller
         $from_id = auth()->user()->id;
         $to_id = $user->id;
 
-        $query = Message::query()->with('sender_user')->where('id', $user->id);
-        $query->where(function ($q) use ($from_id) {
+        $query = Message::query();
+        $query->where(function ($q) use ($from_id, $to_id) {
             $q->where('sender_user_id', $from_id);
-            $q->orWhere('receiver_user_id', $from_id);
+            $q->where('receiver_user_id', $to_id);
         });
-        $query->where(function ($q) use ($to_id) {
+        $query->orWhere(function ($q) use ($from_id, $to_id) {
             $q->where('sender_user_id', $to_id);
-            $q->orWhere('receiver_user_id', $to_id);
+            $q->where('receiver_user_id', $from_id);
         });
 
+        $query->orderBy('created_at');
         $messages = $query->paginate(20);
 
         return view('message.message', compact('user', 'messages', 'from_id', 'to_id'));
@@ -115,6 +115,6 @@ class MessageController extends Controller
 
         $msg->save();
 
-        return redirect()->route('message.message', ['user' => $msg->sender_user_id])->with('message', 'メッセージを送信しました！');
+        return redirect()->route('message.message', ['user' => $msg->receiver_user_id])->with('message', 'メッセージを送信しました！');
     }
 }
