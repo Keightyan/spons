@@ -48,7 +48,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/{user}/inquiry', [MessageController::class, 'create'])->name('message.inquiry');
     Route::post('/user/{user}/inquiry/complete', [MessageController::class, 'store'])->name('message.store');
     Route::get('/messages', [MessageController::class, 'index'])->name('message.index');
-    // Route::get('/post/{post}/message/users', [MessageController::class, 'users'])->name('message.users');
     Route::get('/user/{user}/message/', [MessageController::class, 'message'])->name('message.message');
     Route::post('/user/{user}/message/complete', [MessageController::class, 'store2'])->name('message.store2');
 

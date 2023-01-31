@@ -16,40 +16,39 @@
                     <section id="messages">
                         <div>
                             @foreach ($receivers as $receiver)
-                            {{-- <?php  dd($receiver->user); ?> --}}
                                 @php
-                                
-                                    // $posts = \App\models\Message::where('sender_user_id', $post->sender_user_id)
-                                    //     ->where('post_id', $post->post_id)
-                                    //     ->get();
+                                    $body = $receiver
+                                        ->messages()
+                                        ->orderBy('created_at', 'desc')
+                                        ->pluck('body');
                                 @endphp
                                 {{-- <?php dd($post->receiver_user_id); ?> --}}
                                 {{-- <?php $titles = \App\Models\Post::where('title', $post->title)->get(); ?> --}}
                                 <div class="user relative">
                                     {{-- @if ($post->receiver_user_id === Auth::user()->id) --}}
-                                        <a href="{{ route('message.message', ['user' => $receiver->id]) }}">
-                                            <div
-                                                style="border-bottom: 1px dotted #1A89DA;
+                                    <a href="{{ route('message.message', ['user' => $receiver->id]) }}">
+                                        <div
+                                            style="border-bottom: 1px dotted #1A89DA;
                                         padding-bottom: 10px;
                                         padding-top: 5px;">
-                                                <div class="mb-4 flex">
-                                                    <p class="mr-4 font-bold">
-                                                        {{ $receiver->name }}
-                                                    </p>
-                                                    {{-- <?php dd($body); ?> --}}
-                                                    <p class="mr-4 font-bold">
-                                                        {{ $receiver->body }}
-                                                    </p>
-                                                </div>
-                                                {{-- <p class="text-sm"><span class="mr-2">カテゴリ：<span
+                                            <div class="mb-2">
+                                                <p class="mr-4 font-bold">
+                                                    {{ $receiver->name }}
+                                                </p>
+                                                {{-- <?php dd($body); ?> --}}
+                                                <p class="mt-4 mr-4 font-bold">
+                                                    {{ $body[0] }}
+                                                </p>
+                                            </div>
+                                            {{-- <p class="text-sm"><span class="mr-2">カテゴリ：<span
                                                             class="font-bold">{{ $post->category->name }}</span></span>
                                                     <span class="mr-2">募集タイプ：<span
                                                             class="font-bold">{{ $post->post_type->name }}</span></span>
                                                     <span class="mr-2">都道府県：<span
                                                             class="font-bold">{{ $post->prefecture->name }}</span></span>
                                                 </p> --}}
-                                            </div>
-                                        </a>
+                                        </div>
+                                    </a>
                                     {{-- @elseif($post->sender_user_id === Auth::user()->id)
                                         <a
                                             href="{{ route('message.message', ['post' => $post->post_id, 'user' => $post->sender_user_id]) }}">

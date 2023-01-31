@@ -38,11 +38,11 @@
                                         </ul>
                                     @endif
                                     @if ($user->id !== Auth::id())
-                                        <div class="mt-6 flex">
-                                            <button class="msg_btn mt-4 mb-10 w-40 h-20 rounded bg-green-500"
+                                        <div class="mt-6 text-center">
+                                            <a href="{{ route('message.inquiry', $user) }}"><button class="msg_btn mt-4 mb-10 w-40 h-20 rounded bg-green-500"
                                                 style="margin-inline: auto;">
-                                                <a class="text-xl text-white font-bold w-full" href="{{ route('message.inquiry', $user->id) }}">メッセージを送る</a>
-                                            </button>
+                                                <span class="text-xl text-white font-bold w-full">メッセージを送る</span>
+                                            </button></a>
                                         </div>
                                     @endif
                                 @endif
@@ -57,11 +57,11 @@
                                                 </button></a>
                                         </div>
                                     @else
-                                        <div class="flex relative user-{{ $user->id }}">
+                                        <div class="flex relative user-{{ $user->id }} mt-8">
                                             <button type="submit" onClick="toggleRelation( {{ $user->id }} )"
                                                 data-is-follow="{{ Auth::user()->is_following($user->id) ? true : false }}"
                                                 class="{{ Auth::user()->is_following($user->id) ? 'absolute right-0 border border-solid border-spons_blue p-2 rounded font-bold text-xl bg-spons_blue text-white' : 'absolute right-0 border border-solid border-spons_blue p-2 mb-10 rounded font-bold text-xl bg-white text-spons_blue' }}">
-                                                <span>{{ Auth::user()->is_following($user->id) ? 'フォロー中' : 'フォローする' }}</span></button>
+                                                <span>{{ Auth::user()->is_following($user->id) ? 'フォロー中' : 'フォロー' }}</span></button>
                                         </div>
                                     @endif
                                 @endif
@@ -171,8 +171,8 @@
                                                         <button type="submit"
                                                             onClick="toggleRelation( {{ $following->id }} )"
                                                             data-is-follow="{{ Auth::user()->is_following($following->id) ? true : false }}"
-                                                            class="{{ Auth::user()->is_following($following->id) ? 'absolute top-0 right-0 border border-solid border-spons_blue p-2 rounded font-bold text-xl bg-spons_blue text-white' : 'absolute top-0 right-0 border border-solid border-spons_blue p-2 mb-10 rounded font-bold text-xl bg-white text-spons_blue' }}">
-                                                            <span>{{ Auth::user()->is_following($following->id) ? 'フォロー中' : 'フォローする' }}</span></button>
+                                                            class="{{ Auth::user()->is_following($following->id) ? 'absolute -right-4 border border-solid border-spons_blue p-2 rounded font-bold text-xl bg-spons_blue text-white' : 'absolute -right-4 border border-solid border-spons_blue p-2 mb-10 rounded font-bold text-xl bg-white text-spons_blue' }}">
+                                                            <span>{{ Auth::user()->is_following($following->id) ? 'フォロー中' : 'フォロー' }}</span></button>
                                                     </div>
                                                 @endif
                                         </div>
@@ -202,8 +202,8 @@
                                                         <button type="submit"
                                                             onClick="toggleRelation( {{ $follower->id }} )"
                                                             data-is-follow="{{ Auth::user()->is_following($follower->id) ? true : false }}"
-                                                            class="{{ Auth::user()->is_following($follower->id) ? 'absolute top-0 right-0 border border-solid border-spons_blue p-2 rounded font-bold text-xl bg-spons_blue text-white' : 'absolute top-0 right-0 border border-solid border-spons_blue p-2 mb-10 rounded font-bold text-xl bg-white text-spons_blue' }}">
-                                                            <span>{{ Auth::user()->is_following($follower->id) ? 'フォロー中' : 'フォローする' }}</span></button>
+                                                            class="{{ Auth::user()->is_following($follower->id) ? 'absolute -right-4 border border-solid border-spons_blue p-2 rounded font-bold text-xl bg-spons_blue text-white' : 'absolute -right-4 border border-solid border-spons_blue p-2 mb-10 rounded font-bold text-xl bg-white text-spons_blue' }}">
+                                                            <span>{{ Auth::user()->is_following($follower->id) ? 'フォロー中' : 'フォロー' }}</span></button>
                                                     </div>
                                                 @endif
                                         </div>
@@ -218,7 +218,7 @@
                                             $date = $post->created_at;
                                             $day = new DateTime($date);
                                             $dow = $day->format('w');
-
+                                            
                                             $carbon_updated_at = new \Carbon\Carbon($post->updated_at);
                                             $carbon_created_at = new \Carbon\Carbon($post->created_at);
                                         @endphp
@@ -265,7 +265,7 @@
                                                 $date = $bookmark_post->created_at;
                                                 $day = new DateTime($date);
                                                 $dow = $day->format('w');
-
+                                                
                                                 $carbon_updated_at = new \Carbon\Carbon($bookmark_post->updated_at);
                                                 $carbon_created_at = new \Carbon\Carbon($bookmark_post->created_at);
                                             @endphp

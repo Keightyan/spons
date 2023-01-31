@@ -70,19 +70,6 @@ class MessageController extends Controller
         return view('message.index', compact('receivers'));
     }
 
-    public function users(Post $post)
-    {
-
-        // $posts = auth()->user()->posts()->withCount('messages')->distinct()->select('sender_user_id')->get();
-        // $from_ids = $post->messages;
-        // foreach ($from_ids as $from_id) {
-
-        // $query = Message::query()->with('sender_user')->where('post_id', $post->id);
-        // $query->where('sender_user_id', $from_id->sender_user_id)->distinct()->select('sender_user_id');
-        // $messages = $query->paginate(20);
-        // return view('message.users', compact('posts', 'post'));
-    }
-
     public function message(User $user)
     {
         $from_id = auth()->user()->id;

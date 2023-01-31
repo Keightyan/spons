@@ -33,8 +33,15 @@
                                 @endphp
                                 <div class="message">
                                     <div class="flex my-10 py-10 relative">
-                                        <a href="{{ route('user.show', $message->sender_user_id) }}"><img
-                                                src="{{ asset('/public/profile_image/' . $message->sender_user->profile_image) }}"></a>
+                                        <a href="{{ route('user.show', $message->sender_user_id) }}">
+                                            @if ($message->sender_user->profile_image !== 'user_default.jpg')
+                                                <img
+                                                    src="{{ asset('/storage/profile_image/' . $message->sender_user->profile_image) }}">
+                                            @else
+                                                <img
+                                                    src="{{ asset('/profile_image/' . $message->sender_user->profile_image) }}">
+                                            @endif
+                                        </a>
                                         <p class="ml-8 mr-auto mt-2 font-bold inline-block">
                                             <a href="{{ route('user.show', $message->sender_user_id) }}"
                                                 class="text-spons_blue hover:underline decoration-solid">{{ $message->sender_user->name }}</a><br>
