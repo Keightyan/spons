@@ -27,14 +27,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // トップページの新着の募集
-        // if(Schema::hasTable('posts')) {
-        //     $posts5 = Post::limit(5)->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->get();
-        //     view()->share('posts5', $posts5);
-        // }
+        if(Schema::hasTable('posts')) {
+            $posts5 = Post::limit(5)->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->get();
+            view()->share('posts5', $posts5);
+        }
 
-        // if(Schema::hasTable('posts')) {
-        //     $categories = Category::all();
-        //     view()->share('categories', $categories);
-        // }
+        if(Schema::hasTable('posts')) {
+            $categories = Category::all();
+            view()->share('categories', $categories);
+        }
     }
 }
