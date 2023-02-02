@@ -41,7 +41,7 @@
                                                     src="{{ asset('/storage/profile_image/' . $message->sender_user->profile_image) }}">
                                             @else
                                                 <img
-                                                    src="{{ asset('/profile_image/' . $message->sender_user->profile_image) }}">
+                                                    src="{{ asset('/profile_image/' . 'user_default.jpg') }}">
                                             @endif
                                         </a>
                                         <p class="ml-8 mr-auto mt-2 font-bold inline-block">

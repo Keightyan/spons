@@ -22,7 +22,7 @@
                                 <img src="{{ asset('/storage/profile_image/' . $user->profile_image) }}"
                                     class="mx-auto mb-4" style="width: 200px;">
                             @else
-                                <img src="{{ asset('/profile_image/' . $user->profile_image) }}" class="mx-auto mb-4"
+                                <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}" class="mx-auto mb-4"
                                     style="width: 200px;">
                             @endif
                             <input type="file" name="profile_image">
@@ -134,7 +134,7 @@
                                 <img src="{{ asset('/storage/profile_image/' . $user->profile_image) }}"
                                     class="mx-auto mb-4" style="width: 200px;">
                             @else
-                                <img src="{{ asset('/profile_image/' . $user->profile_image) }}" class="mx-auto mb-4"
+                                <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}" class="mx-auto mb-4"
                                     style="width: 200px;">
                             @endif
                             <input type="file" name="profile_image">

@@ -18,7 +18,7 @@
                                         <img src="{{ asset('/storage/profile_image/' . $user->profile_image) }}"
                                             style="width: 200px;">
                                     @else
-                                        <img src="{{ asset('/profile_image/' . $user->profile_image) }}"
+                                        <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}"
                                             style="width: 200px;">
                                     @endif
                                 </div>
@@ -156,13 +156,13 @@
                                         <div class="flex my-10 relative following">
                                             <a href="{{ route('user.show', $following) }}">
                                                 @if ($following->profile_image === null)
-                                                    <img src="{{ asset('/profile_image/' . $following->profile_image) }}"
+                                                    <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}"
                                                         style="width: 100px;">
                                                 @elseif ($following->profile_image !== 'user_default.jpg')
                                                     <img src="{{ asset('/storage/profile_image/' . $following->profile_image) }}"
                                                         style="width: 100px;">
                                                 @else
-                                                    <img src="{{ asset('/profile_image/' . $following->profile_image) }}"
+                                                    <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}"
                                                         style="width: 100px;">
                                                 @endif
                                             </a>
@@ -190,13 +190,13 @@
                                         <div class="flex my-10 relative follower">
                                             <a href="{{ route('user.show', $follower) }}">
                                                 @if ($follower->profile_image === null)
-                                                    <img src="{{ asset('/profile_image/' . $follower->profile_image) }}"
+                                                    <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}"
                                                         style="width: 100px;">
                                                 @elseif ($follower->profile_image !== 'user_default.jpg')
                                                     <img src="{{ asset('/storage/profile_image/' . $follower->profile_image) }}"
                                                         style="width: 100px;">
                                                 @else
-                                                    <img src="{{ asset('/profile_image/' . $follower->profile_image) }}"
+                                                    <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}"
                                                         style="width: 100px;">
                                                 @endif
                                             </a>
@@ -290,13 +290,13 @@
                                                         @endif
                                                         <p class="info">
                                                             @if ($bookmark_post->user->profile_image === null)
-                                                                <img src="{{ asset('/profile_image/' . $bookmark_post->user->profile_image) }}"
+                                                                <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}"
                                                                     style="height: 35px;">
                                                             @elseif ($bookmark_post->user->profile_image !== 'user_default.jpg')
                                                                 <img src="{{ asset('/storage/profile_image/' . $bookmark_post->user->profile_image) }}"
                                                                     style="height: 35px;">
                                                             @else
-                                                                <img src="{{ asset('/profile_image/' . $bookmark_post->user->profile_image) }}"
+                                                                <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}"
                                                                     style="height: 35px;">
                                                             @endif
                                                             <span

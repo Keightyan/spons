@@ -77,7 +77,8 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'relations', 'followed_id', 'follow_id')->withTimestamps();
     }
 
-    public function follow($userId) {
+    public function follow($userId)
+    {
         $exist = $this->is_following($userId);
         $its_me = $this->id === $userId;
 
@@ -89,7 +90,8 @@ class User extends Authenticatable
         }
     }
 
-    public function unfollow($userId) {
+    public function unfollow($userId)
+    {
         $exist = $this->is_following($userId);
         $its_me = $this->id === $userId;
 
@@ -107,11 +109,13 @@ class User extends Authenticatable
         return $this->followings()->where('followed_id', $userId)->exists();
     }
 
-    public function prefecture() {
+    public function prefecture()
+    {
         return $this->belongsTo(Prefecture::class, 'prefecture_id');
     }
 
-    public function messages() {
+    public function messages()
+    {
         return $this->hasMany(Message::class, 'receiver_user_id');
     }
 
@@ -126,7 +130,8 @@ class User extends Authenticatable
     }
 
     // ユーザが送信または受信した全メッセージ
-    public function all_messages() {
+    public function all_messages()
+    {
         $receive_message = $this->hasMany(Message::class, 'receiver_user_id')->get();
         $send_message    = $this->hasMany(Message::class, 'sender_user_id')->get();
         $messages        = $receive_message->union($send_message)->sortByDesc('created_at');
@@ -141,7 +146,6 @@ class User extends Authenticatable
             }
             $all_messages->add($message);
         }
-
         return $all_messages;
     }
 }

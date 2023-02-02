@@ -90,13 +90,13 @@
                                         </p>
                                         <p class="info">
                                             @if ($post->user->profile_image === null)
-                                                <img src="{{ asset('/profile_image/' . $post->user->profile_image) }}"
+                                                <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}"
                                                     class="inline mr-2" style="height: 35px;">
                                             @elseif ($post->user->profile_image !== 'user_default.jpg')
                                                 <img src="{{ asset('/storage/profile_image/' . $post->user->profile_image) }}"
                                                     class="inline mr-2" style="height: 35px;">
                                             @else
-                                                <img src="{{ asset('/profile_image/' . $post->user->profile_image) }}"
+                                                <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}"
                                                     class="inline mr-2" style="height: 35px;">
                                             @endif
                                             <span class="mr-6 text-spons_blue">{{ $post->user->name }}</span>

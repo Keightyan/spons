@@ -82,13 +82,13 @@
                         <p class="mr-8 font-bold text-gray-500" style="width: 100px;">募集者</p>
                         <a href="{{ route('user.show', $post->user->id) }}">
                             @if ($post->user->profile_image === null)
-                                <img src="{{ asset('/profile_image/' . $post->user->profile_image) }}"
+                                <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}"
                                     class="mr-4" style="width: 40px;">
                             @elseif ($post->user->profile_image !== 'user_default.jpg')
                                 <img src="{{ asset('/storage/profile_image/' . $post->user->profile_image) }}"
                                     class="mr-4" style="width: 40px;">
                             @else
-                                <img src="{{ asset('/profile_image/' . $post->user->profile_image) }}" class="mr-4"
+                                <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}" class="mr-4"
                                     style="width: 40px;">
                             @endif
                         </a>
