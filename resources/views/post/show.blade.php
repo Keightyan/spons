@@ -131,7 +131,7 @@
                         <div class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
                             <p class="mr-8 font-bold text-gray-500" style="width: 100px;">画像</p>
                             <div>
-                                <img src="{{ asset('/images/' . $post->image) }}" style="max-width: 600px;">
+                                <img src="{{ asset('/storage/images/' . $post->image) }}" style="max-width: 600px;">
                             </div>
                         </div>
                     @endif
