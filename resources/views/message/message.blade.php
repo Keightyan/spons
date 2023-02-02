@@ -34,8 +34,9 @@
                                 <div class="message">
                                     <div class="flex my-10 py-10 relative">
                                         <a href="{{ route('user.show', $message->sender_user_id) }}">
-                                            @if ($message->sender_user->profile_image !== 'user_default.jpg')
-                                                <img
+                                            @if ($message->sender_user->profile_image === null)
+                                                <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}" @elseif
+                                                    ($message->sender_user->profile_image !== 'user_default.jpg') <img
                                                     src="{{ asset('/storage/profile_image/' . $message->sender_user->profile_image) }}">
                                             @else
                                                 <img

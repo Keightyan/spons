@@ -89,7 +89,10 @@
                                             @endif
                                         </p>
                                         <p class="info">
-                                            @if ($post->user->profile_image !== 'user_default.jpg')
+                                            @if ($post->user->profile_image === null)
+                                                <img src="{{ asset('/profile_image/' . $post->user->profile_image) }}"
+                                                    class="inline mr-2" style="height: 35px;">
+                                            @elseif ($post->user->profile_image !== 'user_default.jpg')
                                                 <img src="{{ asset('/storage/profile_image/' . $post->user->profile_image) }}"
                                                     class="inline mr-2" style="height: 35px;">
                                             @else

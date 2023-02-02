@@ -39,10 +39,11 @@
                                     @endif
                                     @if ($user->id !== Auth::id())
                                         <div class="mt-6 text-center">
-                                            <a href="{{ route('message.inquiry', $user) }}"><button class="msg_btn mt-4 mb-10 w-40 h-20 rounded bg-green-500"
-                                                style="margin-inline: auto;">
-                                                <span class="text-xl text-white font-bold w-full">メッセージを送る</span>
-                                            </button></a>
+                                            <a href="{{ route('message.inquiry', $user) }}"><button
+                                                    class="msg_btn mt-4 mb-10 w-40 h-20 rounded bg-green-500"
+                                                    style="margin-inline: auto;">
+                                                    <span class="text-xl text-white font-bold w-full">メッセージを送る</span>
+                                                </button></a>
                                         </div>
                                     @endif
                                 @endif
@@ -141,7 +142,8 @@
                                     class=" text-spons_blue font-bold text-xl">{{ $user->name }}</span> さんの</p>
                             <li id="followings"><a
                                     href="#followings_content">フォロー中　{{ $user->followings()->count() }}</a></li>
-                            <li id="followers"><a href="#followers_content">フォロワー　{{ $user->followers()->count() }}</a></li>
+                            <li id="followers"><a href="#followers_content">フォロワー　{{ $user->followers()->count() }}</a>
+                            </li>
                             <li><a href="#posts">募集投稿　{{ $user->posts()->count() }}</a></li>
                             @if ($user->id === Auth::id())
                                 <li><a href="#bookmarks">ブックマーク　{{ $user->bookmarks()->count() }}</a></li>
@@ -153,7 +155,10 @@
                                     @foreach ($user->followings as $following)
                                         <div class="flex my-10 relative following">
                                             <a href="{{ route('user.show', $following) }}">
-                                                @if ($following->profile_image !== 'user_default.jpg')
+                                                @if ($following->profile_image === null)
+                                                    <img src="{{ asset('/profile_image/' . $following->profile_image) }}"
+                                                        style="width: 100px;">
+                                                @elseif ($following->profile_image !== 'user_default.jpg')
                                                     <img src="{{ asset('/storage/profile_image/' . $following->profile_image) }}"
                                                         style="width: 100px;">
                                                 @else
@@ -184,7 +189,10 @@
                                     @foreach ($user->followers as $follower)
                                         <div class="flex my-10 relative follower">
                                             <a href="{{ route('user.show', $follower) }}">
-                                                @if ($follower->profile_image !== 'user_default.jpg')
+                                                @if ($follower->profile_image === null)
+                                                    <img src="{{ asset('/profile_image/' . $follower->profile_image) }}"
+                                                        style="width: 100px;">
+                                                @elseif ($follower->profile_image !== 'user_default.jpg')
                                                     <img src="{{ asset('/storage/profile_image/' . $follower->profile_image) }}"
                                                         style="width: 100px;">
                                                 @else
@@ -281,8 +289,16 @@
                                                                 style="display: inline; max-width: 30px; margin-left: 5px;">
                                                         @endif
                                                         <p class="info">
-                                                            <img src="{{ asset('/profile_image/' . $bookmark_post->user->profile_image) }}"
-                                                                class="inline mr-2" style="height: 35px;">
+                                                            @if ($bookmark_post->user->profile_image === null)
+                                                                <img src="{{ asset('/profile_image/' . $bookmark_post->user->profile_image) }}"
+                                                                    style="height: 35px;">
+                                                            @elseif ($bookmark_post->user->profile_image !== 'user_default.jpg')
+                                                                <img src="{{ asset('/storage/profile_image/' . $bookmark_post->user->profile_image) }}"
+                                                                    style="height: 35px;">
+                                                            @else
+                                                                <img src="{{ asset('/profile_image/' . $bookmark_post->user->profile_image) }}"
+                                                                    style="height: 35px;">
+                                                            @endif
                                                             <span
                                                                 class="text-spons_blue mr-6">{{ $bookmark_post->user->name }}</span>
                                                             カテゴリ：<span

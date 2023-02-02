@@ -81,7 +81,10 @@
                     <div class="mt-6 flex items-center border-dotted border-b-spons_blue border-b-2 pb-6">
                         <p class="mr-8 font-bold text-gray-500" style="width: 100px;">募集者</p>
                         <a href="{{ route('user.show', $post->user->id) }}">
-                            @if ($post->user->profile_image !== 'user_default.jpg')
+                            @if ($post->user->profile_image === null)
+                                <img src="{{ asset('/profile_image/' . $post->user->profile_image) }}"
+                                    class="mr-4" style="width: 40px;">
+                            @elseif ($post->user->profile_image !== 'user_default.jpg')
                                 <img src="{{ asset('/storage/profile_image/' . $post->user->profile_image) }}"
                                     class="mr-4" style="width: 40px;">
                             @else
@@ -147,14 +150,32 @@
                     <x-message :message="session('message')" />
 
                     @if (Auth::check())
-                            @if ($post->user_id === Auth::id())
-                                <ul class="flex justify-center mt-2_5rem">
-                                    <li
-                                        class="bg-gray-500 border-solid border border-gray-500 mb-6 p-2 rounded text-white font-bold mx-1 edit">
-                                        <a href="{{ route('post.edit', $post) }}">編集</a>
-                                    </li>
-                                    <li
-                                        class="bg-red-500 border-solid border border-red-500 mb-6 p-2 rounded text-white font-bold mx-1 destroy_btn">
+                        @if ($post->user_id === Auth::id())
+                            <ul class="flex justify-center mt-2_5rem">
+                                <li
+                                    class="bg-gray-500 border-solid border border-gray-500 mb-6 p-2 rounded text-white font-bold mx-1 edit">
+                                    <a href="{{ route('post.edit', $post) }}">編集</a>
+                                </li>
+                                <li
+                                    class="bg-red-500 border-solid border border-red-500 mb-6 p-2 rounded text-white font-bold mx-1 destroy_btn">
+                                    <form method="post" action="{{ route('post.destroy', $post) }}">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" onClick="return confirm('本当に削除しますか？');">削除</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        @elseif(Auth::user()->role === 2)
+                            <div class="flex justify-center mt-2_5rem">
+                                <button type="submit" id="post-{{ $post->id }}"
+                                    onClick="toggleBookmark( {{ $post->id }} )"
+                                    data-is-bookmark="{{ Auth::user()->is_bookmark($post->id) ? true : false }}"
+                                    class="bookmark_btn border border-solid border-spons_blue mb-6 p-2 mr-2 rounded text-spons_blue font-bold text-xl">
+                                    <i
+                                        class="{{ Auth::user()->is_bookmark($post->id) ? 'fas fa-star' : 'far fa-star' }}"></i></button>
+                                <ul class="destroy_ul">
+                                    <li class="bg-red-500 border-solid border absolute border-red-500 mb-6 p-2 rounded text-white font-bold mx-1 destroy_btn"
+                                        style="top: 6px;">
                                         <form method="post" action="{{ route('post.destroy', $post) }}">
                                             @csrf
                                             @method('delete')
@@ -162,35 +183,16 @@
                                         </form>
                                     </li>
                                 </ul>
-                            @elseif(Auth::user()->role === 2)
-                                <div class="flex justify-center mt-2_5rem">
-                                    <button type="submit" id="post-{{ $post->id }}"
-                                        onClick="toggleBookmark( {{ $post->id }} )"
-                                        data-is-bookmark="{{ Auth::user()->is_bookmark($post->id) ? true : false }}"
-                                        class="bookmark_btn border border-solid border-spons_blue mb-6 p-2 mr-2 rounded text-spons_blue font-bold text-xl">
-                                        <i
-                                            class="{{ Auth::user()->is_bookmark($post->id) ? 'fas fa-star' : 'far fa-star' }}"></i></button>
-                                    <ul class="destroy_ul">
-                                        <li
-                                            class="bg-red-500 border-solid border absolute border-red-500 mb-6 p-2 rounded text-white font-bold mx-1 destroy_btn" style="top: 6px;">
-                                            <form method="post" action="{{ route('post.destroy', $post) }}">
-                                                @csrf
-                                                @method('delete')
-                                                <button type="submit"
-                                                    onClick="return confirm('本当に削除しますか？');">削除</button>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </div>
-                            @else
-                                <button type="submit" id="post-{{ $post->id }}"
-                                    onClick="toggleBookmark( {{ $post->id }} )"
-                                    data-is-bookmark="{{ Auth::user()->is_bookmark($post->id) ? true : false }}"
-                                    class="bookmark_btn absolute right-0 border border-solid border-spons_blue p-2 mb-6 rounded text-spons_blue font-bold text-xl">
-                                    <i
-                                        class="{{ Auth::user()->is_bookmark($post->id) ? 'fas fa-star' : 'far fa-star' }}"></i></button>
-                            @endif
+                            </div>
+                        @else
+                            <button type="submit" id="post-{{ $post->id }}"
+                                onClick="toggleBookmark( {{ $post->id }} )"
+                                data-is-bookmark="{{ Auth::user()->is_bookmark($post->id) ? true : false }}"
+                                class="bookmark_btn absolute right-0 border border-solid border-spons_blue p-2 mb-6 rounded text-spons_blue font-bold text-xl">
+                                <i
+                                    class="{{ Auth::user()->is_bookmark($post->id) ? 'fas fa-star' : 'far fa-star' }}"></i></button>
                         @endif
+                    @endif
 
                     <div class="md:flex items-center relative md:mt-6">
                         <div class="w-full flex flex-col pb-5 border-b-spons_blue border-b-4">
