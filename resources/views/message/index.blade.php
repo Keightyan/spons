@@ -1,4 +1,5 @@
 {{-- <?php dd($receivers->user); ?> --}}
+@inject('User', 'App\Models\User')
 
 <x-app-layout>
     <div class="footer_wrap">
@@ -15,29 +16,26 @@
 
                     <section id="messages">
                         <div>
-                            @foreach ($receivers as $receiver)
+                            @foreach ($last_messages as $message)
                                 @php
-                                    $body = $receiver
-                                        ->messages()
-                                        ->orderBy('created_at', 'desc')
-                                        ->pluck('body');
+                                    $target_user = $User::find($message->target_id);
                                 @endphp
                                 {{-- <?php dd($post->receiver_user_id); ?> --}}
                                 {{-- <?php $titles = \App\Models\Post::where('title', $post->title)->get(); ?> --}}
                                 <div class="user relative">
                                     {{-- @if ($post->receiver_user_id === Auth::user()->id) --}}
-                                    <a href="{{ route('message.message', ['user' => $receiver->id]) }}">
+                                    <a href="{{ route('message.message', ['user' => $target_user->id]) }}">
                                         <div
                                             style="border-bottom: 1px dotted #1A89DA;
                                         padding-bottom: 10px;
                                         padding-top: 5px;">
                                             <div class="mb-2">
                                                 <p class="mr-4 font-bold">
-                                                    {{ $receiver->name }}
+                                                    {{ $target_user->name }}
                                                 </p>
                                                 {{-- <?php dd($body); ?> --}}
                                                 <p class="mt-4 mr-4 font-bold">
-                                                    {{ $body[0] }}
+                                                    {{ $message->body }}
                                                 </p>
                                             </div>
                                             {{-- <p class="text-sm"><span class="mr-2">カテゴリ：<span

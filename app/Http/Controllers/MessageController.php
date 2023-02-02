@@ -62,12 +62,16 @@ class MessageController extends Controller
         // $messages = auth()->user()->messages()->get();
         // // dd($messages);
 
-        $receiver_ids_all   = auth()->user()->all_messages()->groupBy('target_id')->pluck(0)->pluck('target_id');
-        $receiver_ids_order = implode(',', $receiver_ids_all->toArray());
-        $receivers          = $receiver_ids_all->isNotEmpty() ? User::whereIn('id', $receiver_ids_all)->orderByRaw("FIELD(id, $receiver_ids_order)")->get() : [];
+        // $receiver_ids_all   = auth()->user()->all_messages()->groupBy('target_id')->pluck(0)->pluck('target_id');
+        // $receiver_ids_order = implode(',', $receiver_ids_all->toArray());
+        // $receivers          = $receiver_ids_all->isNotEmpty() ? User::whereIn('id', $receiver_ids_all)->orderByRaw("FIELD(id, $receiver_ids_order)")->get() : [];
 
         // dd($receivers);
-        return view('message.index', compact('receivers'));
+
+        // やりとりのあるユーザ毎の最終メッセージを取得
+        $last_messages = $receiver_ids_all   = auth()->user()->all_messages()->groupBy('target_id')->pluck(0);
+
+        return view('message.index', compact('last_messages'));
     }
 
     public function message(User $user)
