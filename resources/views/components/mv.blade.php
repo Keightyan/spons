@@ -81,6 +81,7 @@
                         @endif
                     </p>
                     <p class="info">
+                        <?php dd($post->user->profile_image); ?>
                         @if ($post->user->profile_image === null)
                             <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}" class="inline mr-2"
                                 style="height: 35px;">
