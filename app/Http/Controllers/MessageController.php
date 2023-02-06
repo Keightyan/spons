@@ -69,7 +69,7 @@ class MessageController extends Controller
         // dd($receivers);
 
         // やりとりのあるユーザ毎の最終メッセージを取得
-        $last_messages = $receiver_ids_all   = auth()->user()->all_messages()->groupBy('target_id')->pluck(0);
+        $last_messages = $receiver_ids_all = auth()->user()->all_messages()->sortByDesc('created_at')->groupBy('target_id')->pluck(0);
 
         return view('message.index', compact('last_messages'));
     }

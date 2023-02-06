@@ -31,10 +31,11 @@
                                         padding-top: 5px;">
                                             <div class="mb-2">
                                                 <p class="mr-4 font-bold">
-                                                    {{ $target_user->name }}
+                                                    <span class="text-spons_blue">{{ $target_user->name }}</span> <span class="text-sm ml-2">とのやり取り</span>
                                                 </p>
                                                 {{-- <?php dd($body); ?> --}}
                                                 <p class="mt-4 mr-4 font-bold">
+                                                    {{-- <?php dd($message); ?> --}}
                                                     {{ $message->body }}
                                                 </p>
                                             </div>
