@@ -235,8 +235,6 @@
                                             
                                             $h24ago_carbon_created_at = \Carbon\Carbon::now();
                                             $h24ago_carbon_created_at->subHours(24);
-
-                                            
                                         @endphp
                                         <div class="post">
                                             <a href="{{ route('post.show', $post) }}">
@@ -304,14 +302,11 @@
                                                         @endif
                                                         <p class="info">
                                                             @if ($bookmark_post->user->profile_image === null)
-                                                                <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}"
-                                                                    style="height: 35px;">
+                                                                <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}" class="inline mr-2" style="height: 35px;">
                                                             @elseif ($bookmark_post->user->profile_image !== 'user_default.jpg')
-                                                                <img src="{{ asset('/storage/profile_image/' . $bookmark_post->user->profile_image) }}"
-                                                                    style="height: 35px;">
+                                                                <img src="{{ asset('/storage/profile_image/' . $bookmark_post->user->profile_image) }}" class="inline mr-2" style="height: 35px;">
                                                             @else
-                                                                <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}"
-                                                                    style="height: 35px;">
+                                                                <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}" class="inline mr-2" style="height: 35px;">
                                                             @endif
                                                             <span
                                                                 class="text-spons_blue mr-6">{{ $bookmark_post->user->name }}</span>
