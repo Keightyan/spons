@@ -67,16 +67,16 @@
                                     $day = new DateTime($date);
                                     $dow = $day->format('w');
                                     
-                                    $now_carbon_updated_at = new \Carbon\Carbon($post->updated_at);
-                                    $now_carbon_created_at = new \Carbon\Carbon($post->created_at);
+                                    $post_carbon_updated_at = new \Carbon\Carbon($post->updated_at);
+                                    $post_carbon_created_at = new \Carbon\Carbon($post->created_at);
+
+                                    $h24ago_carbon_updated_at = \Carbon\Carbon::now();
+                                    $h24ago_carbon_updated_at->subHours(24);
                                     
-                                    $h24_carbon_updated_at = new \Carbon\Carbon($post->updated_at);
-                                    $h24_carbon_updated_at->subHours(24);
+                                    $h24ago_carbon_created_at = \Carbon\Carbon::now();
+                                    $h24ago_carbon_created_at->subHours(24);
                                     
-                                    $h24_carbon_created_at = new \Carbon\Carbon($post->created_at);
-                                    $h24_carbon_created_at->subHours(24);
-                                    
-                                    // dd($h24_carbon_updated_at);
+                                    // dd($post_carbon_created_at > $h24ago_carbon_created_at);
                                     
                                 @endphp
 
@@ -84,7 +84,7 @@
                                     <a href="{{ route('post.show', $post) }}">
                                         {{-- 24時間以内の更新 or 投稿には「NEW」を付ける --}}
                                         <p
-                                            class="{{ $now_carbon_updated_at <= $h24_carbon_updated_at || $now_carbon_created_at <= $h24_carbon_created_at ? 'title_currentp1' : 'title' }}">
+                                            class="{{ $post_carbon_updated_at > $h24ago_carbon_updated_at || $post_carbon_created_at > $h24ago_carbon_created_at ? 'title_currentp1' : 'title' }}">
                                             {{ $post->title }}
                                             @if ($post->image)
                                                 <img src="{{ asset('/img/ico_isImage.png') }}" alt="画像有り"
@@ -138,20 +138,20 @@
                                     $day = new DateTime($date);
                                     $dow = $day->format('w');
                                     
-                                    $now_carbon_updated_at = new \Carbon\Carbon($post->updated_at);
-                                    $now_carbon_created_at = new \Carbon\Carbon($post->created_at);
+                                    $post_carbon_updated_at = new \Carbon\Carbon($post->updated_at);
+                                    $post_carbon_created_at = new \Carbon\Carbon($post->created_at);
+
+                                    $h24ago_carbon_updated_at = \Carbon\Carbon::now();
+                                    $h24ago_carbon_updated_at->subHours(24);
                                     
-                                    $h24_carbon_updated_at = new \Carbon\Carbon($post->updated_at);
-                                    $h24_carbon_updated_at->subHours(24);
-                                    
-                                    $h24_carbon_created_at = new \Carbon\Carbon($post->created_at);
-                                    $h24_carbon_created_at->subHours(24);
+                                    $h24ago_carbon_created_at = \Carbon\Carbon::now();
+                                    $h24ago_carbon_created_at->subHours(24);
                                 @endphp
                                 <div class="recruit">
                                     <a href="{{ route('post.show', $post) }}">
                                         {{-- 24時間以内の更新 or 投稿には「NEW」を付ける --}}
                                         <p
-                                            class="{{ $now_carbon_updated_at <= $h24_carbon_updated_at || $now_carbon_created_at <= $h24_carbon_created_at ? 'title_currentp1' : 'title' }}">
+                                            class="{{ $post_carbon_updated_at > $h24ago_carbon_updated_at || $post_carbon_created_at > $h24ago_carbon_created_at ? 'title_currentp1' : 'title' }}">
                                             {{ $post->title }}
                                             @if ($post->image)
                                                 <img src="{{ asset('/img/ico_isImage.png') }}" alt="画像有り"
