@@ -220,21 +220,29 @@
                             </section>
                             <section id="posts">
                                 <div>
-                                    @foreach ($user->posts as $post)
+                                    @foreach ($posts as $post)
                                         @php
                                             $week = ['日', '月', '火', '水', '木', '金', '土'];
                                             $date = $post->created_at;
                                             $day = new DateTime($date);
                                             $dow = $day->format('w');
                                             
-                                            $carbon_updated_at = new \Carbon\Carbon($post->updated_at);
-                                            $carbon_created_at = new \Carbon\Carbon($post->created_at);
+                                            $post_carbon_updated_at = new \Carbon\Carbon($post->updated_at);
+                                            $post_carbon_created_at = new \Carbon\Carbon($post->created_at);
+                                            
+                                            $h24ago_carbon_updated_at = \Carbon\Carbon::now();
+                                            $h24ago_carbon_updated_at->subHours(24);
+                                            
+                                            $h24ago_carbon_created_at = \Carbon\Carbon::now();
+                                            $h24ago_carbon_created_at->subHours(24);
+
+                                            
                                         @endphp
                                         <div class="post">
                                             <a href="{{ route('post.show', $post) }}">
                                                 {{-- 24時間以内の更新 or 投稿には「NEW」を付ける --}}
                                                 <p
-                                                    class="{{ $carbon_updated_at->subHour(24) || $carbon_created_at->subHour(24) ? 'title_currentp1' : 'title' }}">
+                                                    class="{{ $post_carbon_updated_at > $h24ago_carbon_updated_at || $post_carbon_created_at > $h24ago_carbon_created_at ? 'title_currentp1' : 'title' }}">
                                                     {{ $post->title }}
                                                     @if ($post->image)
                                                         <img src="{{ asset('/img/ico_isImage.png') }}" alt="画像有り"
@@ -274,14 +282,20 @@
                                                 $day = new DateTime($date);
                                                 $dow = $day->format('w');
                                                 
-                                                $carbon_updated_at = new \Carbon\Carbon($bookmark_post->updated_at);
-                                                $carbon_created_at = new \Carbon\Carbon($bookmark_post->created_at);
+                                                $post_carbon_updated_at = new \Carbon\Carbon($bookmark_post->updated_at);
+                                                $post_carbon_created_at = new \Carbon\Carbon($bookmark_post->created_at);
+                                                
+                                                $h24ago_carbon_updated_at = \Carbon\Carbon::now();
+                                                $h24ago_carbon_updated_at->subHours(24);
+                                                
+                                                $h24ago_carbon_created_at = \Carbon\Carbon::now();
+                                                $h24ago_carbon_created_at->subHours(24);
                                             @endphp
                                             <div class="bookmark">
                                                 <a href="{{ route('post.show', $bookmark_post) }}">
                                                     {{-- 24時間以内の更新 or 投稿には「NEW」を付ける --}}
                                                     <p
-                                                        class="{{ $carbon_updated_at->subHour(24) || $carbon_created_at->subHour(24) ? 'title_currentp1' : 'title' }}">
+                                                        class="{{ $post_carbon_updated_at > $h24ago_carbon_updated_at || $post_carbon_created_at > $h24ago_carbon_created_at ? 'title_currentp1' : 'title' }}">
                                                         {{ $bookmark_post->title }}
                                                         @if ($bookmark_post->image)
                                                             <img src="{{ asset('/img/ico_isImage.png') }}"

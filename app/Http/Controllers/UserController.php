@@ -18,8 +18,9 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
+        $posts = User::find($id)->posts()->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->get();
 
-        return view('user.show', compact('user'));
+        return view('user.show', compact('user', 'posts'));
     }
 
     public function edit(User $user)
