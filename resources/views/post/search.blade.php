@@ -75,13 +75,16 @@
                                     
                                     $h24_carbon_created_at = new \Carbon\Carbon($post->created_at);
                                     $h24_carbon_created_at->subHours(24);
+                                    
+                                    // dd($h24_carbon_updated_at);
+                                    
                                 @endphp
 
                                 <div class="recruit">
                                     <a href="{{ route('post.show', $post) }}">
                                         {{-- 24時間以内の更新 or 投稿には「NEW」を付ける --}}
                                         <p
-                                            class="{{ $now_carbon_updated_at >= $h24_carbon_updated_at || $now_carbon_created_at >= $h24_carbon_created_at ? 'title_currentp1' : 'title' }}">
+                                            class="{{ $now_carbon_updated_at <= $h24_carbon_updated_at || $now_carbon_created_at <= $h24_carbon_created_at ? 'title_currentp1' : 'title' }}">
                                             {{ $post->title }}
                                             @if ($post->image)
                                                 <img src="{{ asset('/img/ico_isImage.png') }}" alt="画像有り"
@@ -148,13 +151,23 @@
                                     <a href="{{ route('post.show', $post) }}">
                                         {{-- 24時間以内の更新 or 投稿には「NEW」を付ける --}}
                                         <p
-                                            class="{{ $now_carbon_updated_at >= $h24_carbon_updated_at || $now_carbon_created_at >= $h24_carbon_created_at ? 'title_currentp1' : 'title' }}">
+                                            class="{{ $now_carbon_updated_at <= $h24_carbon_updated_at || $now_carbon_created_at <= $h24_carbon_created_at ? 'title_currentp1' : 'title' }}">
                                             {{ $post->title }}
                                             @if ($post->image)
                                                 <img src="{{ asset('/img/ico_isImage.png') }}" alt="画像有り"
                                                     style="display: inline; max-width: 30px; margin-left: 5px;">
                                             @endif
                                             <p class="info">
+                                                @if ($post->user->profile_image === null)
+                                                    <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}"
+                                                        class="inline mr-2" style="height: 35px;">
+                                                @elseif ($post->user->profile_image !== 'user_default.jpg')
+                                                    <img src="{{ asset('/storage/profile_image/' . $post->user->profile_image) }}"
+                                                        class="inline mr-2" style="height: 35px;">
+                                                @else
+                                                    <img src="{{ asset('/profile_image/' . 'user_default.jpg') }}"
+                                                        class="inline mr-2" style="height: 35px;">
+                                                @endif
                                                 <span class="text-spons_blue mr-6">{{ $post->user->name }}</span>
                                                 カテゴリ：<span class="font-bold mr-6">{{ $post->category->name }}</span>
                                                 募集タイプ：<span class="font-bold mr-6">{{ $post->post_type->name }}</span>
