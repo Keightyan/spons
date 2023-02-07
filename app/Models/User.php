@@ -134,7 +134,7 @@ class User extends Authenticatable
     {
         $receive_message = $this->hasMany(Message::class, 'receiver_user_id')->get();
         $send_message    = $this->hasMany(Message::class, 'sender_user_id')->get();
-        $messages        = $receive_message->union($send_message)->sortByDesc('created_at');
+        $messages        = $receive_message->merge($send_message)->sortByDesc('created_at');
         // dd($messages);
 
         // target_idキーを作成し、メッセージ相手のuser_idを格納する
